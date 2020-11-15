@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Chulkify</string>
+    <string name="usuario">Usuario</string>
+    <string name="pass">Contraseña</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="registrar">o registrar</string>
+    <string name="olv_contraseña">¿Olvidastes tu contraseña?</string>
+    <string name="bienvenida">Bienvenidos a CHULKIFY</string>
+    <string name="no_comunidad">Usted no pertenece a una comunidad</string>
+    <string name="crear_comu">Crear una nueva comunidad</string>
+    <string name="unirse_comu">Unirse a una comunidad existente</string>
+</resources>
