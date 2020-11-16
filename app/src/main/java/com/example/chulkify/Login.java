@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +32,7 @@ public class Login extends AppCompatActivity {
     private EditText et_usuario, et_contra;
     private Button btn_Logear;
     private TextView tvw_registrar, tvw_recordar_pass;
-
+    private ImageButton  btn_new_us;
 
     private AsyncHttpClient usuario_clien;
 
@@ -44,6 +45,16 @@ public class Login extends AppCompatActivity {
         et_usuario = (EditText) findViewById(R.id.txt_lg_user);
         et_contra = (EditText) findViewById(R.id.txt_lg_pass);
 
+        btn_new_us = (ImageButton) findViewById(R.id.new_us);
+        btn_new_us.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Login.this, nuevo_usuario.class));
+
+
+            }
+        });
+
         usuario_clien = new AsyncHttpClient();
         botonLoguin(); }
 
@@ -55,7 +66,7 @@ public class Login extends AppCompatActivity {
                 if (et_usuario.getText().toString().isEmpty() || et_contra.getText().toString().isEmpty()) {
                     Toast.makeText(Login.this, "Hay campos en blanco ", Toast.LENGTH_SHORT).show();
                 } else {
-                    String usuario = et_usuario.getText().toString();
+                    String usuario = et_usuario.getText().toString().replace(" ", "%20");
                     String password = et_contra.getText().toString().replace(" ", "%20");
                     String url = "http://www.marlonmym.tk/chulki/login.php?usuario_us="+usuario+"&contrasena_us="+password;
                     //Toast.makeText(Login.this, url, Toast.LENGTH_SHORT).show();
@@ -75,39 +86,31 @@ public class Login extends AppCompatActivity {
 
                                         JSONObject jsonObj = new JSONObject(respuesta);
 
-                                        Logear_usuario user = new Logear_usuario();
-
-                                        user.setCi(jsonObj.getString("cedula_us"));
-                                        user.setNombre_usuario(jsonObj.getString("usuario_us"));
-                                        user.setNombre(jsonObj.getString("nombre_us"));
-                                        user.setTipo(jsonObj.getInt("tipo_us"));
-                                        Toast.makeText(Login.this, "prueba entro6", Toast.LENGTH_SHORT).show();
-                                        user.setPassword(jsonObj.getString("contrasena_us"));
-                                        Toast.makeText(Login.this, "prueba entro5", Toast.LENGTH_SHORT).show();
-                                        user.setApellidos(jsonObj.getString("apellidos_us"));
-                                        Toast.makeText(Login.this, "prueba entro4", Toast.LENGTH_SHORT).show();
-                                        user.setFondos(jsonObj.getDouble("fondos_us"));
-                                        Toast.makeText(Login.this, "prueba entro3", Toast.LENGTH_SHORT).show();
-                                        user.setEstado_grupo(jsonObj.getInt("estado_gru_us"));
-                                        user.setId_cuenta(jsonObj.getInt("id_cuenta_us"));
-
-                                        user.setGrupo(jsonObj.getInt("grupo_us"));
-
-                                        Intent i = null;
-                                        switch (user.getGrupo()) {
+                                        Logear_usuario u = new Logear_usuario();
+                                        u.setId(jsonObj.getInt("id_us"));
+                                        u.setCi(jsonObj.getString("cedula_us"));
+                                        u.setNombre_usuario(jsonObj.getString("usuario_us"));
+                                        u.setNombre(jsonObj.getString("nombre_us"));
+                                        u.setTipo(jsonObj.getInt("tipo_us"));
+                                        u.setPassword(jsonObj.getString("contrasena_us"));
+                                        u.setApellidos(jsonObj.getString("apellidos_us"));
+                                        u.setFondos(jsonObj.getDouble("fondos_us"));
+                                        u.setEstado_grupo(jsonObj.getInt("estado_gru_us"));
+                                        u.setId_cuenta(jsonObj.getInt("id_cuenta_us"));
+                                        u.setGrupo(jsonObj.getInt("grupo_us"));
+                                        u.setAportes(jsonObj.getInt("aportes_id"));
+                                        u.setDireccion(jsonObj.getString("direccion_us"));
+                                        u.setCiudad(jsonObj.getString("ciudad_us"));
+                                        u.setTelefono(jsonObj.getString("telefono_us"));
+                                        u.setF_inicio(jsonObj.getString("fecha_inicio_us"));
+                                        Intent intent = null;
+                                        switch (u.getGrupo()) {
                                             case 0:
-                                                Toast.makeText(Login.this, "prueba entro", Toast.LENGTH_SHORT).show();
-                                                user.setEstado_grupo(0);
-                                                i = new Intent(Login.this, MainActivity.class);
-                                                break;
-
-                                            default:
-                                                Toast.makeText(getApplicationContext(), "PROBLEMA CON LA ASIGNACION DE GRUPO", Toast.LENGTH_SHORT).show();
+                                                intent= new Intent(Login.this, MainActivity.class);
                                                 break;
                                         }
-                                        //i.putExtra("")
-
-                                       startActivity(i);
+                                        intent.putExtra("u", u);
+                                       startActivity(intent);
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }

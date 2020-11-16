@@ -14,25 +14,17 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:paddingTop="60dp"
-            android:text="@string/bienvenida"
-            android:textColor="@color/titulos"
-            android:textSize="30dp"
-            android:textStyle="bold|italic" />
+
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="30dp"
-            android:layout_weight="30"
-            app:srcCompat="@drawable/logo4" />
+            android:paddingTop="50dp"
+            android:layout_weight="40"
+            app:srcCompat="@drawable/logo_app" />
 
         <EditText
             android:id="@+id/txt_lg_user"
@@ -81,16 +73,54 @@
             android:id="@+id/registrar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textColor="@color/negro"
             android:gravity="center"
             android:text="@string/registrar" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="30"
+            android:layout_weight="5"
+            android:orientation="horizontal"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="50"
             android:gravity="center|top"
             android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:text="" />
+
+
+            <ImageButton
+                android:id="@+id/new_us"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:background="@color/transparente"
+                app:srcCompat="@drawable/new_us_80" />
+
+            <ImageButton
+                android:id="@+id/us_google"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:background="@color/transparente"
+                app:srcCompat="@drawable/new_us_google_80" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:text="" />
 
         </LinearLayout>
 
