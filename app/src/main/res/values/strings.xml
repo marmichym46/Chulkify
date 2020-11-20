@@ -18,4 +18,16 @@
     <string name="no_comunidad">Usted no pertenece a una comunidad</string>
     <string name="crear_comu">Crear una nueva comunidad</string>
     <string name="unirse_comu">Unirse a una comunidad existente</string>
+    <string name="nom_comu">nombre nueva comunidad</string>
+    <string name="codigo_unico">codigo para invitados</string>
+    <string name="refrescar">Refrescar</string>
+    <string name="bienvenido">Bienvenido  </string>
+    <string name="qdeseas_hacer">¿Que deseas hacer?</string>
+
+    <string name="info_comu">Informacion de tu comunidad</string>
+    <string name="cog_inv">Codigo de invitacion</string>
+    <string name="t_usuario">Total de usuarios</string>
+    <string name="t_ganancia">Tu ganancia</string>
+
+
 </resources>

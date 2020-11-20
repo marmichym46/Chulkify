@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -56,7 +57,7 @@ public class nuevo_usuario extends AppCompatActivity {
 
         Calendar fecha_a = Calendar.getInstance();
         dia= fecha_a.get(Calendar.DAY_OF_MONTH);
-        mes= fecha_a.get(Calendar.MONTH);
+        mes= fecha_a.get(Calendar.MONTH)+1;
         anio= fecha_a.get(Calendar.YEAR);
         String diaS= String.valueOf(dia);
         String mesS = String.valueOf(mes);
@@ -98,7 +99,7 @@ public class nuevo_usuario extends AppCompatActivity {
         final String nombre = edt_nombre.getText().toString().trim();
         final String apellido = edt_apellido.getText().toString().trim();
         final String pass = edt_contrasena1.getText().toString().trim();
-        String pass2 = edt_contrasena2.getText().toString().trim();
+        final String pass2 = edt_contrasena2.getText().toString().trim();
         final String direccion = edt_direccion.getText().toString().trim();
         final String ciudad = edt_ciudad.getText().toString().trim();
         final String telefono = edt_telefono.getText().toString().trim();
@@ -158,6 +159,7 @@ public class nuevo_usuario extends AppCompatActivity {
                     parametros.put("direccion_us",direccion);
                     parametros.put("ciudad_us",ciudad);
                     parametros.put("fecha_inicio_us",fcha);
+
                     return parametros;
                 }
             };

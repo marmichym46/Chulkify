@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
+    android:background="@drawable/ima4"
     tools:context=".MainActivity">
 
 
@@ -14,25 +16,31 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/txt_mostrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:paddingTop="50dp"
-            android:text="@string/bienvenida"
+            android:paddingTop="80dp"
             android:textColor="@color/titulos"
-            android:textSize="30dp"
+            android:textSize="40dp"
             android:textStyle="bold|italic" />
 
-        <ImageView
-            android:id="@+id/imageView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
             android:layout_height="0dp"
-            android:layout_weight="30"
-            app:srcCompat="@drawable/ima_comu2"/>
+            android:layout_weight="20"
+            android:gravity="center"
+            android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/imageView"
+                android:background="@drawable/tema_negro_trans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ima_comu2" />
+        </LinearLayout>
 
 
         <LinearLayout
@@ -44,11 +52,11 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="50"
+                android:layout_weight="40"
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/imageButton"
+                    android:id="@+id/btn_new_comu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/tema_trans_boton"
@@ -62,17 +70,18 @@
                     android:textColor="@color/titulos"
                     android:textStyle="bold|italic"
                     android:gravity="center_horizontal"
+                    android:visibility="invisible"
                     android:text="@string/crear_comu" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="50"
+                android:layout_weight="40"
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/imageButton2"
+                    android:id="@+id/btn_uni_comu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/tema_trans_boton"
@@ -86,8 +95,11 @@
                     android:textColor="@color/titulos"
                     android:textStyle="bold|italic"
                     android:gravity="center_horizontal"
+                    android:visibility="invisible"
                     android:text="@string/unirse_comu" />
             </LinearLayout>
         </LinearLayout>
+
+
     </LinearLayout>
 </RelativeLayout>

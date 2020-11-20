@@ -15,9 +15,10 @@ public class Logear_usuario implements Parcelable {
     private Double fondos;
     private  int grupo, estado_grupo, id_cuenta, tipo, aportes;
     private String f_inicio;
+    private String f_union;
     public Logear_usuario() {
     }
-    public Logear_usuario(int id, String ci, String nombres, String apellidos, String nombre_usuario, String correo, String password, Double fondos, int grupo, int estado_grupo, int id_cuenta, int tipo, String direccion, String telefono, String ciudad, String f_inicio, int aportes) {
+    public Logear_usuario(int id, String ci, String nombres, String apellidos, String nombre_usuario, String correo, String password, Double fondos, int grupo, int estado_grupo, int id_cuenta, int tipo, String direccion, String telefono, String ciudad, String f_inicio, int aportes, String f_union) {
         this.id = id;
         this.Ci = Ci;
         this.nombres = nombres;
@@ -34,6 +35,7 @@ public class Logear_usuario implements Parcelable {
         this.ciudad = ciudad;
         this.telefono = telefono;
         this.f_inicio = f_inicio;
+        this.f_inicio = f_union;
         this.aportes = aportes;
     }
     //Getter
@@ -54,6 +56,7 @@ public class Logear_usuario implements Parcelable {
     public String getTelefono() { return telefono; }
     public String getCiudad() { return  ciudad; }
     public String getF_inicio() { return f_inicio;}
+    public String getF_union() { return f_union;}
     public int getAportes() { return aportes; }
 
 
@@ -74,6 +77,7 @@ public class Logear_usuario implements Parcelable {
     public void setTelefono(String telefono) { this.telefono = telefono;}
     public void setCiudad(String ciudad) { this.ciudad = ciudad;}
     public void setF_inicio(String f_inicio) { this.f_inicio = f_inicio;}
+    public void setF_union(String f_union) { this.f_inicio = f_union;}
     public void setAportes(int aportes) {this.aportes = aportes; }
 
 
@@ -105,6 +109,7 @@ public class Logear_usuario implements Parcelable {
         dest.writeInt(this.tipo);
         dest.writeInt(this.aportes);
         dest.writeSerializable(this.f_inicio);
+        dest.writeSerializable(this.f_union);
     }
 
     protected Logear_usuario(Parcel in) {
@@ -125,6 +130,7 @@ public class Logear_usuario implements Parcelable {
         this.tipo = in.readInt();
         this.aportes = in.readInt();
         this.f_inicio = in.readString();
+        this.f_union = in.readString();
     }
 
     public static final Parcelable.Creator<Logear_usuario> CREATOR = new Parcelable.Creator<Logear_usuario>() {

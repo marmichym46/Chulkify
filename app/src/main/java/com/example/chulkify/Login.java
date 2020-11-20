@@ -31,10 +31,13 @@ public class Login extends AppCompatActivity {
 
     private EditText et_usuario, et_contra;
     private Button btn_Logear;
+    private TextView tv1;
     private TextView tvw_registrar, tvw_recordar_pass;
     private ImageButton  btn_new_us;
-
     private AsyncHttpClient usuario_clien;
+    private SharedPreferences preferences;
+
+    private String codigo1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,21 @@ public class Login extends AppCompatActivity {
         btn_Logear = (Button) findViewById(R.id.btn_ingresar);
         et_usuario = (EditText) findViewById(R.id.txt_lg_user);
         et_contra = (EditText) findViewById(R.id.txt_lg_pass);
+
+        preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+
+
+        if (preferences.getString("nombre_usuario", null) != null){
+            preferences.edit().clear().apply();
+
+        }
+
+        preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+
+
+
+
+
 
         btn_new_us = (ImageButton) findViewById(R.id.new_us);
         btn_new_us.setOnClickListener(new View.OnClickListener() {
@@ -88,28 +106,35 @@ public class Login extends AppCompatActivity {
 
                                         Logear_usuario u = new Logear_usuario();
                                         u.setId(jsonObj.getInt("id_us"));
-                                        u.setCi(jsonObj.getString("cedula_us"));
-                                        u.setNombre_usuario(jsonObj.getString("usuario_us"));
-                                        u.setNombre(jsonObj.getString("nombre_us"));
                                         u.setTipo(jsonObj.getInt("tipo_us"));
-                                        u.setPassword(jsonObj.getString("contrasena_us"));
-                                        u.setApellidos(jsonObj.getString("apellidos_us"));
-                                        u.setFondos(jsonObj.getDouble("fondos_us"));
-                                        u.setEstado_grupo(jsonObj.getInt("estado_gru_us"));
-                                        u.setId_cuenta(jsonObj.getInt("id_cuenta_us"));
-                                        u.setGrupo(jsonObj.getInt("grupo_us"));
-                                        u.setAportes(jsonObj.getInt("aportes_id"));
-                                        u.setDireccion(jsonObj.getString("direccion_us"));
-                                        u.setCiudad(jsonObj.getString("ciudad_us"));
-                                        u.setTelefono(jsonObj.getString("telefono_us"));
-                                        u.setF_inicio(jsonObj.getString("fecha_inicio_us"));
+                                        int n_tp= jsonObj.getInt("tipo_us");
+
+
+                                        SharedPreferences.Editor editor=preferences.edit();
+                                        editor.putString("cedula_usuario", jsonObj.getString("cedula_us"));
+                                        editor.putString("nombre_usuario", jsonObj.getString("usuario_us"));
+                                        editor.putInt("id", jsonObj.getInt("id_us"));
+                                        editor.putString("comunidad", jsonObj.getString("grupo_us"));
+                                        codigo1 = jsonObj.getString("grupo_us");
+                                        editor.putInt("tipo", jsonObj.getInt("tipo_us"));
+                                        editor.putString("fecha_ini", jsonObj.getString("fecha_inicio_us"));
+                                        editor.putString("fecha_union_grupo", jsonObj.getString("fecha_union_comu_us"));
+                                        editor.apply();
+
                                         Intent intent = null;
-                                        switch (u.getGrupo()) {
+                                        switch (n_tp) {
                                             case 0:
                                                 intent= new Intent(Login.this, MainActivity.class);
                                                 break;
+                                            case 1:
+                                                Toast.makeText(Login.this, "1 :la actividad aun esta en mantnimiento", Toast.LENGTH_SHORT).show();
+                                                break;
+                                            case 2:
+                                                intent= new Intent(Login.this, menu_comunidad.class);
+                                                break;
+
                                         }
-                                        intent.putExtra("u", u);
+
                                        startActivity(intent);
                                     } catch (Exception e) {
                                         e.printStackTrace();
