@@ -107,7 +107,7 @@ public class nueva_comunidad extends AppCompatActivity {
                 public void onResponse(String response) {
                     if (response.equalsIgnoreCase("la comunidad se creo con exito")){
 
-                        Intent intent= new Intent(nueva_comunidad.this, menu_comunidad.class);
+                        Intent intent= new Intent(nueva_comunidad.this, cargar_1.class);
                         startActivity(intent);
                         Toast.makeText(getApplicationContext(), "la comunidad se creo con exito ...!!!", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();

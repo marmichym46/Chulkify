@@ -23,11 +23,21 @@
     <string name="refrescar">Refrescar</string>
     <string name="bienvenido">Bienvenido  </string>
     <string name="qdeseas_hacer">¿Que deseas hacer?</string>
+    <string name="cargar">Cargar Datos...</string>
 
     <string name="info_comu">Informacion de tu comunidad</string>
     <string name="cog_inv">Codigo de invitacion</string>
     <string name="t_usuario">Total de usuarios</string>
     <string name="t_ganancia">Tu ganancia</string>
+
+    <string name="nombre_comu">Nombre comunidad: </string>
+    <string name="n_integrantes">N° integrantes:</string>
+    <string name="ubicacion_comu">Ubicacion:</string>
+    <string name="admind_comu">Administrador:</string>
+
+    <string name="env_solicitud">Enviar solicitud</string>
+
+    <string name="buscar">Buscar</string>
 
 
 </resources>

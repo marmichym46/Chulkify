@@ -26,8 +26,8 @@ public class menu_comunidad extends AppCompatActivity {
     private String usuario, fecha_m;
     private String codg_comu, city_comu,  nom_comu;
     private AsyncHttpClient comu_clien;
-    private  int id_comu, total_us_comu;
-    private String nomb,most_fecha, n_comu, m_usuario, conv_total_us;
+    private  int id_comu;
+    private String nomb,most_fecha, n_comu, m_usuario, conv_total_us,total_us_comu;
     private Button btn_actualizar;
 
     private String fecha;
@@ -40,14 +40,11 @@ public class menu_comunidad extends AppCompatActivity {
         setContentView(R.layout.activity_menu_comunidad);
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
         usuario = preferences.getString("cedula_usuario", null);
-
-
-        preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
         n_comu = preferences.getString("nombre_comu", null);
         fecha_m = preferences.getString("fecha_union_grupo", null);
         m_usuario = preferences.getString("nombre_usuario" , null);
         codg_comu = preferences.getString("codigo_comu",null);
-        total_us_comu=preferences.getInt("total_us_comu",0);
+        total_us_comu= String.valueOf(preferences.getInt("total_usuario_comu",0));
 
 
         nombre_comu=findViewById(R.id.tv_comunidad_m);
@@ -58,7 +55,6 @@ public class menu_comunidad extends AppCompatActivity {
 
 
         comu_clien = new AsyncHttpClient();
-        cargar_datos();
 
         Calendar fecha_a = Calendar.getInstance();
         dia= fecha_a.get(Calendar.DAY_OF_MONTH);
@@ -68,6 +64,8 @@ public class menu_comunidad extends AppCompatActivity {
         String mesS = String.valueOf(mes);
         String anioS = String.valueOf(anio);
         fecha = diaS+"/"+mesS+"/"+anioS;
+
+        mostrar_datos();
 
 
 
@@ -118,7 +116,7 @@ public class menu_comunidad extends AppCompatActivity {
                             preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
                             n_comu = preferences.getString("nombre_comu", null);
                             codg_comu = preferences.getString("codigo_comu",null);
-                            total_us_comu=preferences.getInt("total_usuario_comu",0);
+                            total_us_comu= String.valueOf(preferences.getInt("total_usuario_comu",0));
                             mostrar_datos();
 
 
@@ -147,7 +145,7 @@ public class menu_comunidad extends AppCompatActivity {
         fecha_comu.setText(most_fecha);
         mv_usuario.setText(m_usuario);
         tv_codigo.setText(codg_comu);
-        tv_t_us.setText(String.valueOf(total_us_comu));
+        tv_t_us.setText(total_us_comu);
     }
 
 

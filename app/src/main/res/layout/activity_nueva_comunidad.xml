@@ -69,6 +69,7 @@
                     android:drawableLeft="@drawable/n_comu"
                     android:drawablePadding="12dp"
                     android:ems="10"
+                    android:maxLength="20"
                     android:hint="@string/nom_comu"
                     android:inputType="textPersonName" />
 
@@ -123,6 +124,7 @@
                     android:background="@drawable/caja_texto_style2"
                     android:drawableLeft="@drawable/ciudad"
                     android:drawablePadding="12dp"
+                    android:maxLength="30"
                     android:ems="10"
                     android:hint="@string/ciudad"
                     android:inputType="textPersonName" />

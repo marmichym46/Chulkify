@@ -70,6 +70,7 @@
                     android:drawableLeft="@drawable/user_lg"
                     android:drawablePadding="12dp"
                     android:ems="10"
+                    android:maxLength="20"
                     android:hint="@string/usuario"
                     android:inputType="textPersonName" />
 
@@ -84,6 +85,7 @@
                     android:background="@drawable/caja_texto_style2"
                     android:drawableLeft="@drawable/correo"
                     android:drawablePadding="12dp"
+                    android:maxLength="35"
                     android:ems="10"
                     android:hint="@string/correo"
                     android:inputType="textEmailAddress" />
@@ -99,6 +101,7 @@
                     android:background="@drawable/caja_texto_style2"
                     android:drawableLeft="@drawable/pass_lg"
                     android:drawablePadding="12dp"
+                    android:maxLength="20"
                     android:ems="10"
                     android:hint="@string/pass"
                     android:inputType="textPassword" />
@@ -137,6 +140,7 @@
                     android:background="@drawable/caja_texto_style2"
                     android:drawableLeft="@drawable/nom"
                     android:drawablePadding="12dp"
+                    android:maxLength="30"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:hint="@string/nombre" />
@@ -152,6 +156,7 @@
                     android:background="@drawable/caja_texto_style2"
                     android:drawableLeft="@drawable/nom"
                     android:drawablePadding="12dp"
+                    android:maxLength="30"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:hint="@string/apellido" />
@@ -167,6 +172,7 @@
                     android:background="@drawable/caja_texto_style2"
                     android:drawableLeft="@drawable/ci"
                     android:drawablePadding="12dp"
+                    android:maxLength="10"
                     android:ems="10"
                     android:hint="@string/cedula"
                     android:inputType="numberSigned" />
@@ -182,6 +188,7 @@
                     android:background="@drawable/caja_texto_style2"
                     android:drawableLeft="@drawable/ciudad"
                     android:drawablePadding="12dp"
+                    android:maxLength="20"
                     android:ems="10"
                     android:hint="@string/ciudad"
                     android:inputType="textPersonName" />
@@ -197,6 +204,7 @@
                     android:background="@drawable/caja_texto_style2"
                     android:drawableLeft="@drawable/direccion"
                     android:drawablePadding="12dp"
+                    android:maxLength="30"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:hint="@string/direccion" />
@@ -212,6 +220,7 @@
                     android:background="@drawable/caja_texto_style2"
                     android:drawableLeft="@drawable/phone"
                     android:drawablePadding="12dp"
+                    android:maxLength="10"
                     android:ems="10"
                     android:inputType="number"
                     android:hint="@string/telefono" />

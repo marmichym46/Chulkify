@@ -31,10 +31,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
         new_comu = (ImageButton) findViewById(R.id.btn_new_comu);
+        uni_comu = (ImageButton) findViewById(R.id.btn_uni_comu);
         new_comu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, nueva_comunidad.class));
+
+            }
+        });
+        uni_comu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, unir_comunidad.class));
 
             }
         });

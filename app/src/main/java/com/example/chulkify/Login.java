@@ -130,7 +130,7 @@ public class Login extends AppCompatActivity {
                                                 Toast.makeText(Login.this, "1 :la actividad aun esta en mantnimiento", Toast.LENGTH_SHORT).show();
                                                 break;
                                             case 2:
-                                                intent= new Intent(Login.this, menu_comunidad.class);
+                                                intent= new Intent(Login.this, cargar_1.class);
                                                 break;
 
                                         }

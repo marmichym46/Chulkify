@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".menu_comunidad"></activity>
+        <activity android:name=".unir_comunidad"></activity>
+        <activity android:name=".cargar_1" />
+        <activity android:name=".menu_comunidad" />
         <activity android:name=".nueva_comunidad" />
         <activity android:name=".nuevo_usuario" />
         <activity android:name=".MainActivity" />
