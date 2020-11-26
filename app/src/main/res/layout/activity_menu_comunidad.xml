@@ -140,6 +140,16 @@
                             android:layout_weight="60"
                             android:orientation="vertical">
 
+                            <EditText
+                                android:id="@+id/edt_codigo"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:ems="10"
+                                android:textSize="15dp"
+                                android:textColor="@color/blanco"
+                                android:background="@drawable/tema_negro_trans"
+                                android:inputType="textPersonName"/>
+
                             <TextView
                                 android:id="@+id/textView14"
                                 android:layout_width="match_parent"
@@ -163,6 +173,14 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="40"
                             android:orientation="vertical">
+
+                            <Button
+                                android:id="@+id/btn_copiar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:background="@drawable/tema_boton"
+                                android:drawableLeft="@drawable/copiar_dw"
+                                android:text="@string/copiar" />
 
                             <TextView
                                 android:id="@+id/tv_codigo"

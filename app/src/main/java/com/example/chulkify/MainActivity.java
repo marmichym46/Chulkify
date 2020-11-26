@@ -4,6 +4,8 @@ package com.example.chulkify;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -49,5 +51,24 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_of, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+
+        if (id == R.id.menu_iten_c_sesion){
+            preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+            preferences.edit().clear().apply();
+            startActivity(new Intent(MainActivity.this, Login.class));
+            //Intent intent= new Intent(menu_comunidad.this, Login.class);
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

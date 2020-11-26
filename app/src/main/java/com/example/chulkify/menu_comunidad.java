@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +32,7 @@ public class menu_comunidad extends AppCompatActivity {
     private  int id_comu;
     private String nomb,most_fecha, n_comu, m_usuario, conv_total_us,total_us_comu;
     private Button btn_actualizar;
+    private EditText codigo_cop;
 
     private String fecha;
     private int  dia, mes, anio;
@@ -52,6 +56,7 @@ public class menu_comunidad extends AppCompatActivity {
         mv_usuario=findViewById(R.id.txt_usuario_us);
         tv_codigo =findViewById(R.id.tv_codigo);
         tv_t_us   =findViewById(R.id.tv_t_us);
+        codigo_cop = findViewById(R.id.edt_codigo);
 
 
         comu_clien = new AsyncHttpClient();
@@ -144,8 +149,29 @@ public class menu_comunidad extends AppCompatActivity {
         nombre_comu.setText(n_comu);
         fecha_comu.setText(most_fecha);
         mv_usuario.setText(m_usuario);
+        codigo_cop.setText(codg_comu);
         tv_codigo.setText(codg_comu);
         tv_t_us.setText(total_us_comu);
+    }
+
+
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_of, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+
+        if (id == R.id.menu_iten_c_sesion){
+            preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+            preferences.edit().clear().apply();
+            startActivity(new Intent(menu_comunidad.this, Login.class));
+            //Intent intent= new Intent(menu_comunidad.this, Login.class);
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

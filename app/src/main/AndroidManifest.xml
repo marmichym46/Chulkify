@@ -13,13 +13,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".unir_comunidad"></activity>
-        <activity android:name=".cargar_1" />
-        <activity android:name=".menu_comunidad" />
-        <activity android:name=".nueva_comunidad" />
-        <activity android:name=".nuevo_usuario" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Login">
+        <activity android:name=".cargar_2"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".unir_comunidad"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".cargar_1"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".menu_comunidad"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".nueva_comunidad"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".nuevo_usuario"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Login"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

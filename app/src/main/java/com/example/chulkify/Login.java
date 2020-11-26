@@ -29,6 +29,8 @@ import org.json.JSONObject;
 
 public class Login extends AppCompatActivity {
 
+    //private GoogleApiClient googleApiClient;
+
     private EditText et_usuario, et_contra;
     private Button btn_Logear;
     private TextView tv1;
@@ -36,6 +38,7 @@ public class Login extends AppCompatActivity {
     private ImageButton  btn_new_us;
     private AsyncHttpClient usuario_clien;
     private SharedPreferences preferences;
+    private String us, pw;
 
     private String codigo1;
 
@@ -51,8 +54,13 @@ public class Login extends AppCompatActivity {
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
 
 
-        if (preferences.getString("nombre_usuario", null) != null){
-            preferences.edit().clear().apply();
+        if ((preferences.getString("nombre_usuario", null) != null)&&(preferences.getString("pass", null) != null)){
+            us=preferences.getString("nombre_usuario", null);
+            pw=preferences.getString("pass", null);
+
+            usuario_clien = new AsyncHttpClient();
+            //preferences.edit().clear().apply();
+            ini_seccion();
 
         }
 
@@ -118,7 +126,9 @@ public class Login extends AppCompatActivity {
                                         codigo1 = jsonObj.getString("grupo_us");
                                         editor.putInt("tipo", jsonObj.getInt("tipo_us"));
                                         editor.putString("fecha_ini", jsonObj.getString("fecha_inicio_us"));
+                                        editor.putString("pass", jsonObj.getString("contrasena_us"));
                                         editor.putString("fecha_union_grupo", jsonObj.getString("fecha_union_comu_us"));
+                                        editor.putInt("estado_usuario", jsonObj.getInt("estado_gru_us"));
                                         editor.apply();
 
                                         Intent intent = null;
@@ -127,7 +137,7 @@ public class Login extends AppCompatActivity {
                                                 intent= new Intent(Login.this, MainActivity.class);
                                                 break;
                                             case 1:
-                                                Toast.makeText(Login.this, "1 :la actividad aun esta en mantnimiento", Toast.LENGTH_SHORT).show();
+                                                intent= new Intent(Login.this, cargar_1.class);
                                                 break;
                                             case 2:
                                                 intent= new Intent(Login.this, cargar_1.class);
@@ -160,7 +170,92 @@ public class Login extends AppCompatActivity {
 
         });
 
-    }}
+    }
+    private void ini_seccion() {
+
+
+
+            String usuario = us.replace(" ", "%20");
+            String password =   pw.replace(" ", "%20");
+            String url = "http://www.marlonmym.tk/chulki/login.php?usuario_us="+usuario+"&contrasena_us="+password;
+            //Toast.makeText(Login.this, url, Toast.LENGTH_SHORT).show();
+
+            usuario_clien.post(url, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+
+
+                    if (statusCode == 200) {
+                        String respuesta = new String(responseBody);
+                        if (respuesta.equalsIgnoreCase("null")) {
+                            Toast.makeText(Login.this, "Error De Usuario y/o Contraseña!!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            try {
+
+                                JSONObject jsonObj = new JSONObject(respuesta);
+
+                                Logear_usuario u = new Logear_usuario();
+                                u.setId(jsonObj.getInt("id_us"));
+                                u.setTipo(jsonObj.getInt("tipo_us"));
+                                int n_tp= jsonObj.getInt("tipo_us");
+
+
+                                SharedPreferences.Editor editor=preferences.edit();
+                                editor.putString("cedula_usuario", jsonObj.getString("cedula_us"));
+                                editor.putString("nombre_usuario", jsonObj.getString("usuario_us"));
+                                editor.putInt("id", jsonObj.getInt("id_us"));
+                                editor.putString("comunidad", jsonObj.getString("grupo_us"));
+                                codigo1 = jsonObj.getString("grupo_us");
+                                editor.putInt("tipo", jsonObj.getInt("tipo_us"));
+                                editor.putString("fecha_ini", jsonObj.getString("fecha_inicio_us"));
+                                editor.putString("pass", jsonObj.getString("contrasena_us"));
+                                editor.putString("fecha_union_grupo", jsonObj.getString("fecha_union_comu_us"));
+                                editor.putInt("estado_usuario", jsonObj.getInt("estado_gru_us"));
+                                editor.apply();
+
+                                Intent intent = null;
+                                switch (n_tp) {
+                                    case 0:
+                                        intent= new Intent(Login.this, MainActivity.class);
+                                        break;
+                                    case 1:
+                                        intent= new Intent(Login.this, cargar_1.class);
+                                        break;
+                                    case 2:
+                                        intent= new Intent(Login.this, cargar_1.class);
+                                        break;
+
+                                }
+
+                                startActivity(intent);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    Toast.makeText(Login.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+
+
+                    et_usuario.setText("");
+                    et_contra.setText("");
+                }
+
+
+            });
+
+
+
+    }
+
+
+
+
+}
 
 
 

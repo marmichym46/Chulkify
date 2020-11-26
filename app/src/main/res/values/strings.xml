@@ -38,6 +38,13 @@
     <string name="env_solicitud">Enviar solicitud</string>
 
     <string name="buscar">Buscar</string>
+    <string name="c_sesion">Cerrar sesion</string>
+    <string name="usuario_c">Confg. usuario</string>
+
+    <string name="copiar">Copiar</string>
+
+
+
 
 
 </resources>
