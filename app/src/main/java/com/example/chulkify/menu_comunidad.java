@@ -27,7 +27,7 @@ public class menu_comunidad extends AppCompatActivity {
     private SharedPreferences preferences;
     private TextView nombre_comu, fecha_comu, mv_usuario, tv_codigo,tv_t_us;
     private String usuario, fecha_m;
-    private String codg_comu, city_comu,  nom_comu;
+    private String codg_comu, city_comu,  nom_comu, fecha_at;
     private AsyncHttpClient comu_clien;
     private  int id_comu;
     private String nomb,most_fecha, n_comu, m_usuario, conv_total_us,total_us_comu;
@@ -48,6 +48,7 @@ public class menu_comunidad extends AppCompatActivity {
         fecha_m = preferences.getString("fecha_union_grupo", null);
         m_usuario = preferences.getString("nombre_usuario" , null);
         codg_comu = preferences.getString("codigo_comu",null);
+        fecha_at = preferences.getString("fecha_actual",null);
         total_us_comu= String.valueOf(preferences.getInt("total_usuario_comu",0));
 
 
@@ -150,7 +151,7 @@ public class menu_comunidad extends AppCompatActivity {
         fecha_comu.setText(most_fecha);
         mv_usuario.setText(m_usuario);
         codigo_cop.setText(codg_comu);
-        tv_codigo.setText(codg_comu);
+        tv_codigo.setText(fecha_at);
         tv_t_us.setText(total_us_comu);
     }
 
