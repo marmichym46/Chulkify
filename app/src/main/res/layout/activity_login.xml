@@ -14,15 +14,6 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txt_mostrar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:paddingTop="50dp"
-            android:textColor="@color/titulos"
-            android:textSize="30dp"
-            android:textStyle="bold|italic" />
 
 
         <ImageView
@@ -31,115 +22,113 @@
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="30dp"
+            android:paddingBottom="20dp"
             android:paddingTop="50dp"
-            android:layout_weight="40"
+            android:layout_weight="45"
             app:srcCompat="@drawable/logo_app" />
 
-        <EditText
-            android:id="@+id/txt_lg_user"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="15dp"
-            android:layout_weight="9"
-            android:background="@drawable/caja_texto_style"
-            android:drawableLeft="@drawable/user_lg"
-            android:drawablePadding="12dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="@string/usuario" />
-
-        <EditText
-            android:id="@+id/txt_lg_pass"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="15dp"
-            android:layout_weight="9"
-            android:background="@drawable/caja_texto_style"
-            android:drawableLeft="@drawable/pass_lg"
-            android:drawablePadding="12dp"
-
-            android:ems="10"
-            android:inputType="textPassword"
-            android:hint="@string/pass" />
-
-        <Button
-            android:id="@+id/btn_ingresar"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="10"
-            android:background="@drawable/tema_boton"
-            android:text="@string/ingresar"
-            android:textColor="@color/blanco" />
-
-        <TextView
-            android:id="@+id/registrar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:textColor="@color/negro"
-            android:gravity="center"
-            android:text="@string/registrar" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5"
-            android:orientation="horizontal"></LinearLayout>
+            android:layout_weight="40"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="50"
-            android:gravity="center|top"
-            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/tema_blanco_trans"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="25"
-                android:text="" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="10"/>
 
-            <ImageButton
-                android:id="@+id/new_us"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="25"
-                android:background="@color/transparente"
-                app:srcCompat="@drawable/new_us_80" />
+                    <EditText
+                        android:id="@+id/txt_lg_user"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="15dp"
+                        android:layout_weight="33"
+                        android:background="@drawable/caja_texto_style2"
+                        android:drawableLeft="@drawable/user_lg"
+                        android:drawablePadding="12dp"
+                        android:ems="10"
+                        android:hint="@string/usuario"
+                        android:inputType="textPersonName" />
 
-            <ImageButton
-                android:id="@+id/us_google"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="25"
-                android:background="@color/transparente"
-                app:srcCompat="@drawable/new_us_google_80" />
+                    <EditText
+                        android:id="@+id/txt_lg_pass"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="15dp"
+                        android:layout_weight="33"
+                        android:background="@drawable/caja_texto_style2"
+                        android:drawableLeft="@drawable/pass_lg"
+                        android:drawablePadding="12dp"
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="25"
-                android:text="" />
+                        android:ems="10"
+                        android:hint="@string/pass"
+                        android:inputType="textPassword" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="34"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/checkBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_weight="1"
+                            android:text="mantener la sesion" />
+
+                        <Button
+                            android:id="@+id/btn_ingresar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/tema_boton"
+                            android:text="@string/ingresar"
+
+                            android:drawableLeft="@drawable/ini_sesion"
+                            android:drawablePadding="12dp"
+                            android:paddingRight="20dp"
+                            android:paddingLeft="20dp"
+
+                            android:textColor="@color/blanco" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/recordar_pass"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-
-            android:text="@string/olv_contraseña" />
+            android:layout_height="0dp"
+            android:layout_weight="45"
+            android:orientation="horizontal"></LinearLayout>
 
     </LinearLayout>
 </RelativeLayout>

@@ -23,6 +23,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/refrescar"
+                android:drawablePadding="12dp"
+                android:paddingRight="20dp"
+                android:paddingLeft="20dp"
+                android:textColor="@color/blanco"
                 android:background="@drawable/tema_boton"
                 android:text="@string/refrescar" />
 
@@ -37,7 +41,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/titulos"
-                    android:background="@color/t_gren"
                     android:textSize="25dp"
                     android:gravity="right"
                     android:text="TextView" />
@@ -70,7 +73,7 @@
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/blanco"
+                android:textColor="@color/negro"
                 android:fontFamily="sans-serif-black"
                 android:textSize="25dp"
                 android:text="@string/bienvenido" />
@@ -90,7 +93,6 @@
                 android:textColor="@color/colorPrimary"
                 android:fontFamily="sans-serif-black"
                 android:textSize="25dp"
-                android:background="@color/t_gren"
                 android:text="TextView" />
         </LinearLayout>
 
@@ -124,8 +126,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/naranja_transp"
+                        android:drawableLeft="@drawable/info"
+                        android:drawablePadding="12dp"
+                        android:paddingRight="20dp"
+                        android:paddingLeft="20dp"
                         android:textColor="@color/negro"
                         android:text="@string/info_comu" />
+
+                    <TextView
+                        android:id="@+id/textView33"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -180,6 +192,9 @@
                                 android:layout_height="30dp"
                                 android:background="@drawable/tema_boton"
                                 android:drawableLeft="@drawable/copiar_dw"
+                                android:drawablePadding="12dp"
+                                android:paddingRight="20dp"
+                                android:paddingLeft="20dp"
                                 android:text="@string/copiar" />
 
                             <TextView
@@ -236,15 +251,16 @@
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingRight="35dp"
-                android:paddingLeft="35dp"
-                android:background="@drawable/tema_negro_trans">
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
+
+                    android:paddingRight="35dp"
+                    android:paddingLeft="35dp"
+                    android:background="@drawable/tema_negro_trans"
                     android:orientation="horizontal" >
 
                     <ImageButton
@@ -305,6 +321,7 @@
 
 
                 </LinearLayout>
+
             </HorizontalScrollView>
         </LinearLayout>
 

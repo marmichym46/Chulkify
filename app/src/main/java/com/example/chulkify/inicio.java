@@ -2,20 +2,12 @@ package com.example.chulkify;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -24,99 +16,228 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
-public class cargar_2 extends AppCompatActivity {
+public class inicio extends AppCompatActivity {
 
     private SharedPreferences preferences;
-    private AsyncHttpClient comu_clien;
+    private AsyncHttpClient comu_clien,usuario_clien;
+
+
+    private AsyncHttpClient buscar_version;
+    private  String  resp_2;
+
     private String usuario;
-    private String res, nnn;
-
-
-    private String fechacrea, fechacadu;
+    //variables para fecha
+    private String fecha;
     private int  dia, mes, anio, hora, minutos, segundos;
-    private String  diaS, mesS, anioS,horaS, minutosS, segundosS, minutosa, usuario2;
+    private String  diaS, mesS, anioS,horaS, minutosS, segundosS, minutosa;
     private int minutos_aux;
     private int m_cadu=0;
     private String mnt="0";
 
+    //variables para clave y usuario
+    private String us, pw;
+    private String codigo1;
+
+    //version
+    private String version_1="v1.5";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cargar_2);
+        setContentView(R.layout.activity_inicio);
 
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
-        usuario = preferences.getString("codigo_comu_solicitud", null);
-        usuario2 =preferences.getString("cedula_usuario", null);
+        usuario = preferences.getString("cedula_usuario", null);
+
         comu_clien = new AsyncHttpClient();
-        //enviar_solicitudes();
+
+        SharedPreferences.Editor editor=preferences.edit();
+        editor.putString("version", version_1);
+        editor.apply();
+
+
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                //Toast.makeText(cargar_2.this, usuario, Toast.LENGTH_SHORT).show();
-                //Intent intent= new Intent(cargar_2.this, menu_comunidad.class);
-                //
-                //String dt=datos_usuario(usuario);
-                fyh_actual();
-                caducidad();
-                datos_us();
 
-                cargar_2.this.finish();
+                //Toast.makeText(inicio.this, version_1, Toast.LENGTH_SHORT).show();
+
+                verificar_sesion();
+                //Intent intent= new Intent(inicio.this, menu_comunidad.class);
+                //startActivity(intent);
+                inicio.this.finish();
             }
-        },15000);
+        },07000);
+
+
+
+
+    }
+
+    private void verificar_sesion(){
+        preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+        if ((preferences.getString("nombre_usuario", null) != null)&&(preferences.getString("pass", null) != null)){
+
+
+            if((preferences.getInt("anio_cadu", 0) != 0)&&(preferences.getInt("mes_cadu", 0) != 0)&&(preferences.getInt("dia_cadu", 0) != 0)){
+                int aaa=anio_actual();
+                int mmm=mes_actual();
+                int ddd=dia_actual();
+                int hhh=hora_actual();
+                int mnt=minuto_actual();
+                int sss=segundo_actual();
+
+                int aux_anio = preferences.getInt("anio_cadu", 0);
+                int aux_mes = preferences.getInt("mes_cadu", 0);
+                int aux_dia = preferences.getInt("dia_cadu", 0);
+                int aux_hora = preferences.getInt("hora_cadu", 0);
+                int aux_mnt = preferences.getInt("minuto_cadu", 0);
+                int aux_segundo = preferences.getInt("segundo_cadu", 0);
+
+
+                if (aaa >= aux_anio){
+                    if (mmm >= aux_mes){
+                        if (ddd >= aux_dia){
+                            if (hhh >= aux_hora){
+                                if (mnt >= aux_mnt){
+                                    preferences.edit().clear().apply();
+                                    Toast.makeText(inicio.this, "La session ah caducado", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(inicio.this, menu_inicio.class));
+
+                                }
+                                else{
+                                    us=preferences.getString("nombre_usuario", null);
+                                    pw=preferences.getString("pass", null);
+
+                                    usuario_clien = new AsyncHttpClient();
+                                    ini_seccion();
+                                }
+                            }
+                            else{
+                                us=preferences.getString("nombre_usuario", null);
+                                pw=preferences.getString("pass", null);
+
+                                usuario_clien = new AsyncHttpClient();
+                                ini_seccion();
+                            }
+                        }
+                        else{
+                            us=preferences.getString("nombre_usuario", null);
+                            pw=preferences.getString("pass", null);
+
+                            usuario_clien = new AsyncHttpClient();
+                            ini_seccion();
+                        }
+                    }
+                    else{
+                        us=preferences.getString("nombre_usuario", null);
+                        pw=preferences.getString("pass", null);
+
+                        usuario_clien = new AsyncHttpClient();
+                        ini_seccion();
+                    }
+
+                }
+
+                else{
+                    us=preferences.getString("nombre_usuario", null);
+                    pw=preferences.getString("pass", null);
+
+                    usuario_clien = new AsyncHttpClient();
+                    ini_seccion();
+                }
+            }
+            else{
+                us=preferences.getString("nombre_usuario", null);
+                pw=preferences.getString("pass", null);
+
+                usuario_clien = new AsyncHttpClient();
+                ini_seccion();
+
+
+            }
+
+
+
+
+        }
+        else {
+            startActivity(new Intent(inicio.this, menu_inicio.class));
+            //Toast.makeText(inicio.this, version_1, Toast.LENGTH_SHORT).show();
+        }
 
     }
 
 
 
 
-    private void datos_us(){
-        String ccc= "%22"+usuario+"%22";
-        String cog_comu = ccc.replace(" ", "%20");
-        String url = "http://www.marlonmym.tk/chulki/buscar_usu_per_comu.php?codigo_comu="+cog_comu;
+    private void ini_seccion() {
 
 
 
-        comu_clien.post(url, new AsyncHttpResponseHandler() {
+        String usuario = us.replace(" ", "%20");
+        String password =   pw.replace(" ", "%20");
+        String url = "http://www.marlonmym.tk/chulki/login.php?usuario_us="+usuario+"&contrasena_us="+password;
+        //Toast.makeText(Login.this, url, Toast.LENGTH_SHORT).show();
+
+        usuario_clien.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
 
 
-
                 if (statusCode == 200) {
-
                     String respuesta = new String(responseBody);
                     if (respuesta.equalsIgnoreCase("null")) {
-                        Toast.makeText(cargar_2.this, "Error al cargar datos", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(inicio.this, "Error De Usuario y/o Contraseña!!", Toast.LENGTH_SHORT).show();
                     } else {
                         try {
+                            caducidad();
                             JSONObject jsonObj = new JSONObject(respuesta);
-                            res=jsonObj.getString("dato");
 
-                            String[] parts = res.split("/");
-                            if (parts[1] == "dato_null"){
-                                Toast.makeText(cargar_2.this, "Error al cargar datos", Toast.LENGTH_SHORT).show();
+                            Logear_usuario u = new Logear_usuario();
+                            u.setId(jsonObj.getInt("id_us"));
+                            u.setTipo(jsonObj.getInt("tipo_us"));
+                            int n_tp= jsonObj.getInt("tipo_us");
 
-                            }else {
 
-                                for (int i = 1; i < parts.length; i++) {
-                                    nnn = parts[i];
-                                    Toast.makeText(cargar_2.this, "datos2=" + nnn, Toast.LENGTH_SHORT).show();
-                                    enviar_solicitudes();
-                                }
-                                Intent intent= new Intent(cargar_2.this, Login.class);
-                                startActivity(intent);
+                            SharedPreferences.Editor editor=preferences.edit();
+                            editor.putString("cedula_usuario", jsonObj.getString("cedula_us"));
+                            editor.putString("nombre_usuario", jsonObj.getString("usuario_us"));
+                            editor.putInt("id", jsonObj.getInt("id_us"));
+                            editor.putString("comunidad", jsonObj.getString("grupo_us"));
+                            codigo1 = jsonObj.getString("grupo_us");
+                            editor.putInt("tipo", jsonObj.getInt("tipo_us"));
+                            editor.putString("fecha_ini", jsonObj.getString("fecha_inicio_us"));
+                            editor.putString("pass", jsonObj.getString("contrasena_us"));
+                            editor.putString("fecha_union_grupo", jsonObj.getString("fecha_union_comu_us"));
+                            editor.putInt("estado_usuario", jsonObj.getInt("estado_gru_us"));
+                            editor.apply();
+
+                            Intent intent = null;
+                            switch (n_tp) {
+                                case 0:
+                                    intent= new Intent(inicio.this, MainActivity.class);
+                                    break;
+                                case 1:
+                                    intent= new Intent(inicio.this, cargar_1.class);
+                                    break;
+                                case 2:
+                                    intent= new Intent(inicio.this, cargar_1.class);
+                                    break;
+                                case 3:
+                                    intent= new Intent(inicio.this, cargar3.class);
+
+                                    break;
+
                             }
 
-
-
-
-
+                            startActivity(intent);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -126,15 +247,19 @@ public class cargar_2 extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(cargar_2.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+                Toast.makeText(inicio.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
 
             }
 
 
         });
+
+
+
     }
 
-    private void fyh_actual(){
+
+    private int fyh_actual(){
         Calendar fecha_a = Calendar.getInstance();
         Date date = new Date();
 
@@ -145,7 +270,7 @@ public class cargar_2 extends AppCompatActivity {
         diaS= String.valueOf(dia);
         mesS = String.valueOf(mes);
         anioS = String.valueOf(anio);
-
+        fecha = diaS+"/"+mesS+"/"+anioS;
 
         SimpleDateFormat h= new SimpleDateFormat("kk");
         horaS=h.format(date);
@@ -159,11 +284,45 @@ public class cargar_2 extends AppCompatActivity {
         segundosS=s.format(date);
         segundos=Integer.valueOf(segundosS);
 
-        fechacrea = diaS+"/"+mesS+"/"+anioS+"/"+horaS+"/"+minutosS+"/"+segundosS;
-
+        return minutos;
 
     }
-
+    private int anio_actual(){
+        Calendar fecha_a = Calendar.getInstance();
+        Date date = new Date();
+        anio= fecha_a.get(Calendar.YEAR);
+        return anio;
+    }
+    private int mes_actual(){
+        Calendar fecha_a = Calendar.getInstance();
+        Date date = new Date();
+        mes= fecha_a.get(Calendar.MONTH)+1;
+        return mes;
+    }
+    private int dia_actual(){
+        Calendar fecha_a = Calendar.getInstance();
+        Date date = new Date();
+        dia= fecha_a.get(Calendar.DAY_OF_MONTH);
+        return dia;
+    }
+    private int hora_actual(){
+        Date date = new Date();
+        SimpleDateFormat hh = new SimpleDateFormat("k");
+        hora=Integer.parseInt(hh.format(date));
+        return hora;
+    }
+    private int minuto_actual(){
+        Date date = new Date();
+        SimpleDateFormat mm= new SimpleDateFormat("m");
+        minutos=Integer.parseInt(mm.format(date));
+        return minutos;
+    }
+    private int segundo_actual(){
+        Date date = new Date();
+        SimpleDateFormat ss= new SimpleDateFormat("s");
+        segundos=Integer.parseInt(ss.format(date));
+        return segundos;
+    }
     private void caducidad(){
         Calendar fecha_a = Calendar.getInstance();
         Date date = new Date();
@@ -175,6 +334,7 @@ public class cargar_2 extends AppCompatActivity {
         diaS= String.valueOf(dia);
         mesS = String.valueOf(mes);
         anioS = String.valueOf(anio);
+        fecha = diaS+"/"+mesS+"/"+anioS;
 
         SimpleDateFormat h= new SimpleDateFormat("kk");
         horaS=h.format(date);
@@ -192,6 +352,11 @@ public class cargar_2 extends AppCompatActivity {
         segundosS=s.format(date);
         SimpleDateFormat ss= new SimpleDateFormat("s");
         segundos=Integer.parseInt(ss.format(date));
+
+
+
+
+
 
         if ((anio%4)==0){
             if (mes == 1){
@@ -522,71 +687,21 @@ public class cargar_2 extends AppCompatActivity {
         String mnt= String.valueOf(minutos);
         String ssss= String.valueOf(segundos);
 
-        fechacadu = dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        fecha = diaS+"/"+mesS+"/"+anioS+" - "+horaS+":"+minutosS+":"+segundosS+" -/- "+dddd+"/"+mmmm+"/"+aaaa+" - "+hhhh+":"+mnt+":"+ssss;
+
+        SharedPreferences.Editor editor=preferences.edit();
+        editor.putString("fecha_actual", fecha);
+        editor.putInt("anio_cadu", anio);
+        editor.putInt("mes_cadu", mes);
+        editor.putInt("dia_cadu", dia);
+        editor.putInt("hora_cadu", hora);
+        editor.putInt("minuto_cadu", minutos);
+        editor.putInt("segundo_cadu", segundos);
+
+        editor.apply();
 
 
     }
-
-
-    private void enviar_solicitudes(){
-
-
-        final String fecha_crea_notif = fechacrea.trim();
-        final String fecha_cadu_notif = fechacadu.trim();
-        final String ci_soli_env_notif = usuario2.trim();
-        //Toast.makeText(cargar_2.this, fecha_crea_notif+" - "+fecha_cadu_notif, Toast.LENGTH_SHORT).show();
-        final String codigo_comu_notif = usuario.trim();
-        //Toast.makeText(cargar_2.this, codigo_comu_notif, Toast.LENGTH_SHORT).show();
-        final String ci_us_notif = nnn.trim();
-        //Toast.makeText(cargar_2.this, ci_us_notif, Toast.LENGTH_SHORT).show();
-
-
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-
-
-
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://www.marlonmym.tk/chulki/add_notificacion.php", new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    if (response.equalsIgnoreCase("lasolicitud fue enviada con exito ...!!!")){
-
-                        //Intent intent= new Intent(cargar_2.this, cargar_1.class);
-                        //startActivity(intent);
-                        Toast.makeText(getApplicationContext(), "lasolicitud fue enviada con exito ...!!!", Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                    }else {
-                        Toast.makeText(getApplicationContext(), response , Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                    }
-
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
-                }
-            }){
-                @Override
-                protected Map<String, String> getParams()throws AuthFailureError {
-                    Map<String, String> parametros = new HashMap<String, String>();
-                    parametros.put("ci_us_notif",ci_us_notif);
-                    parametros.put("codigo_comu_notif",codigo_comu_notif);
-                    parametros.put("fecha_crea_notif",fecha_crea_notif);
-                    parametros.put("fecha_cadu_notif",fecha_cadu_notif);
-                    parametros.put("ci_soli_env_notif", ci_soli_env_notif);
-                    return parametros;
-                }
-            };
-            RequestQueue requestQueue= Volley.newRequestQueue(cargar_2.this);
-            requestQueue.add(stringRequest);
-
-
-
-
-
-    }
-
 
 
 }

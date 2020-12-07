@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="60dp"
         android:gravity="center"
         android:orientation="vertical">
         <TextView
@@ -24,15 +25,6 @@
             android:textSize="30dp"
             android:textStyle="bold|italic" />
 
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="15"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            app:srcCompat="@drawable/logo4" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -231,15 +223,18 @@
 
         <Button
             android:id="@+id/btn_registrar"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:layout_marginBottom="5dp"
-            android:layout_weight="8"
             android:background="@drawable/tema_boton"
-            android:text="Registrarse"
-            android:textColor="@color/blanco" />
+            android:drawableLeft="@drawable/regist_uss"
+            android:drawablePadding="12dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:textColor="@color/blanco"
+            android:text="Registrarse"/>
 
         <LinearLayout
             android:layout_width="match_parent"

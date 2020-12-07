@@ -23,7 +23,7 @@
     <string name="refrescar">Refrescar</string>
     <string name="bienvenido">Bienvenido  </string>
     <string name="qdeseas_hacer">¿Que deseas hacer?</string>
-    <string name="cargar">Cargar Datos...</string>
+    <string name="cargar">Cargando Datos...</string>
 
     <string name="info_comu">Informacion de tu comunidad</string>
     <string name="cog_inv">Codigo de invitacion</string>
@@ -43,8 +43,21 @@
 
     <string name="copiar">Copiar</string>
 
+    <string name="cancelar_soli">Cancelar Solicitud</string>
+    <string name="aceptadas">Aceptadas</string>
+    <string name="espera">En espera</string>
+    <string name="negadas">Negadas</string>
 
+    <string name="iniciar">Iniciando . . .</string>
+    <string name="tienes_cuenta">Tienes cuenta ?</string>
+    <string name="o_regis">O registrate</string>
+    <string name="ini_sesion">Iniciar sesion</string>
+    <string name="o_google">O inicia sesion con google</string>
+    <string name="regis">Registrarse</string>
+    <string name="google">Google</string>
 
+    <string name="inf_solicitud">Informacion de tu solicitud</string>
+    <string name="cadu_soli">Tu solicitud caduca:</string>
 
 
 </resources>

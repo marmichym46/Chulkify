@@ -3,10 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:title="@string/usuario_c" >
         <menu >
-            <item
-                android:id="@+id/menu_iten_c_sesion"
-                android:drawableLeft="@drawable/c_session"
-                android:title="@string/c_sesion" />
+
             <item
                 android:id="@+id/menu_actualizacion"
                 android:drawableLeft="@drawable/c_session"

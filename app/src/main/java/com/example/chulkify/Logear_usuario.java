@@ -16,6 +16,8 @@ public class Logear_usuario implements Parcelable {
     private  int grupo, estado_grupo, id_cuenta, tipo, aportes;
     private String f_inicio;
     private String f_union;
+
+
     public Logear_usuario() {
     }
     public Logear_usuario(int id, String ci, String nombres, String apellidos, String nombre_usuario, String correo, String password, Double fondos, int grupo, int estado_grupo, int id_cuenta, int tipo, String direccion, String telefono, String ciudad, String f_inicio, int aportes, String f_union) {

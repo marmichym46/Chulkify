@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#F7CB04 </color>
+    <color name="colorPrimary">#0A46E8 </color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="c_texto">#F5E9BF</color>
-    <color name="t_gren">#60030C00  </color>
-    <color name="colorAccent">#FFA833</color>
-    <color name="naranja_trans">#60FFA833</color>
-    <color name="titulos">#F4B705</color>
+    <color name="c_texto">#CFD9F7</color>
+    <color name="t_gren">#99030C00  </color>
+    <color name="t_gren2">#60030C00  </color>
+    <color name="colorAccent">#0A46E8</color>
+    <color name="naranja_trans">#600A46E8</color>
+    <color name="titulos">#0A46E8</color>
 <color name="transparente">#00FFFFFF</color>
     <color name="blanco">#FFFFFF</color>
-    <color name="blanco_trans">#70FFFFFF</color>
+    <color name="blanco_trans">#4DFFFFFF</color>
     <color name="negro">#000</color>
     <color name="verde">#47F60C</color>
+    <color name="rojo">#F40C60</color>
     <color name="fondo_1">#EEEDEB </color>
 
 </resources>

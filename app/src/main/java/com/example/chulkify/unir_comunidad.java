@@ -32,7 +32,7 @@ public class unir_comunidad extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_unir_comunidad);
 
@@ -54,15 +54,27 @@ public class unir_comunidad extends AppCompatActivity {
         btn_buscar_comu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences.Editor editor=preferences.edit();
+                editor.putString("codigo_comu_solicitud",  (codg_buscar.getText().toString()));
+                editor.apply();
+
                 tv_nombre_comu.setText("-");
                 tv_n_integrantes_comu.setText("-");
                 tv_ubi_comu.setText("-");
                 tv_admin_comu.setText("-");
                 cargar_datos();
                 cargar_datos();
+
+
             }
             });
         cargar_datos();
+        btn_enviar_soli_comu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(unir_comunidad.this, cargar_2.class));
+            }
+        });
 
 
 
@@ -153,6 +165,7 @@ public class unir_comunidad extends AppCompatActivity {
 
                             JSONObject jsonObj = new JSONObject(respuesta);
                             n_usuario = jsonObj.getString("usuario_us");
+                            btn_enviar_soli_comu.setEnabled(true);
 
 
 

@@ -36,7 +36,6 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:background="@drawable/tema_negro_trans"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ima_comu2" />

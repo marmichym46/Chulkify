@@ -1,11 +1,18 @@
 package com.example.chulkify;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,6 +34,7 @@ import com.loopj.android.http.ResponseHandlerInterface;
 import cz.msebera.android.httpclient.Header;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -35,12 +43,13 @@ public class Login extends AppCompatActivity {
 
     //private GoogleApiClient googleApiClient;
 
+    private static final int PERMISSION_STORAGE_CODE = 1000;
+
     private EditText et_usuario, et_contra;
     private Button btn_Logear;
     private TextView tv1;
-    private TextView tvw_registrar, tvw_recordar_pass;
     private ImageButton  btn_new_us;
-    private AsyncHttpClient usuario_clien;
+    private AsyncHttpClient usuario_clien, buscar_url;
     private SharedPreferences preferences;
     private String us, pw;
 
@@ -52,6 +61,8 @@ public class Login extends AppCompatActivity {
     private int minutos_aux;
     private int m_cadu=0;
     private String mnt="0";
+    private String version_1="default", url="null",resp,res;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,112 +74,18 @@ public class Login extends AppCompatActivity {
         et_usuario = (EditText) findViewById(R.id.txt_lg_user);
         et_contra = (EditText) findViewById(R.id.txt_lg_pass);
 
-        preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
 
-
-        if ((preferences.getString("nombre_usuario", null) != null)&&(preferences.getString("pass", null) != null)){
-
-
-            if((preferences.getInt("anio_cadu", 0) != 0)&&(preferences.getInt("mes_cadu", 0) != 0)&&(preferences.getInt("dia_cadu", 0) != 0)){
-                int aaa=anio_actual();
-                int mmm=mes_actual();
-                int ddd=dia_actual();
-                int hhh=hora_actual();
-                int mnt=minuto_actual();
-                int sss=segundo_actual();
-
-                int aux_anio = preferences.getInt("anio_cadu", 0);
-                int aux_mes = preferences.getInt("mes_cadu", 0);
-                int aux_dia = preferences.getInt("dia_cadu", 0);
-                int aux_hora = preferences.getInt("hora_cadu", 0);
-                int aux_mnt = preferences.getInt("minuto_cadu", 0);
-                int aux_segundo = preferences.getInt("segundo_cadu", 0);
-
-
-                if (aaa >= aux_anio){
-                    if (mmm >= aux_mes){
-                        if (ddd >= aux_dia){
-                            if (hhh >= aux_hora){
-                                if (mnt >= aux_mnt){
-                                    preferences.edit().clear().apply();
-                                    Toast.makeText(Login.this, "La session ah caducado", Toast.LENGTH_SHORT).show();
-                                }
-                                else{
-                                    us=preferences.getString("nombre_usuario", null);
-                                    pw=preferences.getString("pass", null);
-
-                                    usuario_clien = new AsyncHttpClient();
-                                    ini_seccion();
-                                }
-                            }
-                            else{
-                                us=preferences.getString("nombre_usuario", null);
-                                pw=preferences.getString("pass", null);
-
-                                usuario_clien = new AsyncHttpClient();
-                                ini_seccion();
-                            }
-                        }
-                        else{
-                            us=preferences.getString("nombre_usuario", null);
-                            pw=preferences.getString("pass", null);
-
-                            usuario_clien = new AsyncHttpClient();
-                            ini_seccion();
-                        }
-                    }
-                    else{
-                        us=preferences.getString("nombre_usuario", null);
-                        pw=preferences.getString("pass", null);
-
-                        usuario_clien = new AsyncHttpClient();
-                        ini_seccion();
-                    }
-
-                }
-
-                else{
-                    us=preferences.getString("nombre_usuario", null);
-                    pw=preferences.getString("pass", null);
-
-                    usuario_clien = new AsyncHttpClient();
-                    ini_seccion();
-                }
-                }
-            else{
-                us=preferences.getString("nombre_usuario", null);
-                pw=preferences.getString("pass", null);
-
-                usuario_clien = new AsyncHttpClient();
-                ini_seccion();
-
-
-            }
-
-
-
-
-        }
 
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+        version_1=preferences.getString("version", null);
+        Toast.makeText(Login.this, version_1, Toast.LENGTH_SHORT).show();
 
-
-
-
-
-
-        btn_new_us = (ImageButton) findViewById(R.id.new_us);
-        btn_new_us.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Login.this, nuevo_usuario.class));
-
-
-            }
-        });
+        buscar_url =new AsyncHttpClient();
+        String aux =(buscar_url(version_1));
 
         usuario_clien = new AsyncHttpClient();
-        botonLoguin(); }
+        botonLoguin();
+    }
 
     private void botonLoguin() {
         btn_Logear.setOnClickListener(new View.OnClickListener() {
@@ -230,6 +147,10 @@ public class Login extends AppCompatActivity {
                                                 intent= new Intent(Login.this, cargar_1.class);
                                                 break;
 
+                                            case 3:
+                                                intent= new Intent(Login.this, cargar3.class);
+                                                break;
+
                                         }
 
                                        startActivity(intent);
@@ -256,86 +177,6 @@ public class Login extends AppCompatActivity {
             }
 
         });
-
-    }
-    private void ini_seccion() {
-
-
-
-            String usuario = us.replace(" ", "%20");
-            String password =   pw.replace(" ", "%20");
-            String url = "http://www.marlonmym.tk/chulki/login.php?usuario_us="+usuario+"&contrasena_us="+password;
-            //Toast.makeText(Login.this, url, Toast.LENGTH_SHORT).show();
-
-            usuario_clien.post(url, new AsyncHttpResponseHandler() {
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
-
-
-                    if (statusCode == 200) {
-                        String respuesta = new String(responseBody);
-                        if (respuesta.equalsIgnoreCase("null")) {
-                            Toast.makeText(Login.this, "Error De Usuario y/o Contraseña!!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            try {
-                                caducidad();
-                                JSONObject jsonObj = new JSONObject(respuesta);
-
-                                Logear_usuario u = new Logear_usuario();
-                                u.setId(jsonObj.getInt("id_us"));
-                                u.setTipo(jsonObj.getInt("tipo_us"));
-                                int n_tp= jsonObj.getInt("tipo_us");
-
-
-                                SharedPreferences.Editor editor=preferences.edit();
-                                editor.putString("cedula_usuario", jsonObj.getString("cedula_us"));
-                                editor.putString("nombre_usuario", jsonObj.getString("usuario_us"));
-                                editor.putInt("id", jsonObj.getInt("id_us"));
-                                editor.putString("comunidad", jsonObj.getString("grupo_us"));
-                                codigo1 = jsonObj.getString("grupo_us");
-                                editor.putInt("tipo", jsonObj.getInt("tipo_us"));
-                                editor.putString("fecha_ini", jsonObj.getString("fecha_inicio_us"));
-                                editor.putString("pass", jsonObj.getString("contrasena_us"));
-                                editor.putString("fecha_union_grupo", jsonObj.getString("fecha_union_comu_us"));
-                                editor.putInt("estado_usuario", jsonObj.getInt("estado_gru_us"));
-                                editor.apply();
-
-                                Intent intent = null;
-                                switch (n_tp) {
-                                    case 0:
-                                        intent= new Intent(Login.this, MainActivity.class);
-                                        break;
-                                    case 1:
-                                        intent= new Intent(Login.this, cargar_1.class);
-                                        break;
-                                    case 2:
-                                        intent= new Intent(Login.this, cargar_1.class);
-                                        break;
-
-                                }
-
-                                startActivity(intent);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                    Toast.makeText(Login.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
-
-
-                    et_usuario.setText("");
-                    et_contra.setText("");
-                }
-
-
-            });
-
-
 
     }
 
@@ -775,7 +616,7 @@ return minutos;
         String mnt= String.valueOf(minutos);
         String ssss= String.valueOf(segundos);
 
-        fecha = diaS+"/"+mesS+"/"+anioS+" - "+horaS+":"+minutosS+":"+segundosS+" -/- "+dddd+"/"+mmmm+"/"+aaaa+" - "+hhhh+":"+mnt+":"+ssss;
+        fecha = diaS+"/"+mesS+"/"+anioS+" - "+horaS+":"+minutosS+":"+segundosS+" -/- "+dddd+"/"+mmmm+"/"+aaaa+" - "+hhhh+":"+mnt+"/"+ssss;
 
         SharedPreferences.Editor editor=preferences.edit();
         editor.putString("fecha_actual", fecha);
@@ -790,6 +631,142 @@ return minutos;
 
 
     }
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_ini, menu);
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+
+        if (id == R.id.menu_actualizacion){
+            String msj1=("ult_vs");
+            String msj2=("error");
+
+            url =(buscar_url(version_1));
+            //buscar_url();
+            //Toast.makeText(espera_soli.this, url, Toast.LENGTH_SHORT).show();
+
+            if(url.equals("ult_vs")){
+                Toast.makeText(Login.this, "la version "+version_1+" es la mas reciente", Toast.LENGTH_SHORT).show();
+            }else if (url.equals("error")){
+                Toast.makeText(Login.this, "Hay un error desconocido", Toast.LENGTH_SHORT).show();
+            }else{
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
+                        String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                        requestPermissions(permissions, PERMISSION_STORAGE_CODE);
+                    }else {
+                        StartDownloading();
+                    }
+                }else {StartDownloading();}
+
+
+
+            }
+
+
+
+
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    private void StartDownloading() {
+        url =(buscar_url(version_1));
+        String url_d= url.trim();
+
+        File file = new File(getExternalFilesDir(null), "chulkify.apk");
+        Toast.makeText(Login.this, "Se inicio la descarga", Toast.LENGTH_SHORT).show();
+
+        DownloadManager.Request request =null;
+        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.N){
+            request = new DownloadManager.Request(Uri.parse(url_d));
+            request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
+            request.setTitle("Download");
+            request.setDescription("Downloading apk...");
+            request.allowScanningByMediaScanner();
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            request.setDestinationUri(Uri.fromFile(file));
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "chulkify.apk");
+            request.setRequiresCharging(false);
+            request.setAllowedOverMetered(true);
+            request.setAllowedOverRoaming(true);
+        }else{
+            request = new DownloadManager.Request(Uri.parse(url_d));
+            request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
+            request.setTitle("Download");
+            request.setDescription("Downloading apk...");
+            request.allowScanningByMediaScanner();
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            request.setDestinationUri(Uri.fromFile(file));
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "chulkyfy.apk");
+            request.setAllowedOverRoaming(true);
+
+        }
+        //
+
+        DownloadManager manager = (DownloadManager)getSystemService(Context.DOWNLOAD_SERVICE);
+
+        manager.enqueue(request);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case  PERMISSION_STORAGE_CODE:{
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    StartDownloading();
+                }
+                else {
+                    Toast.makeText(Login.this, "Permiso denegado...!!!", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+        }
+    }
+
+    public String buscar_url(String dato) {
+
+
+        String ci_usuario = dato.replace(" ", "%20");
+        String url = "http://www.marlonmym.tk/chulki/links/version.php?url_ac="+ci_usuario;
+        //Toast.makeText(Login.this, url, Toast.LENGTH_SHORT).show();
+
+        buscar_url.post(url, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+
+                if (statusCode == 200) {
+                    String respuesta = new String(responseBody);
+                    if (respuesta.equalsIgnoreCase("null")) {
+                        Toast.makeText(Login.this, "Error al  buscar actualizaciones", Toast.LENGTH_SHORT).show();
+                    } else {
+                        try {
+
+                            JSONObject jsonObj = new JSONObject(respuesta);
+                            resp = jsonObj.getString("dato");
+                            //Toast.makeText(espera_soli.this, resp, Toast.LENGTH_SHORT).show();
+
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(Login.this, "Error Desconocido. Intentelo De Nuevo!!" + responseBody, Toast.LENGTH_SHORT).show();
+            }
+
+
+        });
+        return resp;
+    }
+
 
 }
 
