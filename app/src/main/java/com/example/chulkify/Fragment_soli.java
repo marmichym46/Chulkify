@@ -110,7 +110,10 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
                 String[] parts = fch.split("/");
                 String fecha=parts[0]+"/"+parts[1]+"/"+parts[2]+"   "+parts[3]+":"+parts[4]+":"+parts[5];
                 int  id_us=jsonObject.optInt("id_us");
-                //Toast.makeText(getContext(), fecha, Toast.LENGTH_SHORT).show();
+                String id_usuario = String.valueOf(id_us);
+
+
+               Toast.makeText(getContext(), id_usuario, Toast.LENGTH_SHORT).show();
                 agregarTarjetasDeSolicitud(nnn,aaa,aux,fecha,id_us);
             }
 
