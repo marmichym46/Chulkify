@@ -91,17 +91,11 @@ public class espera_soli extends AppCompatActivity {
     }
 
     private void cargar_datos(){
-
             String codigo_comunidad = usuario.replace(" ", "%20");
             String url = "http://www.marlonmym.tk/chulki/soli_estados.php?ci_us="+codigo_comunidad;
-            //Toast.makeText(Login.this, url, Toast.LENGTH_SHORT).show();
-
             buscar_soli.post(url, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
-
-
                     if (statusCode == 200) {
                         String respuesta = new String(responseBody);
                         if (respuesta.equalsIgnoreCase("null")) {
@@ -113,33 +107,21 @@ public class espera_soli extends AppCompatActivity {
                                 String[] parts = res.split("/");
                                 if (parts[1] == "dato_null"){
                                     Toast.makeText(espera_soli.this, "Error al cargar datos", Toast.LENGTH_SHORT).show();
-
                                 }else {
                                     n_aceptadas=0;
                                     n_espera=0;
                                     n_negadas=0;
-
                                     for (int i = 1; i < parts.length; i++) {
-
                                        int aux =Integer.valueOf(parts[i]);
                                         if (aux == 1){n_espera++;}
                                        else if (aux== 2){n_negadas++;}
                                        else if (aux ==3){n_aceptadas++;}
-
-
                                     }
-
                                 }
                                 tv_nombre_comu.setText(comunidad);
                                 tv_aceptadas.setText(String.valueOf(n_aceptadas));
                                 tv_espera.setText(String.valueOf(n_espera));
                                 tv_negadas.setText(String.valueOf(n_negadas));
-
-
-
-
-
-
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

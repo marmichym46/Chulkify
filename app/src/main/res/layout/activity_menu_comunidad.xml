@@ -257,11 +257,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-
                     android:paddingRight="35dp"
                     android:paddingLeft="35dp"
                     android:background="@drawable/tema_negro_trans"
                     android:orientation="horizontal" >
+
+                    <ImageButton
+                        android:id="@+id/btn_notificaciones"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:paddingRight="20dp"
+
+                        android:background="@color/transparente"
+                        app:srcCompat="@drawable/solicitudes_ico" />
 
                     <ImageButton
                         android:id="@+id/imageButton"

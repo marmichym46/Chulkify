@@ -59,5 +59,10 @@
     <string name="inf_solicitud">Informacion de tu solicitud</string>
     <string name="cadu_soli">Tu solicitud caduca:</string>
 
+    <string name="acep">Aceptar</string>
+    <string name="recha">Rechazar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

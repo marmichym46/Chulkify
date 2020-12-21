@@ -15,18 +15,27 @@
         android:roundIcon="@mipmap/new_logo_ico_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".menu_inicio"
+        <activity
+            android:name=".Soli_notifi"
             android:screenOrientation="portrait" />
-        <activity android:name=".cargar3"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".espera_soli"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".inicio"
-            android:screenOrientation="portrait">  <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        <activity
+            android:name=".menu_inicio"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".cargar3"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".espera_soli"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inicio"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".cargar_2"
             android:screenOrientation="portrait" />
@@ -50,7 +59,11 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Login"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity
+        android:name=".Fratments_solicitudes"
+        android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

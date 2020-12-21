@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +51,9 @@ public class menu_comunidad extends AppCompatActivity {
     private String fecha;
     private int  dia, mes, anio;
     private int  diaS, mesS, anioS;
+
+
+
 
     private String version, url="null", resp,res;
 
@@ -98,6 +102,17 @@ public class menu_comunidad extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 cargar_datos();
+            }
+        });
+
+
+        //Boton iniciar sesion
+        ImageButton btn_noti = (ImageButton) findViewById(R.id.btn_notificaciones);
+        btn_noti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(menu_comunidad.this, Soli_notifi.class));
+                //Toast.makeText(menu_inicio.this, "url", Toast.LENGTH_SHORT).show();
             }
         });
 

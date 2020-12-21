@@ -675,10 +675,8 @@ return minutos;
     private void StartDownloading() {
         url =(buscar_url(version_1));
         String url_d= url.trim();
-
         File file = new File(getExternalFilesDir(null), "chulkify.apk");
         Toast.makeText(Login.this, "Se inicio la descarga", Toast.LENGTH_SHORT).show();
-
         DownloadManager.Request request =null;
         if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.N){
             request = new DownloadManager.Request(Uri.parse(url_d));
@@ -702,12 +700,8 @@ return minutos;
             request.setDestinationUri(Uri.fromFile(file));
             request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "chulkyfy.apk");
             request.setAllowedOverRoaming(true);
-
         }
-        //
-
         DownloadManager manager = (DownloadManager)getSystemService(Context.DOWNLOAD_SERVICE);
-
         manager.enqueue(request);
     }
     @Override
