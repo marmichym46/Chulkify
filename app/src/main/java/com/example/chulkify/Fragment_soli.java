@@ -109,7 +109,7 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
                 String fch=jsonObject.optString("fecha_crea_notif");
                 String[] parts = fch.split("/");
                 String fecha=parts[0]+"/"+parts[1]+"/"+parts[2]+"   "+parts[3]+":"+parts[4]+":"+parts[5];
-                int  id_us=jsonObject.optInt("id_us");
+                int  id_us=jsonObject.optInt("id_notif");
                 String id_usuario = String.valueOf(id_us);
 
 
