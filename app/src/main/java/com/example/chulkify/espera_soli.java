@@ -36,9 +36,9 @@ public class espera_soli extends AppCompatActivity {
 
     private static final int PERMISSION_STORAGE_CODE = 1000;
     private SharedPreferences preferences;
-    private AsyncHttpClient buscar_soli, buscar_url, buscar_cadu;
-    private Button btn_enviar_soli_comu;
-    private TextView tv_nombre_comu, tv_aceptadas, tv_espera, tv_negadas, tv_fecha, tv_hora;
+    private AsyncHttpClient buscar_soli, buscar_url, buscar_cadu, cancelar_htt;
+    private Button cancelar;
+    private TextView tv_nombre_comu, tv_aceptadas, tv_espera, tv_negadas, tv_fecha, tv_hora, tv_mensaje;
     private String nombre_comu, aceptadas, espera, negadas, usuario, resp,res, comunidad;
     private int n_aceptadas, n_espera, n_negadas;
     private String version, url="null";
@@ -50,13 +50,14 @@ public class espera_soli extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_espera_soli);
 
-        btn_enviar_soli_comu = (Button) findViewById(R.id.btn_env_soli_comu);
+        cancelar = (Button) findViewById(R.id.btn_env_soli_comu);
         tv_nombre_comu = (TextView) findViewById(R.id.tv_nombre_comu);
         tv_aceptadas = (TextView) findViewById(R.id.tv_n_i_comu);
         tv_espera = (TextView) findViewById(R.id.tv_ubi_comu);
         tv_negadas = (TextView) findViewById(R.id.tv_admin_comu);
         tv_fecha=(TextView) findViewById(R.id.fecha_cadu);
         tv_hora=(TextView) findViewById(R.id.hora_cadu);
+        tv_mensaje=(TextView) findViewById(R.id.tv_mensaje);
 
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
         usuario = preferences.getString("cedula_usuario", null);
@@ -81,11 +82,64 @@ public class espera_soli extends AppCompatActivity {
         //Toast.makeText(espera_soli.this, version, Toast.LENGTH_SHORT).show();
         //buscar_url();
 
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               cancelar_soli(usuario);
+            }
+        });
 
 
 
 
 
+
+
+
+    }
+
+    private void cancelar_soli(String usuario){
+        AsyncHttpClient rechazar  = new AsyncHttpClient();
+        String ident=usuario;
+
+        String url = "http://www.marlonmym.tk/chulki/consulta_solicitudes/cancelar.php?id="+ident;
+        rechazar.post(url, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                if (statusCode == 200) {
+                    String respuesta = new String(responseBody);
+                    if (respuesta.equalsIgnoreCase("null")) {
+                        Toast.makeText(espera_soli.this, "Error...!!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        try {
+
+                            JSONObject jsonObj = new JSONObject(respuesta);
+                            String resp = jsonObj.getString("dato");
+
+                            if (resp.equals("cancelar")){
+                                Toast.makeText(espera_soli.this, "Has cancelado la colicitud de union a comunidad", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(espera_soli.this, inicio.class));
+                            } else {
+                                Toast.makeText(espera_soli.this, "Error...!", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(espera_soli.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+
+
+            }
+
+
+        });
 
 
     }
@@ -114,7 +168,8 @@ public class espera_soli extends AppCompatActivity {
                                     for (int i = 1; i < parts.length; i++) {
                                        int aux =Integer.valueOf(parts[i]);
                                         if (aux == 1){n_espera++;}
-                                       else if (aux== 2){n_negadas++;}
+                                       else if (aux== 2){n_negadas++;
+                                       tv_mensaje.setVisibility(View.VISIBLE);}
                                        else if (aux ==3){n_aceptadas++;}
                                     }
                                 }

@@ -44,7 +44,7 @@ public class menu_comunidad extends AppCompatActivity {
     private String codg_comu, city_comu,  nom_comu, fecha_at;
     private AsyncHttpClient comu_clien;
     private  int id_comu;
-    private String nomb,most_fecha, n_comu, m_usuario, conv_total_us,total_us_comu;
+    private String nomb,most_fecha, n_comu, m_usuario, conv_total_us,total_us_comu, cog_cm;
     private Button btn_actualizar;
     private EditText codigo_cop;
 
@@ -106,12 +106,22 @@ public class menu_comunidad extends AppCompatActivity {
         });
 
 
-        //Boton iniciar sesion
+        //Boton notificaciones
         ImageButton btn_noti = (ImageButton) findViewById(R.id.btn_notificaciones);
         btn_noti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(menu_comunidad.this, Soli_notifi.class));
+                //Toast.makeText(menu_inicio.this, "url", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //Boton aportes
+        ImageButton btn_apotes = (ImageButton) findViewById(R.id.btn_aportes);
+        btn_apotes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(menu_comunidad.this, AportesActivity.class));
                 //Toast.makeText(menu_inicio.this, "url", Toast.LENGTH_SHORT).show();
             }
         });
@@ -123,10 +133,12 @@ public class menu_comunidad extends AppCompatActivity {
 
 
 
+
+
     }
 
     private void cargar_datos(){
-        String cog_comu = usuario.replace(" ", "%20");
+        String cog_comu = codg_comu.replace(" ", "%20");
         String url = "http://www.marlonmym.tk/chulki/consulta_comu.php?codigo_comu="+cog_comu;
 
 
@@ -184,7 +196,7 @@ public class menu_comunidad extends AppCompatActivity {
         fecha_comu.setText(most_fecha);
         mv_usuario.setText(m_usuario);
         codigo_cop.setText(codg_comu);
-        tv_codigo.setText(fecha_at);
+        tv_codigo.setText("");
         tv_t_us.setText(total_us_comu);
     }
 

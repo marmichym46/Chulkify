@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/new_logo_ico_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".AportesActivity"></activity>
         <activity
             android:name=".Soli_notifi"
             android:screenOrientation="portrait" />
@@ -60,10 +61,6 @@
         <activity
             android:name=".Login"
             android:screenOrientation="portrait" />
-        <activity
-        android:name=".Fratments_solicitudes"
-        android:screenOrientation="portrait" />
-
     </application>
 
 </manifest>

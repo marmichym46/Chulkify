@@ -36,6 +36,8 @@ import java.util.Calendar;
 import cz.msebera.android.httpclient.Header;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class nuevo_usuario extends AppCompatActivity {
 
@@ -49,6 +51,11 @@ public class nuevo_usuario extends AppCompatActivity {
     private Button btn_guardar;
     private AsyncHttpClient cliente;
     private Date fecha_dt;
+
+    //validar correo patron
+    Pattern pattern = Pattern
+            .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,15 +113,20 @@ public class nuevo_usuario extends AppCompatActivity {
         final String fcha = fecha.trim();
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
+        Matcher mather = pattern.matcher(correo);
         if (usuario_new.isEmpty()) {
             edt_usuario.setError("complete los campos");
         } else if (correo.isEmpty()) {
             edt_correo.setError("complete los campos");
+        } else if (mather.find() == false) {
+                edt_correo.setError("el correo ingresado es invalido");
         } else if (pass.isEmpty()) {
             edt_contrasena1.setError("complete los campos");
         } else if (pass2.isEmpty()) {
             edt_contrasena2.setError("complete los campos");
-        }  else if (nombre.isEmpty()) {
+        }else if (pass2.equals(pass)== false) {
+            edt_contrasena2.setError("las contraseñas no coinciden");
+        } else if (nombre.isEmpty()) {
             edt_nombre.setError("complete los campos");
         } else if (apellido.isEmpty()) {
             edt_apellido.setError("complete los campos");

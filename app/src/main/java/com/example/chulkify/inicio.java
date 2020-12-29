@@ -42,7 +42,7 @@ public class inicio extends AppCompatActivity {
     private String codigo1;
 
     //version
-    private String version_1="v1.6";
+    private String version_1="v1.7";
 
 
     @Override

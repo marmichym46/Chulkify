@@ -59,6 +59,10 @@
     <string name="inf_solicitud">Informacion de tu solicitud</string>
     <string name="cadu_soli">Tu solicitud caduca:</string>
 
+    <string name="bienvenida_aportes">Estos son tus aportes</string>
+    <string name="total_aportes">Total : </string>
+    <string name="ult_mes">Este mes : </string>
+
     <string name="acep">Aceptar</string>
     <string name="recha">Rechazar</string>
     <!-- TODO: Remove or change this placeholder text -->

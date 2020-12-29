@@ -28,7 +28,7 @@ public class cargar_1 extends AppCompatActivity {
         setContentView(R.layout.activity_cargar_1);
 
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
-        usuario = preferences.getString("cedula_usuario", null);
+        usuario = preferences.getString("comunidad", null);
 
         comu_clien = new AsyncHttpClient();
         cargar_datos();

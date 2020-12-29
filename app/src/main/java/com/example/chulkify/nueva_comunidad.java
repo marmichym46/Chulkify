@@ -21,6 +21,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.loopj.android.http.AsyncHttpClient;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -31,8 +32,15 @@ public class nueva_comunidad extends AppCompatActivity {
     private SharedPreferences preferences;
     private EditText edt_nombre, edt_codigo, edt_ciudad;
     private String fecha;
-    private int  dia, mes, anio;
-    private int  diaS, mesS, anioS;
+
+
+    private String fechacrea, fechacadu;
+    private int  dia, mes, anio, hora, minutos, segundos;
+    private String  diaS, mesS, anioS,horaS, minutosS, segundosS, minutosa, usuario2;
+    private int minutos_aux;
+
+
+
     private Button btn_guardar;
     private AsyncHttpClient cliente;
     private Date fecha_dt;
@@ -57,16 +65,29 @@ public class nueva_comunidad extends AppCompatActivity {
         }
 
         Calendar fecha_a = Calendar.getInstance();
+        Date date = new Date();
         dia= fecha_a.get(Calendar.DAY_OF_MONTH);
         mes= fecha_a.get(Calendar.MONTH)+1;
         anio= fecha_a.get(Calendar.YEAR);
+
         String diaS= String.valueOf(dia);
         String mesS = String.valueOf(mes);
         String anioS = String.valueOf(anio);
 
+        SimpleDateFormat h= new SimpleDateFormat("kk");
+        horaS=h.format(date);
+        hora=Integer.valueOf(horaS);
+        SimpleDateFormat m= new SimpleDateFormat("mm");
+        minutosS=m.format(date);
+        SimpleDateFormat mm= new SimpleDateFormat("m");
+        minutos=Integer.parseInt(mm.format(date));
+        minutosa=String.valueOf(minutos);
+        SimpleDateFormat s= new SimpleDateFormat("ss");
+        segundosS=s.format(date);
+        segundos=Integer.valueOf(segundosS);
 
+        fechacrea = diaS+"/"+mesS+"/"+anioS+"/"+horaS+"/"+minutosS+"/"+segundosS;
 
-        fecha = diaS+"/"+mesS+"/"+anioS;
 
         edt_nombre=(EditText) findViewById(R.id.txt_nombre_comu);
         edt_codigo=(EditText) findViewById(R.id.txt_codigo_comu);
@@ -89,7 +110,7 @@ public class nueva_comunidad extends AppCompatActivity {
         final String nombre_comu = edt_nombre.getText().toString().trim();
         final String codigo_comu = edt_codigo.getText().toString().trim();
         final String ciudad_comu = edt_ciudad.getText().toString().trim();
-        final String fechaI_comu = fecha.trim();
+        final String fechaI_comu = fechacrea.trim();
         final String cedula_comu = ci_usuario_us.trim();
 
         final ProgressDialog progressDialog = new ProgressDialog(this);

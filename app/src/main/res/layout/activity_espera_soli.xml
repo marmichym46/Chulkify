@@ -143,6 +143,36 @@
                     android:text="" />
 
                 <LinearLayout
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_mensaje"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:background="@color/negro"
+                        android:textColor="@color/rojo"
+                        android:drawableLeft="@drawable/info"
+                        android:drawableTint="@color/rojo"
+                        android:textSize="18dp"
+                        android:visibility="gone"
+                        android:text="Tu solicitud fue rechazada por un usuario, cancelala y vuelve a intentar...!" />
+
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/textView225"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="10"
+                    android:text="" />
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -218,6 +248,9 @@
                             android:text="" />
                     </LinearLayout>
                 </LinearLayout>
+
+
+
 
             </LinearLayout>
             </ScrollView>

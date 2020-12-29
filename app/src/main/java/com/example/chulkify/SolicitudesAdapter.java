@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.json.JSONObject;
@@ -27,32 +28,48 @@ public class SolicitudesAdapter extends RecyclerView.Adapter<SolicitudesAdapter.
 
     List<Solicitudes> listSolicitudes;
     Context context;
+    Fragment_soli f;
 
 
-    public SolicitudesAdapter(List<Solicitudes> listSolicitudes, Context context){
+    public SolicitudesAdapter(List<Solicitudes> listSolicitudes, Context context, Fragment_soli f){
         this.listSolicitudes = listSolicitudes;
         this.context = context;
+        this.f = f;
     }
 
     @NonNull
     @Override
     public solicitudesholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_solicitudes,parent,false);
-        //RecyclerView.LayoutParams layoutParams=new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                //ViewGroup.LayoutParams.WRAP_CONTENT);
-        //v.setLayoutParams(layoutParams);
         return new SolicitudesAdapter.solicitudesholder(v);
 
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull solicitudesholder holder, int position) {
-        holder.nonbre_us.setText(listSolicitudes.get(position).getNombre_us().toString());
-        holder.apellido_us.setText(listSolicitudes.get(position).getApellido_us().toString());
-        holder.nombre_lis.setText(listSolicitudes.get(position).getUsuario_us().toString());
-        holder.fecha_crea.setText(listSolicitudes.get(position).getFecha_crea_notif().toString());
+    public void onBindViewHolder(@NonNull solicitudesholder holder, final int position) {
+        holder.nonbre_us.setText(listSolicitudes.get(position).getNombre_us());
+        holder.apellido_us.setText(listSolicitudes.get(position).getApellido_us());
+        holder.nombre_lis.setText(listSolicitudes.get(position).getUsuario_us());
+        holder.fecha_crea.setText(listSolicitudes.get(position).getFecha_crea_notif());
         holder.identificador=listSolicitudes.get(position).getId_notif();
+
+       holder.cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                f.cancelarSolicitud(listSolicitudes.get(position).getId_notif(),listSolicitudes.get(position).getUsuario_us());
+            }
+        });
+
+        holder.aceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                f.aceptarSolicitud(listSolicitudes.get(position).getId_notif(),listSolicitudes.get(position).getUsuario_us() );
+            }
+        });
+
+
+
 
     }
 
@@ -77,25 +94,10 @@ public class SolicitudesAdapter extends RecyclerView.Adapter<SolicitudesAdapter.
             nombre_lis = (TextView) itemView.findViewById(R.id.txt_nombre_soli);
             fecha_crea = (TextView) itemView.findViewById(R.id.txt_n_fecha_soli);
             aceptar =(Button) itemView.findViewById(R.id.btn_acep);
-            //Toast.makeText(context, identificador, Toast.LENGTH_SHORT).show();
-            aceptar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    aceptarsoli(identificador);
-                }
-            });
-
-
             cancelar=(Button) itemView.findViewById(R.id.btn_rech);
 
 
         }
     }
-    public void aceptarsoli(int identificador){
-        String ident="id: "+identificador;
 
-       Toast.makeText(context, ident, Toast.LENGTH_SHORT).show();
-
-
-    }
 }

@@ -109,7 +109,7 @@ public class cargar_2 extends AppCompatActivity {
                                     Toast.makeText(cargar_2.this, "datos2=" + nnn, Toast.LENGTH_SHORT).show();
                                     enviar_solicitudes();
                                 }
-                                Intent intent= new Intent(cargar_2.this, Login.class);
+                                Intent intent= new Intent(cargar_2.this, inicio.class);
                                 startActivity(intent);
                             }
 

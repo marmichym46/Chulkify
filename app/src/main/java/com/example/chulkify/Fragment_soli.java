@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,7 +30,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
@@ -40,8 +45,10 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
 
     private RecyclerView rv;
     private SolicitudesAdapter adapter;
-    private List<Solicitudes> listasolicitudes;
+    private List<Solicitudes> listSolicitudes;
     private LinearLayout layoutSinSolicitudes;
+    //private EventBus bus = EventBus.getDefault();
+
     //ArrayList<Solicitudes> listasolicitudes;
     JsonObjectRequest jsonObjectRequest;
     RequestQueue request;
@@ -53,17 +60,25 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
     private AsyncHttpClient buscar_usuario_bd;
 
 
+
+    private String fechacrea, fechacadu;
+    private int  dia, mes, anio, hora, minutos, segundos;
+    private String  diaS, mesS, anioS,horaS, minutosS, segundosS, minutosa, usuario2;
+    private int minutos_aux;
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
        View v=inflater.inflate(R.layout.fragment_soli, container, false);
-       listasolicitudes = new ArrayList<>();
+       listSolicitudes = new ArrayList<>();
 
        rv = (RecyclerView) v.findViewById(R.id.rcw_solicitudes);
        layoutSinSolicitudes = (LinearLayout)v.findViewById(R.id.layout_vacio_vicivility);
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
         rv.setLayoutManager(lm);
 
-        adapter = new SolicitudesAdapter(listasolicitudes,getContext());
+        adapter = new SolicitudesAdapter(listSolicitudes,getContext(),this);
         rv.setAdapter(adapter);
 
         preferences = getContext().getSharedPreferences("Preferences", MODE_PRIVATE);
@@ -83,9 +98,7 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
         request.add(jsonObjectRequest);}
 
     public void onErrorResponse(VolleyError error) {
-        Toast.makeText(getContext(), "No se puede conectar" +error.toString(), Toast.LENGTH_LONG).show();
-        System.out.println();
-        Log.d("ERROR: ", error.toString());
+        Toast.makeText(getContext(), "No hay solicitudes" , Toast.LENGTH_LONG).show();
 
     }
 
@@ -113,7 +126,7 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
                 String id_usuario = String.valueOf(id_us);
 
 
-               Toast.makeText(getContext(), id_usuario, Toast.LENGTH_SHORT).show();
+               //Toast.makeText(getContext(), id_usuario, Toast.LENGTH_SHORT).show();
                 agregarTarjetasDeSolicitud(nnn,aaa,aux,fecha,id_us);
             }
 
@@ -129,7 +142,7 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
 
 
     public  void verificar_solicitudes(){
-        if (listasolicitudes.isEmpty()){
+        if (listSolicitudes.isEmpty()){
             layoutSinSolicitudes.setVisibility(View.VISIBLE);
             rv.setVisibility(View.GONE);
         }
@@ -147,13 +160,162 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
         solicitudes.setUsuario_us(usuario_usu);
         solicitudes.setFecha_crea_notif(fecha_crea);
         solicitudes.setId_notif(id_us);
-        listasolicitudes.add(solicitudes);
+        listSolicitudes.add(0,solicitudes);
         actualizarTarjetas();
     }
+    public void agregarTarjetasDeSolicitud(Solicitudes solicitudes){
+        listSolicitudes.add(0,solicitudes);
+        actualizarTarjetas();
+    }
+
 
     public void actualizarTarjetas(){
         adapter.notifyDataSetChanged();
         verificar_solicitudes();
+    }
+
+    public void eliminarTarjeta(int id){
+        //int id_t= Integer.p
+        for(int i=0;i<listSolicitudes.size();i++){
+            if(listSolicitudes.get(i).getId_notif()==id){
+                listSolicitudes.remove(i);
+                actualizarTarjetas();
+            }
+        }
+    }
+
+
+
+    public void aceptarSolicitud(final int identificador, final String usuario_soli){
+
+
+        Calendar fecha_a = Calendar.getInstance();
+        Date date = new Date();
+
+        dia= fecha_a.get(Calendar.DAY_OF_MONTH);
+        mes= fecha_a.get(Calendar.MONTH)+1;
+        anio= fecha_a.get(Calendar.YEAR);
+
+        diaS= String.valueOf(dia);
+        mesS = String.valueOf(mes);
+        anioS = String.valueOf(anio);
+
+
+        SimpleDateFormat h= new SimpleDateFormat("kk");
+        horaS=h.format(date);
+        hora=Integer.valueOf(horaS);
+        SimpleDateFormat m= new SimpleDateFormat("mm");
+        minutosS=m.format(date);
+        SimpleDateFormat mm= new SimpleDateFormat("m");
+        minutos=Integer.parseInt(mm.format(date));
+        minutosa=String.valueOf(minutos);
+        SimpleDateFormat s= new SimpleDateFormat("ss");
+        segundosS=s.format(date);
+        segundos=Integer.valueOf(segundosS);
+
+        fechacrea = diaS+"/"+mesS+"/"+anioS+"/"+horaS+"/"+minutosS+"/"+segundosS;
+
+
+
+
+
+        AsyncHttpClient aceptar  = new AsyncHttpClient();
+        final int ident=identificador;
+        String idt=String.valueOf(ident);
+        String url = "http://www.marlonmym.tk/chulki/consulta_solicitudes/aceptar.php?id="+ident+"&fe="+fechacrea;
+        aceptar.post(url, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                if (statusCode == 200) {
+                    String respuesta = new String(responseBody);
+                    if (respuesta.equalsIgnoreCase("null")) {
+                        Toast.makeText(getContext(), "Error...!!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        try {
+
+                            JSONObject jsonObj = new JSONObject(respuesta);
+                            String resp = jsonObj.getString("dato");
+
+                            if (resp.equals("en_espera")){
+                                Toast.makeText(getContext(), "Has aceptado la solicitud del usuario "+usuario_soli+", el usuario aun tiene solicitudes pendientes", Toast.LENGTH_SHORT).show();
+                            }
+                            else if (resp.equals("aceptado")){
+                                Toast.makeText(getContext(), "Has aceptado la solicitud del usuario "+usuario_soli+", el usuario ya es integraante de tu comunidad...!", Toast.LENGTH_SHORT).show();
+
+                            }else {
+                                Toast.makeText(getContext(), "Error...!", Toast.LENGTH_SHORT).show();
+
+                            }
+                            eliminarTarjeta(ident);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(getContext(), "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+
+
+            }
+
+
+        });
+
+
+    }
+
+
+    public void cancelarSolicitud(final int identificador, final String usuario_soli){
+
+        AsyncHttpClient rechazar  = new AsyncHttpClient();
+        final int ident=identificador;
+        String idt=String.valueOf(ident);
+        String url = "http://www.marlonmym.tk/chulki/consulta_solicitudes/rechazar.php?id="+ident;
+        rechazar.post(url, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                if (statusCode == 200) {
+                    String respuesta = new String(responseBody);
+                    if (respuesta.equalsIgnoreCase("null")) {
+                        Toast.makeText(getContext(), "Error...!!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        try {
+
+                            JSONObject jsonObj = new JSONObject(respuesta);
+                            String resp = jsonObj.getString("dato");
+
+                            if (resp.equals("rechazado")){
+                                Toast.makeText(getContext(), "Has rechazado la solicitud del usuario "+usuario_soli+" de tu comunidad", Toast.LENGTH_SHORT).show();
+                            }
+                            else if (resp.equals("error")){
+                                Toast.makeText(getContext(), "Error...!", Toast.LENGTH_SHORT).show();
+
+                            }else {
+                                Toast.makeText(getContext(), "Error...!", Toast.LENGTH_SHORT).show();
+
+                            }
+                            eliminarTarjeta(ident);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(getContext(), "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+
+
+            }
+
+
+        });
+
+
     }
 
 
