@@ -269,7 +269,6 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
 
 
     public void cancelarSolicitud(final int identificador, final String usuario_soli){
-
         AsyncHttpClient rechazar  = new AsyncHttpClient();
         final int ident=identificador;
         String idt=String.valueOf(ident);
@@ -283,40 +282,24 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
                         Toast.makeText(getContext(), "Error...!!", Toast.LENGTH_SHORT).show();
                     } else {
                         try {
-
                             JSONObject jsonObj = new JSONObject(respuesta);
                             String resp = jsonObj.getString("dato");
-
                             if (resp.equals("rechazado")){
                                 Toast.makeText(getContext(), "Has rechazado la solicitud del usuario "+usuario_soli+" de tu comunidad", Toast.LENGTH_SHORT).show();
                             }
                             else if (resp.equals("error")){
                                 Toast.makeText(getContext(), "Error...!", Toast.LENGTH_SHORT).show();
-
                             }else {
                                 Toast.makeText(getContext(), "Error...!", Toast.LENGTH_SHORT).show();
-
                             }
                             eliminarTarjeta(ident);
                         } catch (Exception e) {
                             e.printStackTrace();
-                        }
-                    }
-                }
-            }
-
+                        } } } }
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Toast.makeText(getContext(), "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
-
-
-            }
-
-
-        });
-
-
-    }
+            }}); }
 
 
 

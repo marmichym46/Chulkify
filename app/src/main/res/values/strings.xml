@@ -62,6 +62,21 @@
     <string name="bienvenida_aportes">Estos son tus aportes</string>
     <string name="total_aportes">Total : </string>
     <string name="ult_mes">Este mes : </string>
+    <string name="val_aportar">Aporte</string>
+    <string name="aportar">Realizar aporte</string>
+
+    <!--//confirmacion aporte -->
+    <string name="conf_transaccion">confirma tu transaccion</string>
+    <string name="fecha_tran">Fecha :</string>
+    <string name="usuario_tran">Usuario :</string>
+    <string name="comu_tran">Com/Gp :</string>
+    <string name="ci_tran">CI :</string>
+    <string name="aporte_tran">Aporte :</string>
+    <string name="Valor_tran">Valor / transaccion :</string>
+    <string name="total_tran">Total :</string>
+    <string name="confirma_aporte">Confirmar Aporte</string>
+
+    <string name="msj_costo_tran">¡..Recuerda toda transaccion tiene un costo de $0.25, tal valor es descontado del aporte que se va ah realizar...!</string>
 
     <string name="acep">Aceptar</string>
     <string name="recha">Rechazar</string>

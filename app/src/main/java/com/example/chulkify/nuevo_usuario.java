@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -139,14 +140,15 @@ public class nuevo_usuario extends AppCompatActivity {
         } else if (telefono.isEmpty()) {
             edt_telefono.setError("complete los campos");
         } else {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://www.marlonmym.tk/chulki/add_us.php", new Response.Listener<String>() {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://www.marlonmym.tk/chulki/new_usuario/add_us.php", new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    if (response.equalsIgnoreCase("El usuario  se guardo con exito")){
+                    if (response.equalsIgnoreCase("Datos_insertados")){
                         Toast.makeText(getApplicationContext(), "El usuario  se guardo con exito", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
+                        startActivity(new Intent(nuevo_usuario.this, Login.class));
                     }else {
-                        Toast.makeText(getApplicationContext(), response , Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), response+"88" , Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     }
 
