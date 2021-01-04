@@ -65,6 +65,17 @@
     <string name="val_aportar">Aporte</string>
     <string name="aportar">Realizar aporte</string>
 
+    <string name="bienvenida_retiro">Estos son tus Retiros</string>
+    <string name="total_retiro">Total : </string>
+    <string name="ult_mes">Este mes : </string>
+    <string name="val_retiro">Aporte</string>
+    <string name="retiro">Realizar aporte</string>
+
+    <!--//confirmacion retiro -->
+    <string name="confirmar_retiro">Confirmar Retiro</string>
+    <string name="retiro_tran">Aporte :</string>
+
+
     <!--//confirmacion aporte -->
     <string name="conf_transaccion">confirma tu transaccion</string>
     <string name="fecha_tran">Fecha :</string>
@@ -82,6 +93,15 @@
     <string name="recha">Rechazar</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_retiro">activity_retiro</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
 
 </resources>
