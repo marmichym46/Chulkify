@@ -111,7 +111,6 @@
                             android:layout_marginBottom="5dp"
                             android:background="@drawable/tema_boton"
                             android:text="@string/ingresar"
-
                             android:drawableLeft="@drawable/ini_sesion"
                             android:drawablePadding="12dp"
                             android:paddingRight="20dp"

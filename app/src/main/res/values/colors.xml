@@ -17,4 +17,7 @@
     <color name="fondo_1">#EEEDEB </color>
     <color name="gris">#C4C5DE</color>
 
+    <color name="azul_nor">#3B54DB</color>
+    <color name="azul_pres">#3BA1DB</color>
+
 </resources>

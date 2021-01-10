@@ -59,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/tema_trans_boton"
-                    app:srcCompat="@drawable/nueva_comunidad" />
+                    app:srcCompat="@drawable/new_com" />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -84,7 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/tema_trans_boton"
-                    app:srcCompat="@drawable/unirse" />
+                    app:srcCompat="@drawable/uni_com" />
 
                 <TextView
                     android:id="@+id/textView5"
