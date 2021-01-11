@@ -9,6 +9,6 @@ public class activity_retiro extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_retiro);
+        setContentView(R.layout.retiro);
     }
 }
