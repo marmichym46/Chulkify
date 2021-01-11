@@ -77,8 +77,8 @@ public class Aportar extends AppCompatActivity {
         hora1=devolver_hora();
 
         calcular_ap();
-        preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
-        hoy_tran=preferences.getString("aportes_hoy", null);
+        calcular_ap();
+
 
         //istanciar controles del xml de la actividad
         fecha_report=findViewById(R.id.txt_fecha);
@@ -96,16 +96,16 @@ public class Aportar extends AppCompatActivity {
         //LinearLayoutManager lm = new LinearLayoutManager(tarjeta1);
 
         cargar_datos();
-
+        cargar_datos();
 //Boton realizar aporte
         btn_realizar_aporte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Double val11 =Double.parseDouble(hoy_tran);
-
-                Double val21 =Double.parseDouble(taza);
+                Double val21 =Double.parseDouble(maximo);
                 Double val31 = val21-val11;
+
 
                if(val31<(Double.parseDouble(val_aportar.getText().toString()))){
                    Toast.makeText(Aportar.this, "exedio el maximo de aporte en el dia ", Toast.LENGTH_SHORT).show();
@@ -119,7 +119,8 @@ public class Aportar extends AppCompatActivity {
 
 
                     cargar_transaccion();}
-            }}
+            }
+            }
 
         });
 
@@ -127,6 +128,7 @@ public class Aportar extends AppCompatActivity {
         btn_confirmar_aporte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ocultar_tarjeta();
                 aportar();
             }
         });
@@ -135,6 +137,8 @@ public class Aportar extends AppCompatActivity {
         btn_actualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ocultar_tarjeta();
+                calcular_ap();
                 cargar_datos();
             }
         });
@@ -259,6 +263,10 @@ public class Aportar extends AppCompatActivity {
         tarjeta1.setVisibility(View.VISIBLE);
     }
 
+    public void ocultar_tarjeta(){
+        tarjeta1.setVisibility(View.GONE);
+    }
+
     public void aportar() {
         aportar_conm = new AsyncHttpClient();
 
@@ -341,6 +349,9 @@ public class Aportar extends AppCompatActivity {
                             SharedPreferences.Editor editor=preferences.edit();
                             editor.putString("aportes_hoy", ap);
                             editor.apply();
+                            preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+                            hoy_tran=preferences.getString("aportes_hoy", null);
+
 
 
 
@@ -358,8 +369,11 @@ public class Aportar extends AppCompatActivity {
 
             }});
 
-
+       // preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+       // hoy_tran=preferences.getString("aportes_hoy", null);
+       // Toast.makeText(Aportar.this, hoy_tran, Toast.LENGTH_SHORT).show();
 
     }
+
 
 }
