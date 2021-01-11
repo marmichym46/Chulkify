@@ -100,7 +100,7 @@
                         android:text="$" />
 
                     <EditText
-                        android:id="@+id/editTextNumber"
+                        android:id="@+id/edt_valor_aportar"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="70"
@@ -188,11 +188,13 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/tarjeta1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="40"
             android:padding="5dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -273,7 +275,7 @@
                                 <LinearLayout
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="30"
+                                    android:layout_weight="75"
                                     android:gravity="left"
                                     android:orientation="vertical">
 
@@ -288,56 +290,6 @@
 
                                     <TextView
                                         android:id="@+id/txt_usuario_tran"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textColor="@color/colorPrimary"
-                                        android:text="-" />
-
-
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="20"
-                                    android:gravity="left"
-                                    android:orientation="vertical">
-
-
-
-                                    <TextView
-                                        android:id="@+id/tv_codigo"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textColor="@color/negro"
-                                        android:text="@string/comu_tran" />
-
-                                    <TextView
-                                        android:id="@+id/tv_t_us"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:textColor="@color/negro"
-                                        android:text="@string/ci_tran" />
-
-
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="25"
-                                    android:gravity="left"
-                                    android:orientation="vertical">
-
-
-
-                                    <TextView
-                                        android:id="@+id/textView14"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textColor="@color/colorPrimary"
-                                        android:text="-" />
-
-                                    <TextView
-                                        android:id="@+id/textView15"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:textColor="@color/colorPrimary"
@@ -532,7 +484,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="60"
+                android:layout_weight="80"
                 android:padding="20dp"
                 android:orientation="vertical">
                 <LinearLayout
@@ -559,7 +511,7 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="80"
+                        android:layout_weight="95"
                         android:orientation="horizontal">
                         <TextView
                             android:id="@+id/tv_mensaj"
@@ -580,7 +532,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="40"></LinearLayout>
+                android:layout_weight="5"></LinearLayout>
 
 
 

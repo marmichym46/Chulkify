@@ -126,6 +126,16 @@ public class menu_comunidad extends AppCompatActivity {
             }
         });
 
+        //Boton aportes
+        ImageButton btn_retiros = (ImageButton) findViewById(R.id.btn_retiros);
+        btn_retiros.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(menu_comunidad.this, retiro.class));
+                //Toast.makeText(menu_inicio.this, "url", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
 
 

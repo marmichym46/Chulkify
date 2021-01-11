@@ -123,7 +123,7 @@ public class nueva_comunidad extends AppCompatActivity {
         } else {
 
 
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://www.marlonmym.tk/chulki/add_comunidad.php", new Response.Listener<String>() {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://www.marlonmym.tk/chulki/new_comunidad/add_comunidad.php", new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     if (response.equalsIgnoreCase("la comunidad se creo con exito")){
@@ -147,8 +147,12 @@ public class nueva_comunidad extends AppCompatActivity {
             }){
                 @Override
                 protected Map<String, String> getParams()throws AuthFailureError {
+
+
                     Map<String, String> parametros = new HashMap<String, String>();
-                    parametros.put("nombre_comu",nombre_comu);
+
+                    String nomb_comu =nombre_comu.toString().replace(" ", "%20");
+                    parametros.put("nombre_comu",nomb_comu);
                     parametros.put("codigo_comu",codigo_comu);
                     parametros.put("ciudad_comu",ciudad_comu);
                     parametros.put("admin_comu",cedula_comu);

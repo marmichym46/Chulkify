@@ -42,7 +42,7 @@ public class inicio extends AppCompatActivity {
     private String codigo1;
 
     //version
-    private String version_1="v1.8";
+    private String version_1="v1.7", taza_transacion="0.25", maximo="500";
 
 
     @Override
@@ -57,6 +57,8 @@ public class inicio extends AppCompatActivity {
 
         SharedPreferences.Editor editor=preferences.edit();
         editor.putString("version", version_1);
+        editor.putString("taza", taza_transacion);
+        editor.putString("maximo", maximo);
         editor.apply();
 
 

@@ -62,6 +62,7 @@ public class Login extends AppCompatActivity {
     private int m_cadu=0;
     private String mnt="0";
     private String version_1="default", url="null",resp,res;
+    private Double taza_transacion=0.25;
 
 
     @Override
