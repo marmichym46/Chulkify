@@ -271,7 +271,7 @@ public class Aportar extends AppCompatActivity {
         aportar_conm = new AsyncHttpClient();
 
         final String ci_us = ci_us_1.trim();
-        final String aporte = aporte_report.getText().toString().trim();
+        final String aporte = val_aportar.getText().toString().trim();
         final String fecha = fecha1.toString().trim();
         final String hora = hora1.toString().trim();
         final String gp = gp_1.replace(" ", "%20").trim();
