@@ -23,7 +23,11 @@
     <string name="refrescar">Refrescar</string>
     <string name="bienvenido">Bienvenido  </string>
     <string name="qdeseas_hacer">¿Que deseas hacer?</string>
+
+    <!--//mensajes barra de progreso -->
     <string name="cargar">Cargando Datos...</string>
+    <string name="cargar_aporte">Acreditando en su cuenta ...</string>
+    <string name="cargar_retiro">Realizando devito en la cuenta ...</string>
 
     <string name="info_comu">Informacion de tu comunidad</string>
     <string name="cog_inv">Codigo de invitacion</string>
@@ -101,6 +105,12 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="fondos_most">Fondos:</string>
+    <string name="aportes_hoy_most">Hoy aporto:</string>
+    <string name="retiros_hoy_most">Hoy ha retirado:</string>
+    <string name="ult_mes_most">Mes ultimo aporte:</string>
+    <string name="ult_val_ap_most">Valor ultimo aporte:</string>
 
 
 </resources>

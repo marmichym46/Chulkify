@@ -42,7 +42,7 @@ public class inicio extends AppCompatActivity {
     private String codigo1;
 
     //version
-    private String version_1="v1.7", taza_transacion="0.25", maximo="500";
+    private String version_1="v2.0", taza_transacion="0.25", maximo="500";
 
 
     @Override

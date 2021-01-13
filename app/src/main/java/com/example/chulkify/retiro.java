@@ -2,7 +2,6 @@ package com.example.chulkify;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,13 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -28,8 +20,6 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -44,6 +34,7 @@ public class retiro extends AppCompatActivity {
     private Button btn_actualizar, btn_realizar_retiro, btn_confirmar_retiro;
     private String fecha1, fecha2, hora1;
     private LinearLayout tarjeta1;
+    private String fondos_us;
 
     //Variables para capturar preferencias
     private String ci_us_1, gp_1, cg_gp_1, taza,hoy_tran, maximo;
@@ -63,6 +54,8 @@ public class retiro extends AppCompatActivity {
         gp_1=preferences.getString("nombre_comu", null);
         cg_gp_1=preferences.getString("codigo_comu", null);
         taza=preferences.getString("taza", null);
+        fondos_us=preferences.getString("fondos_us", null);
+        hoy_tran=preferences.getString("retiro_hoy", null);
         maximo=preferences.getString("maximo", null);
 
         //captura la fecha
@@ -100,20 +93,33 @@ public class retiro extends AppCompatActivity {
                 Double val21 =Double.parseDouble(maximo);
                 Double val31 = val21-val11;
 
+                Double val41 =Double.parseDouble(val_retiro.getText().toString());
+                Double val51 =Double.parseDouble(taza);
+                Double val61 =val41+val51;
 
-                if(val31<(Double.parseDouble(val_retiro.getText().toString()))){
-                    Toast.makeText(retiro.this, "excedio el maximo de retiro en el dia ", Toast.LENGTH_SHORT).show();
+                Double val71 =Double.parseDouble(fondos_us);
+
+
+                if(val_retiro.getText().toString().isEmpty()){
+                    Toast.makeText(retiro.this, "Hay campos en blanco ", Toast.LENGTH_SHORT).show();
                 }else {
-
-
-                    if (val_retiro.getText().toString().isEmpty()) {
-                        Toast.makeText(retiro.this, "Hay campos en blanco ", Toast.LENGTH_SHORT).show();
+                    if (val31<(Double.parseDouble(val_retiro.getText().toString()))) {
+                        Toast.makeText(retiro.this, "excedio el maximo de retiro en el dia ", Toast.LENGTH_SHORT).show();
                     } else {
-
-
-
-                        cargar_transaccion();}
+                        if(val71 >=val61){
+                            cargar_transaccion();
+                        }
+                        else {
+                            Toast.makeText(retiro.this, "Los fondos son insuficientes ", Toast.LENGTH_SHORT).show();
+                        }
+                       }
                 }
+
+
+
+
+
+
             }
 
         });
@@ -123,7 +129,14 @@ public class retiro extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ocultar_tarjeta();
-                aportar();
+                SharedPreferences.Editor editor=preferences.edit();
+                editor.putString("val_aportar", val_retiro.getText().toString());
+                editor.putString("fecha_t_ap", fecha1);
+                editor.putString("hora_t_ap", hora1);
+                editor.apply();
+                //aportar();
+                Intent intent = new Intent(retiro.this, cargar_retiro.class);
+                startActivity(intent);
             }
         });
 
@@ -228,7 +241,7 @@ public class retiro extends AppCompatActivity {
 
     public void cargar_datos(){
 
-        String val_fecha="hoy: "+fecha1+"    Retiro: $"+hoy_tran;
+        String val_fecha="hoy: "+fecha1+"    Retiros de hoy: $"+hoy_tran;
 
         nomb_comu.setText(gp_1);
         dato_hoy.setText(val_fecha);
@@ -261,7 +274,7 @@ public class retiro extends AppCompatActivity {
         tarjeta1.setVisibility(View.GONE);
     }
 
-    public void aportar() {
+    /*public void aportar() {
         aportar_conm = new AsyncHttpClient();
 
         final String ci_us = ci_us_1.trim();
@@ -278,8 +291,7 @@ public class retiro extends AppCompatActivity {
             public void onResponse(String response) {
                 if (response.equalsIgnoreCase("transaccion_correcta")) {
 
-                    Intent intent = new Intent(retiro.this, activity_retiro.class);
-                    startActivity(intent);
+
                     Toast.makeText(getApplicationContext(), "la transaccion se realizo con exito ...!!!", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                 } else {
@@ -314,7 +326,7 @@ public class retiro extends AppCompatActivity {
 
 
 
-    }
+    }*/
 
     public void calcular_ap(){
         //String ap="null";

@@ -278,7 +278,7 @@
                         android:layout_weight="2"
                         android:paddingRight="20dp"
                         android:background="@color/transparente"
-                        app:srcCompat="@drawable/apor_us" />
+                        app:srcCompat="@drawable/tran_tran" />
 
                     <ImageButton
                         android:id="@+id/btn_retiros"
@@ -287,7 +287,8 @@
                         android:layout_weight="2"
                         android:paddingRight="20dp"
                         android:background="@color/transparente"
-                        app:srcCompat="@drawable/reti_us" />
+                        app:srcCompat="@drawable/reti_us"
+                        android:visibility="gone"/>
 
                     <ImageButton
                         android:id="@+id/imageButton7"

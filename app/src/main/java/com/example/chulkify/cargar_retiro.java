@@ -26,7 +26,7 @@ import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
-public class cargar_transacciones extends AppCompatActivity {
+public class cargar_retiro extends AppCompatActivity {
 
     private SharedPreferences preferences;
     private AsyncHttpClient comu_clien;
@@ -38,7 +38,7 @@ public class cargar_transacciones extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.cargar_transacciones);
+        setContentView(R.layout.activity_cargar_retiro);
 
 
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
@@ -58,7 +58,7 @@ public class cargar_transacciones extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent= new Intent(cargar_transacciones.this, AportesActivity.class);
+                Intent intent= new Intent(cargar_retiro.this, AportesActivity.class);
                 startActivity(intent);
                 //cargar3.this.finish();
             }
@@ -89,7 +89,7 @@ public class cargar_transacciones extends AppCompatActivity {
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://www.marlonmym.tk/chulki/aportar/aportar_us.php", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://www.marlonmym.tk/chulki/retirar/retirar_us.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (response.equalsIgnoreCase("transaccion_correcta")) {
@@ -126,7 +126,7 @@ public class cargar_transacciones extends AppCompatActivity {
                 return parametros;
             }
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(cargar_transacciones.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(cargar_retiro.this);
         requestQueue.add(stringRequest);
 
 
@@ -147,7 +147,7 @@ public class cargar_transacciones extends AppCompatActivity {
                 if (statusCode == 200) {
                     String respuesta = new String(responseBody);
                     if (respuesta.equalsIgnoreCase("null")) {
-                        Toast.makeText(cargar_transacciones.this, "Error ...!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(cargar_retiro.this, "Error ...!!", Toast.LENGTH_SHORT).show();
                     } else {
                         try {
 
@@ -169,7 +169,7 @@ public class cargar_transacciones extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(cargar_transacciones.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+                Toast.makeText(cargar_retiro.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
 
 
             }});
@@ -181,7 +181,7 @@ public class cargar_transacciones extends AppCompatActivity {
 
         String ci_us = ci_us_1.toString().replace(" ", "%20");
         String fecha22 = fecha1.toString().replace(" ", "%20");
-        String url = "http://www.marlonmym.tk/chulki/aportar/aporte_hoy.php?ci_us="+ci_us+"&fecha="+fecha22;
+        String url = "http://www.marlonmym.tk/chulki/retirar/retiro_hoy.php?ci_us="+ci_us+"&fecha="+fecha22;
 
         aportar_conm.post(url, new AsyncHttpResponseHandler() {
             @Override
@@ -189,7 +189,7 @@ public class cargar_transacciones extends AppCompatActivity {
                 if (statusCode == 200) {
                     String respuesta = new String(responseBody);
                     if (respuesta.equalsIgnoreCase("null")) {
-                        Toast.makeText(cargar_transacciones.this, "Error ...!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(cargar_retiro.this, "Error ...!!", Toast.LENGTH_SHORT).show();
                     } else {
                         try {
 
@@ -197,7 +197,7 @@ public class cargar_transacciones extends AppCompatActivity {
                             JSONObject jsonObj = new JSONObject(respuesta);
                             String ap = jsonObj.getString("dato");
                             SharedPreferences.Editor editor=preferences.edit();
-                            editor.putString("aportes_hoy", ap);
+                            editor.putString("retiro_hoy", ap);
                             editor.apply();
                             verificar_pres_dispo();
 
@@ -211,7 +211,7 @@ public class cargar_transacciones extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(cargar_transacciones.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+                Toast.makeText(cargar_retiro.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
 
 
             }});
@@ -231,7 +231,7 @@ public class cargar_transacciones extends AppCompatActivity {
                 if (statusCode == 200) {
                     String respuesta = new String(responseBody);
                     if (respuesta.equalsIgnoreCase("null")) {
-                        Toast.makeText(cargar_transacciones.this, "Error ...!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(cargar_retiro.this, "Error ...!!", Toast.LENGTH_SHORT).show();
                     } else {
                         try {
 
@@ -251,7 +251,7 @@ public class cargar_transacciones extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(cargar_transacciones.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+                Toast.makeText(cargar_retiro.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
 
 
             }});

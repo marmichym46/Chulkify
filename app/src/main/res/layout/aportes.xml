@@ -56,16 +56,11 @@
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5"
-            android:orientation="horizontal"></LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="15"
+            android:layout_weight="25"
             android:gravity="bottom"
             android:paddingLeft="10dp"
             android:orientation="vertical">
@@ -124,19 +119,14 @@
 
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5"
-            android:orientation="horizontal">
 
-        </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="50"
+        android:layout_weight="65"
         android:padding="5dp"
+        android:gravity="top"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
@@ -147,7 +137,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="25"
+                android:layout_weight="10"
                 android:padding="5dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
@@ -157,7 +147,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="50"
+                android:layout_weight="80"
                 android:padding="5dp"
                 android:orientation="vertical">
                 <ScrollView
@@ -194,7 +184,8 @@
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="50"
+                                android:layout_weight="65"
+
                                 android:orientation="vertical">
 
 
@@ -206,48 +197,114 @@
                                     android:layout_gravity="right"
                                     android:textSize="18dp"
                                     android:textColor="@color/negro"
-                                    android:text="@string/total_aportes" />
+                                    android:text="@string/fondos_most" />
 
                                 <TextView
                                     android:id="@+id/textView15"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="right"
-                                    android:textSize="16dp"
+                                    android:textSize="18dp"
                                     android:textColor="@color/negro"
-                                    android:text="@string/ult_mes" />
+                                    android:text="@string/aportes_hoy_most" />
 
+                                <TextView
+                                    android:id="@+id/textView1555"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:textSize="18dp"
+                                    android:textColor="@color/negro"
+                                    android:text="@string/retiros_hoy_most" />
+
+                                <TextView
+                                    android:id="@+id/textView1kk"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:textSize="18dp"
+                                    android:textColor="@color/negro"
+                                    android:text="@string/ult_mes_most"
+                                    android:visibility="gone"/>
+
+                                <TextView
+                                    android:id="@+id/textView1kjk"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:textSize="18dp"
+                                    android:textColor="@color/negro"
+                                    android:text="@string/ult_val_ap_most"
+                                    android:visibility="gone"/>
 
                             </LinearLayout>
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="50"
+                                android:layout_weight="35"
                                 android:orientation="vertical">
 
 
 
                                 <TextView
-                                    android:id="@+id/tv_codigo"
+                                    android:id="@+id/tv_fondos"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="left"
-                                    android:textSize="20dp"
+                                    android:textSize="18dp"
                                     android:textColor="@color/colorPrimary"
                                     android:text="$xx.xx" />
 
                                 <TextView
-                                    android:id="@+id/tv_t_us"
+                                    android:id="@+id/tv_ap_hoy"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:textSize="20dp"
+                                    android:textSize="18dp"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="$xx.xx" />
+
+                                <TextView
+                                    android:id="@+id/tv_rt_hoy"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="18dp"
                                     android:textColor="@color/colorPrimary"
                                     android:text="$xx.xx" />
 
 
+                                <TextView
+                                    android:id="@+id/tv_fecha_ult_ap"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="18dp"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="$xx.xx"
+                                    android:visibility="gone"/>
+                                <TextView
+                                    android:id="@+id/tv_vaalor_ult_ap"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="18dp"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="$xx.xx"
+                                    android:visibility="gone"/>
+
+
+
                             </LinearLayout>
                         </LinearLayout>
-
+                        <TextView
+                            android:id="@+id/textView13333"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/negro"/>
+                        <TextView
+                            android:id="@+id/textView133366"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/negro"/>
                         <TextView
                             android:id="@+id/tv_mensaje"
                             android:layout_width="match_parent"
@@ -258,7 +315,9 @@
                             android:drawableLeft="@drawable/correcto"
                             android:drawableTint="@color/verde"
                             android:textSize="18dp"
-                            android:text="prestamos" />
+                            android:text="xxxx"
+
+                            android:visibility="gone"/>
 
 
                     </LinearLayout>
@@ -273,7 +332,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="25"
+                android:layout_weight="10"
                 android:padding="5dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
@@ -294,7 +353,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="40"
+            android:layout_weight="55"
             android:padding="5dp"
             android:gravity="top"
             android:orientation="horizontal">
@@ -305,25 +364,25 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:background="@color/transparente"
-                app:srcCompat="@drawable/ap_tran" />
+                app:srcCompat="@drawable/apor_us"  />
 
             <ImageButton
-                android:id="@+id/imageButton1"
+                android:id="@+id/btn_retiros"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:background="@color/transparente"
-                app:srcCompat="@drawable/ut_tran" />
+                app:srcCompat="@drawable/reti_us" />
 
 
 
             <ImageButton
-                android:id="@+id/imageButton20"
+                android:id="@+id/btn_historial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:background="@color/transparente"
-                app:srcCompat="@drawable/ha_tran" />
+                app:srcCompat="@drawable/hist_tran" />
         </LinearLayout>
 
     </LinearLayout>
@@ -334,11 +393,7 @@
 
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="10"
-            android:orientation="horizontal"></LinearLayout>
+
 
     </LinearLayout>
 </RelativeLayout>

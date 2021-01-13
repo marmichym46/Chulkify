@@ -37,6 +37,7 @@ public class menu_comunidad extends AppCompatActivity {
     private static final int PERMISSION_STORAGE_CODE = 1000;
     private SharedPreferences preferences;
     private AsyncHttpClient buscar_url;
+    private AsyncHttpClient aportar_conm;
 
 
     private TextView nombre_comu, fecha_comu, mv_usuario, tv_codigo,tv_t_us;
@@ -47,6 +48,7 @@ public class menu_comunidad extends AppCompatActivity {
     private String nomb,most_fecha, n_comu, m_usuario, conv_total_us,total_us_comu, cog_cm;
     private Button btn_actualizar;
     private EditText codigo_cop;
+    private String ci_us_1,fecha1,hoy_tran;
 
     private String fecha;
     private int  dia, mes, anio;
@@ -71,6 +73,8 @@ public class menu_comunidad extends AppCompatActivity {
         fecha_at = preferences.getString("fecha_actual",null);
         total_us_comu= String.valueOf(preferences.getInt("total_usuario_comu",0));
 
+        ci_us_1=usuario;
+
 
         nombre_comu=findViewById(R.id.tv_comunidad_m);
         fecha_comu=findViewById(R.id.tv_fecha);
@@ -93,7 +97,14 @@ public class menu_comunidad extends AppCompatActivity {
         String anioS = String.valueOf(anio);
         fecha = diaS+"/"+mesS+"/"+anioS;
 
+        SharedPreferences.Editor editor=preferences.edit();
+        editor.putString("fecha_actual", fecha);
+        editor.apply();
+        consultar_fondos();
+        consulta_hoy();
+        verificar_pres_dispo();
         mostrar_datos();
+
 
 
 
@@ -101,6 +112,9 @@ public class menu_comunidad extends AppCompatActivity {
         btn_actualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                consultar_fondos();
+                consulta_hoy();
+                verificar_pres_dispo();
                 cargar_datos();
             }
         });
@@ -121,29 +135,205 @@ public class menu_comunidad extends AppCompatActivity {
         btn_apotes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                consultar_fondos();
+               consulta_hoy();
+                verificar_pres_dispo();
                 startActivity(new Intent(menu_comunidad.this, AportesActivity.class));
                 //Toast.makeText(menu_inicio.this, "url", Toast.LENGTH_SHORT).show();
             }
         });
 
-        //Boton aportes
-        ImageButton btn_retiros = (ImageButton) findViewById(R.id.btn_retiros);
-        btn_retiros.setOnClickListener(new View.OnClickListener() {
+
+
+
+    }
+
+    public void consultar_fondos(){
+        //String ap="null";
+        aportar_conm = new AsyncHttpClient();
+
+
+        String ci_us = ci_us_1.toString().replace(" ", "%20");
+
+        String url = "http://www.marlonmym.tk/chulki/aportar/consultar_fondos.php?ci_us="+ci_us;
+
+        aportar_conm.post(url, new AsyncHttpResponseHandler() {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(menu_comunidad.this, retiro.class));
-                //Toast.makeText(menu_inicio.this, "url", Toast.LENGTH_SHORT).show();
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                if (statusCode == 200) {
+                    String respuesta = new String(responseBody);
+                    if (respuesta.equalsIgnoreCase("null")) {
+                        Toast.makeText(menu_comunidad.this, "Error ...!!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        try {
+
+
+                            JSONObject jsonObj = new JSONObject(respuesta);
+                            String ap = jsonObj.getString("dato");
+                            SharedPreferences.Editor editor=preferences.edit();
+                            editor.putString("fondos_us", ap);
+                            editor.apply();
+
+
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
             }
-        });
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(menu_comunidad.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+
+
+            }});
+
+        // preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+        // hoy_tran=preferences.getString("aportes_hoy", null);
+        // Toast.makeText(Aportar.this, hoy_tran, Toast.LENGTH_SHORT).show();
+
+    }
+    public void consulta_hoy(){
+        //String ap="null";
+        aportar_conm = new AsyncHttpClient();
+
+
+        String ci_us = ci_us_1.toString().replace(" ", "%20");
+        String fecha22 = fecha.toString().replace(" ", "%20");
+        String url = "http://www.marlonmym.tk/chulki/aportar/aporte_hoy.php?ci_us="+ci_us+"&fecha="+fecha22;
+
+        aportar_conm.post(url, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                if (statusCode == 200) {
+                    String respuesta = new String(responseBody);
+                    if (respuesta.equalsIgnoreCase("null")) {
+                        Toast.makeText(menu_comunidad.this, "Error ...!!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        try {
+
+
+                            JSONObject jsonObj = new JSONObject(respuesta);
+                            String ap = jsonObj.getString("dato");
+                            SharedPreferences.Editor editor=preferences.edit();
+                            editor.putString("aportes_hoy", ap);
+                            editor.apply();
+                            preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+                            hoy_tran=preferences.getString("aportes_hoy", null);
 
 
 
 
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(menu_comunidad.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+
+
+            }});
+
+        // preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+        // hoy_tran=preferences.getString("aportes_hoy", null);
+        // Toast.makeText(Aportar.this, hoy_tran, Toast.LENGTH_SHORT).show();
+
+    }
+    public void consulta_rt_hoy(){
+        //String ap="null";
+        aportar_conm = new AsyncHttpClient();
+
+
+        String ci_us = ci_us_1.toString().replace(" ", "%20");
+        String fecha22 = fecha.toString().replace(" ", "%20");
+        String url = "http://www.marlonmym.tk/chulki/retirar/retiro_hoy.php?ci_us="+ci_us+"&fecha="+fecha22;
+
+        aportar_conm.post(url, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                if (statusCode == 200) {
+                    String respuesta = new String(responseBody);
+                    if (respuesta.equalsIgnoreCase("null")) {
+                        Toast.makeText(menu_comunidad.this, "Error ...!!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        try {
+
+
+                            JSONObject jsonObj = new JSONObject(respuesta);
+                            String ap = jsonObj.getString("dato");
+                            SharedPreferences.Editor editor=preferences.edit();
+                            editor.putString("retiro_hoy", ap);
+                            editor.apply();
 
 
 
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(menu_comunidad.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
 
 
+            }});
+
+        // preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+        // hoy_tran=preferences.getString("aportes_hoy", null);
+        // Toast.makeText(Aportar.this, hoy_tran, Toast.LENGTH_SHORT).show();
+
+    }
+    public void verificar_pres_dispo(){
+        //String ap="null";
+        aportar_conm = new AsyncHttpClient();
+
+
+        String ci_us = ci_us_1.toString().replace(" ", "%20");
+        String url = "http://www.marlonmym.tk/chulki/prestamos/consulta_bandera_prestamo.php?ci_us="+ci_us;
+
+        aportar_conm.post(url, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                if (statusCode == 200) {
+                    String respuesta = new String(responseBody);
+                    if (respuesta.equalsIgnoreCase("null")) {
+                        Toast.makeText(menu_comunidad.this, "Error ...!!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        try {
+
+
+                            JSONObject jsonObj = new JSONObject(respuesta);
+                            String ap = jsonObj.getString("dato");
+                            SharedPreferences.Editor editor=preferences.edit();
+                            editor.putString("linea_ap", ap);
+                            editor.apply();
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(menu_comunidad.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+
+
+            }});
+
+        // preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+        // hoy_tran=preferences.getString("aportes_hoy", null);
+        // Toast.makeText(Aportar.this, hoy_tran, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -210,13 +400,10 @@ public class menu_comunidad extends AppCompatActivity {
         tv_t_us.setText(total_us_comu);
     }
 
-
-
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_of, menu);
         return true;
     }
-
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
 
@@ -298,7 +485,6 @@ public class menu_comunidad extends AppCompatActivity {
 
         manager.enqueue(request);
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode){
@@ -314,7 +500,6 @@ public class menu_comunidad extends AppCompatActivity {
 
         }
     }
-
     public String buscar_url(String dato) {
 
 
@@ -355,10 +540,6 @@ public class menu_comunidad extends AppCompatActivity {
         });
         return resp;
     }
-
-
-
-
 
 
 

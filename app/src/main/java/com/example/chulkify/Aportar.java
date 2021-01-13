@@ -69,6 +69,7 @@ public class Aportar extends AppCompatActivity {
         gp_1=preferences.getString("nombre_comu", null);
         cg_gp_1=preferences.getString("codigo_comu", null);
         taza=preferences.getString("taza", null);
+        hoy_tran=preferences.getString("aportes_hoy", null);
         maximo=preferences.getString("maximo", null);
 
         //captura la fecha
@@ -108,7 +109,7 @@ public class Aportar extends AppCompatActivity {
 
 
                if(val31<(Double.parseDouble(val_aportar.getText().toString()))){
-                   Toast.makeText(Aportar.this, "exedio el maximo de aporte en el dia ", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(Aportar.this, "excedio el maximo de aporte en el dia ", Toast.LENGTH_SHORT).show();
                }else {
 
 
@@ -129,7 +130,14 @@ public class Aportar extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ocultar_tarjeta();
-                aportar();
+                SharedPreferences.Editor editor=preferences.edit();
+                editor.putString("val_aportar", val_aportar.getText().toString());
+                editor.putString("fecha_t_ap", fecha1);
+                editor.putString("hora_t_ap", hora1);
+                editor.apply();
+                //aportar();
+                Intent intent = new Intent(Aportar.this, cargar_transacciones.class);
+                startActivity(intent);
             }
         });
 
@@ -234,7 +242,7 @@ public class Aportar extends AppCompatActivity {
 
     public void cargar_datos(){
 
-        String val_fecha="hoy: "+fecha1+"    Aporte: $"+hoy_tran;
+        String val_fecha="hoy: "+fecha1+"    Aportes de hoy: $"+hoy_tran;
 
         nomb_comu.setText(gp_1);
         dato_hoy.setText(val_fecha);
@@ -267,7 +275,7 @@ public class Aportar extends AppCompatActivity {
         tarjeta1.setVisibility(View.GONE);
     }
 
-    public void aportar() {
+    /*public void aportar() {
         aportar_conm = new AsyncHttpClient();
 
         final String ci_us = ci_us_1.trim();
@@ -284,8 +292,7 @@ public class Aportar extends AppCompatActivity {
             public void onResponse(String response) {
                 if (response.equalsIgnoreCase("transaccion_correcta")) {
 
-                    Intent intent = new Intent(Aportar.this, AportesActivity.class);
-                    startActivity(intent);
+
                     Toast.makeText(getApplicationContext(), "la transaccion se realizo con exito ...!!!", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                 } else {
@@ -322,7 +329,7 @@ public class Aportar extends AppCompatActivity {
 
 
 
-    }
+    }*/
 
     public void calcular_ap(){
         //String ap="null";
