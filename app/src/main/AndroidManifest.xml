@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/new_logo_ico_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".cargar_retiro"></activity>
+        <activity android:name=".Activity_historial_transaccion"></activity>
+        <activity android:name=".cargar_retiro" />
         <activity android:name=".cargar_transacciones" />
         <activity android:name=".retiro" />
         <activity android:name=".Aportar" />

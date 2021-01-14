@@ -88,6 +88,20 @@ public class AportesActivity extends AppCompatActivity {
             }
         });
 
+
+        //boton historial
+        ImageButton btn_historial = (ImageButton) findViewById(R.id.btn_historial);
+        btn_historial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AportesActivity.this, Activity_historial_transaccion.class));
+                //Toast.makeText(menu_inicio.this, "url", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
         //Boton refrescar
         btn_actualizar=findViewById(R.id.btn_refres);
         btn_actualizar.setOnClickListener(new View.OnClickListener() {
@@ -238,7 +252,7 @@ public class AportesActivity extends AppCompatActivity {
                             editor.putString("retiro_hoy", ap);
                             editor.apply();
                             preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
-                            retiros_hoy=preferences.getString("aportes_hoy", null);
+                            retiros_hoy=preferences.getString("retiro_hoy", null);
 
 
 
