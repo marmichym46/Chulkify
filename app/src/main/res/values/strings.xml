@@ -44,7 +44,7 @@
     <!--//mensajes barra de progreso -->
     <string name="cargar">Cargando Datos...</string>
     <string name="cargar_aporte">Acreditando en su cuenta ...</string>
-    <string name="cargar_retiro">Realizando devito en la cuenta ...</string>
+    <string name="cargar_retiro">Realizando debito en la cuenta ...</string>
 
     <string name="info_comu">Informacion de tu comunidad</string>
     <string name="cog_inv">Codigo de invitacion</string>
@@ -80,7 +80,7 @@
     <string name="inf_solicitud">Informacion de tu solicitud</string>
     <string name="cadu_soli">Tu solicitud caduca:</string>
 
-    <string name="bienvenida_aportes">Estos son tus aportes</string>
+    <string name="bienvenida_aportes">Estos son tus Aportes</string>
     <string name="total_aportes">Total : </string>
     <string name="ult_mes">Este mes : </string>
     <string name="val_aportar">Aporte </string>

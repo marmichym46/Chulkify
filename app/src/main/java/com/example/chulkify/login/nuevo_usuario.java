@@ -139,8 +139,6 @@ public class nuevo_usuario extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), response+"88" , Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     }
-
-
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -167,11 +165,6 @@ public class nuevo_usuario extends AppCompatActivity {
             };
             RequestQueue requestQueue= Volley.newRequestQueue(nuevo_usuario.this);
             requestQueue.add(stringRequest);
-
-
         }
-
-
     }
-
 }
