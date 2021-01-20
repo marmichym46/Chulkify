@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/ima4"
     android:orientation="vertical"
-    tools:context=".Activity_historial_transaccion">
+    tools:context=".transacciones_pg.reportes.Activity_historial_transaccion">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tb_layout_histo_tran"

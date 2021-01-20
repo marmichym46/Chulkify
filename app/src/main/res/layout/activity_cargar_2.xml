@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ima4"
-    tools:context=".cargar_2">
+    tools:context=".envio_solicitud_comu.cargar_2">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

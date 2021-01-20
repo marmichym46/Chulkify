@@ -1,4 +1,21 @@
 <resources>
+
+    <!--links -->
+    <string name="link_login">http://www.marlonmym.tk/chulki/login.php</string>
+    <string name="link_registro_us">http://www.marlonmym.tk/chulki/new_usuario/add_us.php</string>
+    <string name="link_actualizar">http://www.marlonmym.tk/chulki/links/version.php</string>
+    <string name="link_consulta_datos">http://www.marlonmym.tk/chulki/consultas/consultas_ap_rt_fd_lap.php</string>
+    <string name="link_consul_comunidad">http://www.marlonmym.tk/chulki/consulta_comu.php</string>
+    <string name="link_registro_cm">http://www.marlonmym.tk/chulki/new_comunidad/add_comunidad.php</string>
+    <string name="link_consulta_comu_admin">http://www.marlonmym.tk/chulki/consultas/consulta_comu_admin.php</string>
+    <!--links -->
+
+    <!--constantes-->
+    <string name="version">v2.1</string>
+    <string name="taza_transaccion">0.25</string>
+    <string name="maximo">500</string>
+    <!--constantes-->
+
     <string name="app_name">Chulkify</string>
     <string name="usuario">Usuario</string>
     <string name="pass">Contraseña</string>

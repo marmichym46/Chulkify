@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ima4"
-    tools:context=".nueva_comunidad">
+    tools:context=".nueva_comunidad.nueva_comunidad">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ima4"
-    tools:context=".menu_inicio">
+    tools:context=".login.menu_inicio">
 
     <LinearLayout
         android:layout_width="match_parent"
