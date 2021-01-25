@@ -55,21 +55,22 @@ public class cargar_2 extends AppCompatActivity {
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
         usuario = preferences.getString("codigo_comu_solicitud", null);
         usuario2 =preferences.getString("cedula_usuario", null);
+        Manejo_fechas fc = new Manejo_fechas();
+        fechacrea=fc.fechaYhora_actual();
+        fechacadu=fc.caducidad();
         comu_clien = new AsyncHttpClient();
         //enviar_solicitudes();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
-                Manejo_fechas fc = new Manejo_fechas();
-                fechacrea=fc.fechaYhora_actual();
-                fechacadu=fc.caducidad();
+
 
                 datos_us();
 
                 cargar_2.this.finish();
             }
-        },15000);
+        },25000);
 
     }
 
@@ -79,19 +80,12 @@ public class cargar_2 extends AppCompatActivity {
     private void datos_us(){
         String ccc= "%22"+usuario+"%22";
         String cog_comu = ccc.replace(" ", "%20");
-        String url = "http://www.marlonmym.tk/chulki/buscar_usu_per_comu.php?codigo_comu="+cog_comu;
-
-
-
+        String url_link = getString(R.string.link_buscar_usuarios);
+        String url = url_link+"?codigo_comu="+cog_comu;
         comu_clien.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
-
-
-
                 if (statusCode == 200) {
-
                     String respuesta = new String(responseBody);
                     if (respuesta.equalsIgnoreCase("null")) {
                         Toast.makeText(cargar_2.this, "Error al cargar datos", Toast.LENGTH_SHORT).show();
@@ -99,46 +93,36 @@ public class cargar_2 extends AppCompatActivity {
                         try {
                             JSONObject jsonObj = new JSONObject(respuesta);
                             res=jsonObj.getString("dato");
-
                             String[] parts = res.split("/");
                             if (parts[1] == "dato_null"){
                                 Toast.makeText(cargar_2.this, "Error al cargar datos", Toast.LENGTH_SHORT).show();
-
                             }else {
-
                                 for (int i = 1; i < parts.length; i++) {
                                     nnn = parts[i];
                                     Toast.makeText(cargar_2.this, "datos2=" + nnn, Toast.LENGTH_SHORT).show();
-                                    enviar_solicitudes();
+                                    enviar_solicitudes(nnn);
                                 }
+                                Toast.makeText(getApplicationContext(), "las solicitudes fueron enviadas con exito ...!!!", Toast.LENGTH_SHORT).show();
+
                                 Intent intent= new Intent(cargar_2.this, inicio.class);
                                 startActivity(intent);
                             }
-
-
-
-
-
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
                 }
             }
-
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Toast.makeText(cargar_2.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
-
             }
-
-
         });
     }
 
 
 
-    private void enviar_solicitudes(){
+   /* private void enviar_solicitudes(){
 
 
         final String fecha_crea_notif = fechacrea.trim();
@@ -195,6 +179,54 @@ public class cargar_2 extends AppCompatActivity {
 
 
 
+    }*/
+
+
+    private void enviar_solicitudes(String dato){
+
+        String ccc= "%22"+usuario+"%22";
+        String cog_comu = ccc.replace(" ", "%20");
+        String ci_emisor = usuario2.replace(" ", "%20");
+        String cg_cm = usuario.replace(" ", "%20");
+        String ci_receptor = dato.replace(" ", "%20");
+        String fecha_crea = fechacrea.replace(" ", "%20");
+        String fecha_cadu = fechacadu.replace(" ", "%20");
+        String url_link2 = getString(R.string.link_generar_solicitud_ing_grupo);
+        String url = url_link2+"?ci_emisor="+ci_emisor+"&cg_cm="+cg_cm+"&ci_receptor="+ci_receptor+"&fecha_crea="+fecha_crea+"&fecha_cadu="+fecha_cadu;
+
+
+
+        comu_clien.post(url, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+
+
+
+                if (statusCode == 200) {
+
+                    String respuesta = new String(responseBody);
+                    if (respuesta.equalsIgnoreCase("null")) {
+                        Toast.makeText(cargar_2.this, "Error al cargar datos", Toast.LENGTH_SHORT).show();
+                    } else {
+                        try {
+
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(cargar_2.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+
+            }
+
+
+        });
     }
 
 

@@ -41,7 +41,7 @@
                 android:background="@drawable/tema_negro_trans"
                 android:indeterminate="true"
                 android:layout_height="wrap_content"
-                android:indeterminateDuration="07000"
+                android:indeterminateDuration="25000"
                 android:indeterminateDrawable="@drawable/cargar_tema"/>
 
             <TextView

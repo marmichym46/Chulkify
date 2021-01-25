@@ -22,7 +22,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.chulkify.Manejo_fechas;
 import com.example.chulkify.R;
+import com.example.chulkify.envio_solicitud_comu.cargar_2;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -91,54 +93,81 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
        return v;
     }
     public void cargarservice(){
-        String cog_comu = usuario.replace(" ", "%20");
-        String url="http://www.marlonmym.tk/chulki/consulta_solicitudes/capturar_solicitudes.php?ci_us="+cog_comu;
-        jsonObjectRequest=new JsonObjectRequest(Request.Method.GET,url,null, this,this);
-        request.add(jsonObjectRequest);}
+        cargar_solicitudes();
+    }
 
     public void onErrorResponse(VolleyError error) {
         Toast.makeText(getContext(), "No hay solicitudes" , Toast.LENGTH_LONG).show();
 
     }
 
-    public void onResponse(JSONObject response) {
-        Solicitudes centrousu=null;
+    public void onResponse(JSONObject response) {}
 
-        JSONArray json=response.optJSONArray("solicitud");
-        try {
+    public void cargar_solicitudes(){
 
-            for (int i=0;i<json.length();i++){
-                centrousu=new Solicitudes();
-                JSONObject jsonObject=null;
-                jsonObject=json.getJSONObject(i);
-
-                String nnn=jsonObject.optString("10");
-                String aaa=jsonObject.optString("11");
-
-                String dt=jsonObject.optString("9");
-                String aux="("+dt+")";
-
-                String fch=jsonObject.optString("fecha_crea_notif");
-                String[] parts = fch.split("/");
-                String fecha=parts[0]+"/"+parts[1]+"/"+parts[2]+"   "+parts[3]+":"+parts[4]+":"+parts[5];
-                int  id_us=jsonObject.optInt("id_notif");
-                String id_usuario = String.valueOf(id_us);
+        AsyncHttpClient cargar_soli  = new AsyncHttpClient();
+        String cog_comu = usuario.replace(" ", "%20");
+        String l_crg_soli =getString(R.string.link_captura_solicitud);
+        String url=l_crg_soli+"?ci_us="+cog_comu;
+        cargar_soli.post(url, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                if (statusCode == 200) {
+                    String respuesta = new String(responseBody);
+                    if (respuesta.equalsIgnoreCase("null")) {
+                        Toast.makeText(getContext(), "Error...!!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        try {
+                            JSONObject jsonObj = new JSONObject(respuesta);
+                            String res=jsonObj.getString("dato");
 
 
-               //Toast.makeText(getContext(), id_usuario, Toast.LENGTH_SHORT).show();
-                agregarTarjetasDeSolicitud(nnn,aaa,aux,fecha,id_us);
+                            String[] parts = res.split("//");
+
+                            for (int i = 1; i < parts.length; i++) {
+                                String res2=parts[i];
+                                String[] rpt2 = res2.split("%");
+
+                                Solicitudes centrousu=new Solicitudes();
+
+                                int  id_us=Integer.parseInt(rpt2[0]);
+
+
+                                String[] pt2 = rpt2[1].split("/");
+                                //Toast.makeText(getContext(), "soli==>   "+pt2[0], Toast.LENGTH_LONG).show();
+                                String fecha=pt2[0]+"/"+pt2[1]+"/"+pt2[2]+"   "+pt2[3]+":"+pt2[4]+":"+pt2[5];
+                                String dt=rpt2[2];
+                                String aux="("+dt+")";
+                                String nnn=rpt2[3];
+                                String aaa=rpt2[4];
+
+                                //Toast.makeText(getContext(), "soli==>   "+ nnn+"soli==> "+aaa+"soli==> "+aux+"soli==> "+fecha+"soli==> ", Toast.LENGTH_LONG).show();
+
+                                //Toast.makeText(getContext(), id_usuario, Toast.LENGTH_SHORT).show();
+                                agregarTarjetasDeSolicitud(nnn,aaa,aux,fecha,id_us);
+
+                            }
+
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                             }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(getContext(), "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+
+
             }
 
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(getContext(), "No se ha podido establecer conexión con el servidor" +
-                    " "+response, Toast.LENGTH_LONG).show();
-        }
+        });
+
 
     }
-
-
 
     public  void verificar_solicitudes(){
         if (listSolicitudes.isEmpty()){
@@ -162,11 +191,11 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
         listSolicitudes.add(0,solicitudes);
         actualizarTarjetas();
     }
+
     public void agregarTarjetasDeSolicitud(Solicitudes solicitudes){
         listSolicitudes.add(0,solicitudes);
         actualizarTarjetas();
     }
-
 
     public void actualizarTarjetas(){
         adapter.notifyDataSetChanged();
@@ -183,45 +212,16 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
         }
     }
 
-
-
     public void aceptarSolicitud(final int identificador, final String usuario_soli){
 
-
-        Calendar fecha_a = Calendar.getInstance();
-        Date date = new Date();
-
-        dia= fecha_a.get(Calendar.DAY_OF_MONTH);
-        mes= fecha_a.get(Calendar.MONTH)+1;
-        anio= fecha_a.get(Calendar.YEAR);
-
-        diaS= String.valueOf(dia);
-        mesS = String.valueOf(mes);
-        anioS = String.valueOf(anio);
-
-
-        SimpleDateFormat h= new SimpleDateFormat("kk");
-        horaS=h.format(date);
-        hora=Integer.valueOf(horaS);
-        SimpleDateFormat m= new SimpleDateFormat("mm");
-        minutosS=m.format(date);
-        SimpleDateFormat mm= new SimpleDateFormat("m");
-        minutos=Integer.parseInt(mm.format(date));
-        minutosa=String.valueOf(minutos);
-        SimpleDateFormat s= new SimpleDateFormat("ss");
-        segundosS=s.format(date);
-        segundos=Integer.valueOf(segundosS);
-
-        fechacrea = diaS+"/"+mesS+"/"+anioS+"/"+horaS+"/"+minutosS+"/"+segundosS;
-
-
-
-
+        Manejo_fechas nf = new Manejo_fechas();
+        fechacrea = nf.fechaYhora_actual();
 
         AsyncHttpClient aceptar  = new AsyncHttpClient();
         final int ident=identificador;
         String idt=String.valueOf(ident);
-        String url = "http://www.marlonmym.tk/chulki/consulta_solicitudes/aceptar.php?id="+ident+"&fe="+fechacrea;
+        String l_acep_soli=getString(R.string.link_aceptar_solicitudes);
+        String url = l_acep_soli+"?id="+ident+"&fe="+fechacrea;
         aceptar.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -234,7 +234,6 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
 
                             JSONObject jsonObj = new JSONObject(respuesta);
                             String resp = jsonObj.getString("dato");
-
                             if (resp.equals("en_espera")){
                                 Toast.makeText(getContext(), "Has aceptado la solicitud del usuario "+usuario_soli+", el usuario aun tiene solicitudes pendientes", Toast.LENGTH_SHORT).show();
                             }
@@ -252,26 +251,21 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
                     }
                 }
             }
-
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Toast.makeText(getContext(), "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
-
-
             }
-
-
         });
-
-
     }
 
 
     public void cancelarSolicitud(final int identificador, final String usuario_soli){
         AsyncHttpClient rechazar  = new AsyncHttpClient();
         final int ident=identificador;
+
         String idt=String.valueOf(ident);
-        String url = "http://www.marlonmym.tk/chulki/consulta_solicitudes/rechazar.php?id="+ident;
+        String l_recha_soli=getString(R.string.link_rechazar_solicitud);
+        String url = l_recha_soli+"?id="+ident;
         rechazar.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -299,10 +293,5 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Toast.makeText(getContext(), "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
             }}); }
-
-
-
-
-
 
 }

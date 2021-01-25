@@ -80,7 +80,7 @@ public class cargar_transacciones extends AppCompatActivity {
 
     }
 
-    public void aportar() {
+    /*public void aportar() {
         aportar_conm = new AsyncHttpClient();
         final String ci_us = ci_us_1.trim();
         final String aporte = val_aportar.trim();
@@ -93,8 +93,7 @@ public class cargar_transacciones extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 if (response.equalsIgnoreCase("transaccion_correcta")) {
-                    Toast.makeText(getApplicationContext(), "la transaccion se realizo con exito ...!!!", Toast.LENGTH_SHORT).show();
-                    cargar_datos();
+
                     progressDialog.dismiss();
                 } else {
                     Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
@@ -121,6 +120,53 @@ public class cargar_transacciones extends AppCompatActivity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(cargar_transacciones.this);
         requestQueue.add(stringRequest);
+    }*/
+
+    public void aportar(){
+        //String ap="null";
+        aportar_conm = new AsyncHttpClient();
+        String ci_us = ci_us_1.toString().replace(" ", "%20");
+        String fecha22 = fecha1.toString().replace(" ", "%20");
+
+        String ci_us2 = ci_us_1.trim();
+        String aporte2 = val_aportar.trim();
+        String fecha2 = fecha1.toString().trim();
+        String gp2 = gp_1.replace(" ", "%20").trim();
+        String cg_gp2 = cg_gp_1.trim();
+        String hora2 = hora1.toString().trim();
+        String url = "http://www.marlonmym.tk/chulki/aportar/aportar_us.php?ci_us="+ci_us2+"&aporte="+aporte2+"&fecha="+fecha2+"&gp="+gp2+"&cg_gp="+cg_gp2+"&hora="+hora2;
+
+        aportar_conm.post(url, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                if (statusCode == 200) {
+                    String respuesta = new String(responseBody);
+                    if (respuesta.equalsIgnoreCase("null")) {
+                        Toast.makeText(cargar_transacciones.this, "Error ...!!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        try {
+
+
+
+                            Toast.makeText(getApplicationContext(), "la transaccion se realizo con exito ...!!!", Toast.LENGTH_SHORT).show();
+                            cargar_datos();
+
+                            //Toast.makeText(getApplicationContext(), "datos cargados...!!!"+parts[0]+" - "+parts[1]+" - "+parts[2]+" - "+parts[3]+" - ", Toast.LENGTH_SHORT).show();
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(cargar_transacciones.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+
+
+            }});
+
     }
 
 

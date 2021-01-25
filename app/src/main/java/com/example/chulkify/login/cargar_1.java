@@ -44,23 +44,16 @@ public class cargar_1 extends AppCompatActivity {
                 cargar_1.this.finish();
             }
         },07000);
-
-
-
-
     }
 
     private void cargar_datos(){
         String cog_comu = usuario.replace(" ", "%20");
-        String url = "http://www.marlonmym.tk/chulki/consulta_comu.php?codigo_comu="+cog_comu;
-
+        String l_c_comunidad=getString(R.string.link_consul_comunidad);
+        String url = l_c_comunidad+"?codigo_comu="+cog_comu;
 
         comu_clien.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
-
-
                 if (statusCode == 200) {
                     String respuesta = new String(responseBody);
                     if (respuesta.equalsIgnoreCase("null")) {
@@ -69,7 +62,6 @@ public class cargar_1 extends AppCompatActivity {
                         try {
 
                             JSONObject jsonObj = new JSONObject(respuesta);
-
                             SharedPreferences.Editor editor=preferences.edit();
                             editor.putString("ciudad_comu", jsonObj.getString("ciudad_comu"));
                             editor.putInt("id_comu", jsonObj.getInt("id_comu"));
@@ -77,26 +69,16 @@ public class cargar_1 extends AppCompatActivity {
                             editor.putString("codigo_comu", jsonObj.getString("codigo_comu"));
                             editor.putInt("total_usuario_comu", jsonObj.getInt("total_usuario_comu"));
                             editor.apply();
-
-
-
-
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
                 }
             }
-
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Toast.makeText(cargar_1.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
-
             }
-
-
         });
     }
-
-
 }

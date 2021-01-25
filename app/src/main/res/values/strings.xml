@@ -8,6 +8,16 @@
     <string name="link_consul_comunidad">http://www.marlonmym.tk/chulki/consulta_comu.php</string>
     <string name="link_registro_cm">http://www.marlonmym.tk/chulki/new_comunidad/add_comunidad.php</string>
     <string name="link_consulta_comu_admin">http://www.marlonmym.tk/chulki/consultas/consulta_comu_admin.php</string>
+    <string name="link_buscar_usuarios">http://www.marlonmym.tk/chulki/buscar_usu_per_comu.php</string>
+    <string name="link_generar_solicitud_ing_grupo">http://www.marlonmym.tk/chulki/add_notificacion.php</string>
+    <string name="link_captura_solicitud">http://www.marlonmym.tk/chulki/consulta_solicitudes/capturar_solicitudes.php</string>
+    <string name="link_aceptar_solicitudes">http://www.marlonmym.tk/chulki/consulta_solicitudes/aceptar.php</string>
+    <string name="link_rechazar_solicitud">http://www.marlonmym.tk/chulki/consulta_solicitudes/rechazar.php</string>
+    <string name="link_consultar_comunidad">http://www.marlonmym.tk/chulki/consultar_comunidad.php</string>
+
+
+
+
     <!--links -->
 
     <!--constantes-->
@@ -15,6 +25,13 @@
     <string name="taza_transaccion">0.25</string>
     <string name="maximo">500</string>
     <!--constantes-->
+
+    <!--prestamos-->
+    <string name="msj_ini_prestamos">Prestamos</string>
+    <string name="no_prestamo">No hay prestamos</string>
+    <string name="val_ult_prestamo">Su ultimo prestamo: </string>
+    <string name="fec_ult_prestamo">Hecho en: </string>
+    <!--prestamos-->
 
     <string name="app_name">Chulkify</string>
     <string name="usuario">Usuario</string>

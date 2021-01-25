@@ -259,6 +259,11 @@ public class espera_soli extends AppCompatActivity {
 
     }
 
+
+
+
+
+
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_of, menu);
         return true;
