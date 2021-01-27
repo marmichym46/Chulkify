@@ -12,9 +12,11 @@
     <string name="link_captura_solicitud">http://www.marlonmym.tk/chulki/consulta_solicitudes/capturar_solicitudes.php</string>
     <string name="link_aceptar_solicitudes">http://www.marlonmym.tk/chulki/consulta_solicitudes/aceptar.php</string>
     <string name="link_rechazar_solicitud">http://www.marlonmym.tk/chulki/consulta_solicitudes/rechazar.php</string>
-    <string name="link_consultar_comunidad">http://www.marlonmym.tk/chulki/consultar_comunidad.php</string>
-    <!--links -->
+    <string name="link_consultar_prestamos">http://www.marlonmym.tk/chulki/prestamos/consulta_prestamos.php</string>
+    <string name="link_estado_solicitud_prestamos">http://www.marlonmym.tk/chulki/prestamos/estado_soli_prestamo.php</string>
 
+
+    <!--links -->
 
 
     <!--constantes-->
@@ -143,6 +145,11 @@
     <string name="ult_mes_most">Mes ultimo aporte:</string>
     <string name="ult_val_ap_most">Valor ultimo aporte:</string>
 
+    <string name="cargando">Cargando . . .</string>
+
+    <string name="solicitud_caducara">Tu Solicitud Caducara en:</string>
+    <string name="cancelar">Cancelar Solicitud</string>
+    <string name="inf_solicitud_prestamo">Informacion de Solicitud Prestamo</string>
 
     <!-- Strings historial transacciones -->
 

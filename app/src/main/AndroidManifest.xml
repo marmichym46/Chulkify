@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/new_logo_ico_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".prestamos.Activity_menu_prestamos"></activity>
+        <activity android:name=".prestamos.activity_espera_soli_prestamo"></activity>
+        <activity android:name=".prestamos.cargahistorial" />
+        <activity android:name=".prestamos.Activity_menu_prestamos" />
         <activity android:name=".login.no_usados.Activity_login" />
         <activity android:name=".transacciones_pg.reportes.Activity_historial_transaccion" />
         <activity android:name=".transacciones_pg.retiros.cargar_retiro" />
