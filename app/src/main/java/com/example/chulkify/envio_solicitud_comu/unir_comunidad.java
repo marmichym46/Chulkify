@@ -41,6 +41,7 @@ public class unir_comunidad extends AppCompatActivity {
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
         buscar_comu = new AsyncHttpClient();
         buscar_usuario =new AsyncHttpClient();
+
         btn_buscar_comu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

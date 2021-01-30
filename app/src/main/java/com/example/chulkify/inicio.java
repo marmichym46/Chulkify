@@ -4,15 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.chulkify.login.Logear_usuario;
 import com.example.chulkify.login.cargar3;
 import com.example.chulkify.login.cargar_1;
 import com.example.chulkify.login.menu_inicio;
-import com.example.chulkify.menus_usuarios.MainActivity;
+import com.example.chulkify.menus_usuarios.menu_no_comunidad;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -25,17 +26,18 @@ public class inicio extends AppCompatActivity {
     private SharedPreferences preferences;
     private AsyncHttpClient comu_clien,usuario_clien;
 
-
     private AsyncHttpClient buscar_version;
     private  String  resp_2;
 
     private String usuario;
     private int m_cadu=0;
     private String mnt="0";
+    ProgressBar pb1;
 
     //variables para clave y usuario
     private String us, pw;
     private String codigo1;
+    String cdd;
 
 
     @Override
@@ -54,22 +56,28 @@ public class inicio extends AppCompatActivity {
         editor.putString("taza", getString(R.string.taza_transaccion));
         editor.putString("maximo", getString(R.string.maximo));
         editor.apply();
+        pb1=(ProgressBar)findViewById(R.id.pgbar_1);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 verificar_sesion();
-                inicio.this.finish();
+                //inicio.this.finish();
             }
-        },07000);
+        },012000);
 
     }
+
+
+
+
 
     private void verificar_sesion(){
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
         if ((preferences.getString("nombre_usuario", null) != null)&&(preferences.getString("pass", null) != null)){
-
             if((preferences.getInt("anio_cadu", 0) != 0)&&(preferences.getInt("mes_cadu", 0) != 0)&&(preferences.getInt("dia_cadu", 0) != 0)){
+                cdd="CADUCADO";
+
                 Manejo_fechas mf = new Manejo_fechas();
 
                 int aaa=mf.anio_actual();
@@ -78,6 +86,8 @@ public class inicio extends AppCompatActivity {
                 int hhh=mf.hora_actual();
                 int mnt=mf.minuto_actual();
                 int sss=mf.segundo_actual();
+
+                preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
                 int aux_anio = preferences.getInt("anio_cadu", 0);
                 int aux_mes = preferences.getInt("mes_cadu", 0);
                 int aux_dia = preferences.getInt("dia_cadu", 0);
@@ -91,44 +101,44 @@ public class inicio extends AppCompatActivity {
                             if (hhh >= aux_hora){
                                 if (mnt >= aux_mnt){
                                     preferences.edit().clear().apply();
-                                    Toast.makeText(inicio.this, "La session ah caducado", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(inicio.this, menu_inicio.class));
+
+                                    cdd="CADUCADO";
+
                                 }
                                 else{
-                                    us=preferences.getString("nombre_usuario", null);
-                                    pw=preferences.getString("pass", null);
-                                    usuario_clien = new AsyncHttpClient();
-                                    ini_seccion();
+                                    cdd="NO_CADUCADO";
                                 }
                             }
                             else{
-                                us=preferences.getString("nombre_usuario", null);
-                                pw=preferences.getString("pass", null);
-                                usuario_clien = new AsyncHttpClient();
-                                ini_seccion();
+                                cdd="NO_CADUCADO";
                             }
                         }
                         else{
-                            us=preferences.getString("nombre_usuario", null);
-                            pw=preferences.getString("pass", null);
-                            usuario_clien = new AsyncHttpClient();
-                            ini_seccion();
+                            cdd="NO_CADUCADO";
                         }
                     }
                     else{
-                        us=preferences.getString("nombre_usuario", null);
-                        pw=preferences.getString("pass", null);
-                        usuario_clien = new AsyncHttpClient();
-                        ini_seccion();
+                        cdd="NO_CADUCADO";
                     }
                 }
 
                 else{
+                    cdd="NO_CADUCADO";
+                }
+
+
+                if (cdd.equals("CADUCADO")){
+                    preferences.edit().clear().apply();
+                    Toast.makeText(inicio.this, "La session ah caducado", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(inicio.this, menu_inicio.class));
+                }else{
                     us=preferences.getString("nombre_usuario", null);
                     pw=preferences.getString("pass", null);
                     usuario_clien = new AsyncHttpClient();
                     ini_seccion();
                 }
+
+
             }
             else{
                 us=preferences.getString("nombre_usuario", null);
@@ -139,8 +149,7 @@ public class inicio extends AppCompatActivity {
         }
         else {
             startActivity(new Intent(inicio.this, menu_inicio.class));
-            //Toast.makeText(inicio.this, version_1, Toast.LENGTH_SHORT).show();
-        }
+           }
     }
 
     private void ini_seccion() {
@@ -157,15 +166,14 @@ public class inicio extends AppCompatActivity {
                     String respuesta = new String(responseBody);
                     if (respuesta.equalsIgnoreCase("null")) {
                         Toast.makeText(inicio.this, "Error De Usuario y/o Contraseña!!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(inicio.this, menu_inicio.class));
                     } else {
                         try {
 
                             JSONObject jsonObj = new JSONObject(respuesta);
 
-                            Logear_usuario u = new Logear_usuario();
-                            u.setId(jsonObj.getInt("id_us"));
-                            u.setTipo(jsonObj.getInt("tipo_us"));
-                            int n_tp= jsonObj.getInt("tipo_us");
+
+                            String n_tp= jsonObj.getString("tipo_us");
                             Manejo_fechas cd = new Manejo_fechas();
                             String cadd=cd.caducidad();
                             String[] pt = cadd.split("/");
@@ -186,30 +194,24 @@ public class inicio extends AppCompatActivity {
                             editor.putString("comunidad", jsonObj.getString("grupo_us"));
                             codigo1 = jsonObj.getString("grupo_us");
                             editor.putString("fondos_us", jsonObj.getString("fondos_us"));
-                            editor.putInt("tipo", jsonObj.getInt("tipo_us"));
+                            editor.putString("tipo", jsonObj.getString("tipo_us"));
                             editor.putString("fecha_ini", jsonObj.getString("fecha_inicio_us"));
                             editor.putString("pass", jsonObj.getString("contrasena_us"));
                             editor.putString("fecha_union_grupo", jsonObj.getString("fecha_union_comu_us"));
-                            editor.putInt("estado_usuario", jsonObj.getInt("estado_gru_us"));
+                            editor.putString("estado_usuario", jsonObj.getString("estado_gru_us"));
                             editor.apply();
-
                             Intent intent = null;
-                            switch (n_tp) {
-                                case 0:
-                                    intent= new Intent(inicio.this, MainActivity.class);
-                                    break;
-                                case 1:
-                                    intent= new Intent(inicio.this, cargar_1.class);
-                                    break;
-                                case 2:
-                                    intent= new Intent(inicio.this, cargar_1.class);
-                                    break;
-                                case 3:
-                                    intent= new Intent(inicio.this, cargar3.class);
-
-                                    break;
-
+                            if(n_tp.equals("NO_COMU")){
+                                intent= new Intent(inicio.this, menu_no_comunidad.class);
+                            }else if(n_tp.equals("US_COMU")){
+                                intent= new Intent(inicio.this, cargar_1.class);
+                            }else if(n_tp.equals("ADMIN_COMU")){
+                                intent= new Intent(inicio.this, cargar_1.class);
+                            }else if(n_tp.equals("US_ESPERA")){
+                                intent= new Intent(inicio.this, cargar3.class);
                             }
+
+
 
                             startActivity(intent);
                         } catch (Exception e) {
@@ -222,7 +224,7 @@ public class inicio extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Toast.makeText(inicio.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
-
+                startActivity(new Intent(inicio.this, menu_inicio.class));
             }
 
 
@@ -231,7 +233,5 @@ public class inicio extends AppCompatActivity {
 
 
     }
-
-
 
 }

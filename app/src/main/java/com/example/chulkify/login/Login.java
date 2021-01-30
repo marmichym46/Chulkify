@@ -22,7 +22,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.chulkify.menus_usuarios.MainActivity;
+import com.example.chulkify.menus_usuarios.menu_no_comunidad;
 import com.example.chulkify.Manejo_fechas;
 import com.example.chulkify.R;
 import com.loopj.android.http.AsyncHttpClient;
@@ -105,14 +105,11 @@ public class Login extends AppCompatActivity {
 
                                         JSONObject jsonObj = new JSONObject(respuesta);
 
-                                        Logear_usuario u = new Logear_usuario();
-                                        u.setId(jsonObj.getInt("id_us"));
-                                        u.setTipo(jsonObj.getInt("tipo_us"));
-                                        int n_tp= jsonObj.getInt("tipo_us");
+
+                                        String n_tp= jsonObj.getString("tipo_us");
                                         Manejo_fechas cd = new Manejo_fechas();
                                         String cadd=cd.caducidad();
                                         String[] pt = cadd.split("/");
-
 
                                         SharedPreferences.Editor editor=preferences.edit();
 
@@ -129,30 +126,23 @@ public class Login extends AppCompatActivity {
                                         editor.putInt("id", jsonObj.getInt("id_us"));
                                         editor.putString("comunidad", jsonObj.getString("grupo_us"));
                                         codigo1 = jsonObj.getString("grupo_us");
-                                        editor.putInt("tipo", jsonObj.getInt("tipo_us"));
+                                        editor.putString("tipo", jsonObj.getString("tipo_us"));
                                         editor.putString("fondos_us", jsonObj.getString("fondos_us"));
                                         editor.putString("fecha_ini", jsonObj.getString("fecha_inicio_us"));
                                         editor.putString("pass", jsonObj.getString("contrasena_us"));
                                         editor.putString("fecha_union_grupo", jsonObj.getString("fecha_union_comu_us"));
-                                        editor.putInt("estado_usuario", jsonObj.getInt("estado_gru_us"));
+                                        editor.putString("estado_usuario", jsonObj.getString("estado_gru_us"));
                                         editor.apply();
 
                                         Intent intent = null;
-                                        switch (n_tp) {
-                                            case 0:
-                                                intent= new Intent(Login.this, MainActivity.class);
-                                                break;
-                                            case 1:
-                                                intent= new Intent(Login.this, cargar_1.class);
-                                                break;
-                                            case 2:
-                                                intent= new Intent(Login.this, cargar_1.class);
-                                                break;
-
-                                            case 3:
-                                                intent= new Intent(Login.this, cargar3.class);
-                                                break;
-
+                                        if(n_tp.equals("NO_COMU")){
+                                            intent= new Intent(Login.this, menu_no_comunidad.class);
+                                        }else if(n_tp.equals("US_COMU")){
+                                            intent= new Intent(Login.this, cargar_1.class);
+                                        }else if(n_tp.equals("ADMIN_COMU")){
+                                            intent= new Intent(Login.this, cargar_1.class);
+                                        }else if(n_tp.equals("US_ESPERA")){
+                                            intent= new Intent(Login.this, cargar3.class);
                                         }
 
                                        startActivity(intent);

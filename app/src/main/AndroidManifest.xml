@@ -25,7 +25,7 @@
         <activity android:name=".transacciones_pg.aportes.cargar_transacciones" />
         <activity android:name=".transacciones_pg.retiros.retiro" />
         <activity android:name=".transacciones_pg.aportes.Aportar" />
-        <activity android:name=".transacciones_pg.AportesActivity" />
+        <activity android:name=".transacciones_pg.transaccionesActivity" />
         <activity
             android:name=".envio_solicitud_comu.solicitudes.Soli_notifi"
             android:screenOrientation="portrait" />
@@ -66,7 +66,7 @@
             android:name=".login.nuevo_usuario"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".menus_usuarios.MainActivity"
+            android:name=".menus_usuarios.menu_no_comunidad"
             android:screenOrientation="portrait" />
         <activity
             android:name=".login.Login"

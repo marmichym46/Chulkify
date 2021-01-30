@@ -2,29 +2,18 @@ package com.example.chulkify.transacciones_pg.aportes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.chulkify.R;
-import com.example.chulkify.transacciones_pg.AportesActivity;
+import com.example.chulkify.transacciones_pg.transaccionesActivity;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -61,7 +50,7 @@ public class cargar_transacciones extends AppCompatActivity {
             @Override
             public void run() {
 
-                Intent intent= new Intent(cargar_transacciones.this, AportesActivity.class);
+                Intent intent= new Intent(cargar_transacciones.this, transaccionesActivity.class);
                 startActivity(intent);
                 //cargar3.this.finish();
             }

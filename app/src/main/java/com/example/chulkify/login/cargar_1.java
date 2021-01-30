@@ -48,7 +48,7 @@ public class cargar_1 extends AppCompatActivity {
 
     private void cargar_datos(){
         String cog_comu = usuario.replace(" ", "%20");
-        String l_c_comunidad=getString(R.string.link_consul_comunidad);
+        String l_c_comunidad=getString(R.string.link_consultar_comunidad);
         String url = l_c_comunidad+"?codigo_comu="+cog_comu;
 
         comu_clien.post(url, new AsyncHttpResponseHandler() {

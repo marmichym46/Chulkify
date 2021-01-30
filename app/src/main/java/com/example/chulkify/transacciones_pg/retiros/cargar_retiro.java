@@ -17,7 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.chulkify.R;
-import com.example.chulkify.transacciones_pg.AportesActivity;
+import com.example.chulkify.transacciones_pg.transaccionesActivity;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -60,7 +60,7 @@ public class cargar_retiro extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent= new Intent(cargar_retiro.this, AportesActivity.class);
+                Intent intent= new Intent(cargar_retiro.this, transaccionesActivity.class);
                 startActivity(intent);
                 //cargar3.this.finish();
             }

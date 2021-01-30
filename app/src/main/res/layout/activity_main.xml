@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
     android:background="@drawable/ima4"
-    tools:context=".menus_usuarios.MainActivity">
+    tools:context=".menus_usuarios.menu_no_comunidad">
 
 
     <LinearLayout

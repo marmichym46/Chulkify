@@ -89,40 +89,42 @@ public class espera_soli extends AppCompatActivity {
         });
 
 
-
-
-
-
-
-
     }
 
-    private void cancelar_soli(String usuario){
-        AsyncHttpClient rechazar  = new AsyncHttpClient();
-        String ident=usuario;
-
-        String url = "http://www.marlonmym.tk/chulki/consulta_solicitudes/cancelar.php?id="+ident;
-        rechazar.post(url, new AsyncHttpResponseHandler() {
+    private void cargar_datos(){
+        String codigo_comunidad = usuario.replace(" ", "%20");
+        String link_consult=getString(R.string.link_consultar_estd_soli_union);
+        String url = link_consult+"?ci_us="+codigo_comunidad;
+        buscar_soli.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 if (statusCode == 200) {
                     String respuesta = new String(responseBody);
                     if (respuesta.equalsIgnoreCase("null")) {
-                        Toast.makeText(espera_soli.this, "Error...!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(espera_soli.this, "codigo no encontrado", Toast.LENGTH_SHORT).show();
                     } else {
                         try {
-
                             JSONObject jsonObj = new JSONObject(respuesta);
-                            String resp = jsonObj.getString("dato");
-
-                            if (resp.equals("cancelar")){
-                                Toast.makeText(espera_soli.this, "Has cancelado la colicitud de union a comunidad", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(espera_soli.this, inicio.class));
-                            } else {
-                                Toast.makeText(espera_soli.this, "Error...!", Toast.LENGTH_SHORT).show();
-
+                            res=jsonObj.getString("dato");
+                            String[] parts = res.split("/");
+                            if (parts[1] == "dato_null"){
+                                Toast.makeText(espera_soli.this, "Error al cargar datos", Toast.LENGTH_SHORT).show();
+                            }else {
+                                n_aceptadas=0;
+                                n_espera=0;
+                                n_negadas=0;
+                                for (int i = 1; i < parts.length; i++) {
+                                    int aux =Integer.valueOf(parts[i]);
+                                    if (aux == 1){n_espera++;}
+                                    else if (aux== 2){n_negadas++;
+                                        tv_mensaje.setVisibility(View.VISIBLE);}
+                                    else if (aux ==3){n_aceptadas++;}
+                                }
                             }
-
+                            tv_nombre_comu.setText(comunidad);
+                            tv_aceptadas.setText(String.valueOf(n_aceptadas));
+                            tv_espera.setText(String.valueOf(n_espera));
+                            tv_negadas.setText(String.valueOf(n_negadas));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -133,63 +135,10 @@ public class espera_soli extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Toast.makeText(espera_soli.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
-
-
             }
 
 
         });
-
-
-    }
-
-    private void cargar_datos(){
-            String codigo_comunidad = usuario.replace(" ", "%20");
-            String url = "http://www.marlonmym.tk/chulki/soli_estados.php?ci_us="+codigo_comunidad;
-            buscar_soli.post(url, new AsyncHttpResponseHandler() {
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                    if (statusCode == 200) {
-                        String respuesta = new String(responseBody);
-                        if (respuesta.equalsIgnoreCase("null")) {
-                            Toast.makeText(espera_soli.this, "codigo no encontrado", Toast.LENGTH_SHORT).show();
-                        } else {
-                            try {
-                                JSONObject jsonObj = new JSONObject(respuesta);
-                                res=jsonObj.getString("dato");
-                                String[] parts = res.split("/");
-                                if (parts[1] == "dato_null"){
-                                    Toast.makeText(espera_soli.this, "Error al cargar datos", Toast.LENGTH_SHORT).show();
-                                }else {
-                                    n_aceptadas=0;
-                                    n_espera=0;
-                                    n_negadas=0;
-                                    for (int i = 1; i < parts.length; i++) {
-                                       int aux =Integer.valueOf(parts[i]);
-                                        if (aux == 1){n_espera++;}
-                                       else if (aux== 2){n_negadas++;
-                                       tv_mensaje.setVisibility(View.VISIBLE);}
-                                       else if (aux ==3){n_aceptadas++;}
-                                    }
-                                }
-                                tv_nombre_comu.setText(comunidad);
-                                tv_aceptadas.setText(String.valueOf(n_aceptadas));
-                                tv_espera.setText(String.valueOf(n_espera));
-                                tv_negadas.setText(String.valueOf(n_negadas));
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                    Toast.makeText(espera_soli.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
-                }
-
-
-            });
 
 
 
@@ -258,6 +207,57 @@ public class espera_soli extends AppCompatActivity {
 
 
     }
+
+
+
+
+    private void cancelar_soli(String usuario){
+        AsyncHttpClient rechazar  = new AsyncHttpClient();
+        String ident=usuario;
+
+        String url = "http://www.marlonmym.tk/chulki/consulta_solicitudes/cancelar.php?id="+ident;
+        rechazar.post(url, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                if (statusCode == 200) {
+                    String respuesta = new String(responseBody);
+                    if (respuesta.equalsIgnoreCase("null")) {
+                        Toast.makeText(espera_soli.this, "Error...!!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        try {
+
+                            JSONObject jsonObj = new JSONObject(respuesta);
+                            String resp = jsonObj.getString("dato");
+
+                            if (resp.equals("cancelar")){
+                                Toast.makeText(espera_soli.this, "Has cancelado la colicitud de union a comunidad", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(espera_soli.this, inicio.class));
+                            } else {
+                                Toast.makeText(espera_soli.this, "Error...!", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(espera_soli.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+
+
+            }
+
+
+        });
+
+
+    }
+
+
 
 
 

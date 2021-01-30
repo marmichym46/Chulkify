@@ -60,15 +60,15 @@ public class cargar_2 extends AppCompatActivity {
         fechacadu=fc.caducidad();
         comu_clien = new AsyncHttpClient();
         //enviar_solicitudes();
+        datos_us();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
+                Intent intent= new Intent(cargar_2.this, inicio.class);
+                startActivity(intent);
 
 
-                datos_us();
-
-                cargar_2.this.finish();
             }
         },25000);
 
@@ -99,13 +99,15 @@ public class cargar_2 extends AppCompatActivity {
                             }else {
                                 for (int i = 1; i < parts.length; i++) {
                                     nnn = parts[i];
-                                    Toast.makeText(cargar_2.this, "datos2=" + nnn, Toast.LENGTH_SHORT).show();
-                                    enviar_solicitudes(nnn);
+                                    String[] parts2 = nnn.split("%%");
+                                    String usuario_soli=parts[1];
+                                    String ci_soli=parts[0];
+                                    enviar_solicitudes(ci_soli);
+                                    Toast.makeText(cargar_2.this, "Solicitud enviada a:" + ci_soli, Toast.LENGTH_SHORT).show();
+
                                 }
                                 Toast.makeText(getApplicationContext(), "las solicitudes fueron enviadas con exito ...!!!", Toast.LENGTH_SHORT).show();
 
-                                Intent intent= new Intent(cargar_2.this, inicio.class);
-                                startActivity(intent);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -121,67 +123,6 @@ public class cargar_2 extends AppCompatActivity {
     }
 
 
-
-   /* private void enviar_solicitudes(){
-
-
-        final String fecha_crea_notif = fechacrea.trim();
-        final String fecha_cadu_notif = fechacadu.trim();
-        final String ci_soli_env_notif = usuario2.trim();
-        //Toast.makeText(cargar_2.this, fecha_crea_notif+" - "+fecha_cadu_notif, Toast.LENGTH_SHORT).show();
-        final String codigo_comu_notif = usuario.trim();
-        //Toast.makeText(cargar_2.this, codigo_comu_notif, Toast.LENGTH_SHORT).show();
-        final String ci_us_notif = nnn.trim();
-        //Toast.makeText(cargar_2.this, ci_us_notif, Toast.LENGTH_SHORT).show();
-
-
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-
-
-
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://www.marlonmym.tk/chulki/add_notificacion.php", new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    if (response.equalsIgnoreCase("lasolicitud fue enviada con exito ...!!!")){
-
-                        //Intent intent= new Intent(cargar_2.this, cargar_1.class);
-                        //startActivity(intent);
-                        Toast.makeText(getApplicationContext(), "lasolicitud fue enviada con exito ...!!!", Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                    }else {
-                        Toast.makeText(getApplicationContext(), response , Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                    }
-
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
-                }
-            }){
-                @Override
-                protected Map<String, String> getParams()throws AuthFailureError {
-                    Map<String, String> parametros = new HashMap<String, String>();
-                    parametros.put("ci_us_notif",ci_us_notif);
-                    parametros.put("codigo_comu_notif",codigo_comu_notif);
-                    parametros.put("fecha_crea_notif",fecha_crea_notif);
-                    parametros.put("fecha_cadu_notif",fecha_cadu_notif);
-                    parametros.put("ci_soli_env_notif", ci_soli_env_notif);
-                    return parametros;
-                }
-            };
-            RequestQueue requestQueue= Volley.newRequestQueue(cargar_2.this);
-            requestQueue.add(stringRequest);
-
-
-
-
-
-    }*/
-
-
     private void enviar_solicitudes(String dato){
 
         String ccc= "%22"+usuario+"%22";
@@ -191,17 +132,13 @@ public class cargar_2 extends AppCompatActivity {
         String ci_receptor = dato.replace(" ", "%20");
         String fecha_crea = fechacrea.replace(" ", "%20");
         String fecha_cadu = fechacadu.replace(" ", "%20");
+
         String url_link2 = getString(R.string.link_generar_solicitud_ing_grupo);
         String url = url_link2+"?ci_emisor="+ci_emisor+"&cg_cm="+cg_cm+"&ci_receptor="+ci_receptor+"&fecha_crea="+fecha_crea+"&fecha_cadu="+fecha_cadu;
-
-
 
         comu_clien.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
-
-
 
                 if (statusCode == 200) {
 
@@ -210,7 +147,6 @@ public class cargar_2 extends AppCompatActivity {
                         Toast.makeText(cargar_2.this, "Error al cargar datos", Toast.LENGTH_SHORT).show();
                     } else {
                         try {
-
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -222,13 +158,7 @@ public class cargar_2 extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Toast.makeText(cargar_2.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
-
             }
-
-
         });
     }
-
-
-
 }

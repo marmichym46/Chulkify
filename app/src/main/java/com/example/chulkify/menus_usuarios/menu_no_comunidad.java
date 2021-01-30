@@ -34,7 +34,7 @@ import java.io.File;
 
 import cz.msebera.android.httpclient.Header;
 
-public class MainActivity extends AppCompatActivity {
+public class menu_no_comunidad extends AppCompatActivity {
 
 
     private static final int PERMISSION_STORAGE_CODE = 1000;
@@ -66,14 +66,14 @@ public class MainActivity extends AppCompatActivity {
         new_comu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, nueva_comunidad.class));
+                startActivity(new Intent(menu_no_comunidad.this, nueva_comunidad.class));
 
             }
         });
         uni_comu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, unir_comunidad.class));
+                startActivity(new Intent(menu_no_comunidad.this, unir_comunidad.class));
 
             }
         });
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.menu_iten_c_sesion){
             preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
             preferences.edit().clear().apply();
-            startActivity(new Intent(MainActivity.this, inicio.class));
+            startActivity(new Intent(menu_no_comunidad.this, inicio.class));
             //Intent intent= new Intent(menu_comunidad.this, Login.class);
         }
         else if (id == R.id.menu_actualizacion){
@@ -105,9 +105,9 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(espera_soli.this, url, Toast.LENGTH_SHORT).show();
 
             if(url.equals("ult_vs")){
-                Toast.makeText(MainActivity.this, "la version "+version+" es la mas reciente", Toast.LENGTH_SHORT).show();
+                Toast.makeText(menu_no_comunidad.this, "la version "+version+" es la mas reciente", Toast.LENGTH_SHORT).show();
             }else if (url.equals("error")){
-                Toast.makeText(MainActivity.this, "Hay un error desconocido", Toast.LENGTH_SHORT).show();
+                Toast.makeText(menu_no_comunidad.this, "Hay un error desconocido", Toast.LENGTH_SHORT).show();
             }else{
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                     if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         String url_d= url.trim();
 
         File file = new File(getExternalFilesDir(null), "chulkify.apk");
-        Toast.makeText(MainActivity.this, "Se inicio la descarga", Toast.LENGTH_SHORT).show();
+        Toast.makeText(menu_no_comunidad.this, "Se inicio la descarga", Toast.LENGTH_SHORT).show();
 
         DownloadManager.Request request =null;
         if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.N){
@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
                     StartDownloading();
                 }
                 else {
-                    Toast.makeText(MainActivity.this, "Permiso denegado...!!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(menu_no_comunidad.this, "Permiso denegado...!!!", Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                 if (statusCode == 200) {
                     String respuesta = new String(responseBody);
                     if (respuesta.equalsIgnoreCase("null")) {
-                        Toast.makeText(MainActivity.this, "Error al  buscar actualizaciones", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(menu_no_comunidad.this, "Error al  buscar actualizaciones", Toast.LENGTH_SHORT).show();
                     } else {
                         try {
 
@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(MainActivity.this, "Error Desconocido. Intentelo De Nuevo!!" + responseBody, Toast.LENGTH_SHORT).show();
+                Toast.makeText(menu_no_comunidad.this, "Error Desconocido. Intentelo De Nuevo!!" + responseBody, Toast.LENGTH_SHORT).show();
             }
 
 

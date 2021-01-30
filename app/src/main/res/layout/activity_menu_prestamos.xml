@@ -164,12 +164,7 @@
                             android:layout_height="match_parent"
                             android:orientation="vertical" >
 
-                            <TextView
-                                android:id="@+id/textView13"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textColor="@color/negro"/>
+
 
                             <TextView
                                 android:id="@+id/textView33"
@@ -183,7 +178,6 @@
                                 android:layout_height="wrap_content"
                                 android:paddingRight="10dp"
                                 android:paddingLeft="10dp"
-                                android:gravity="center_horizontal"
                                 android:orientation="horizontal">
 
                                 <LinearLayout
@@ -191,7 +185,6 @@
                                     android:layout_height="wrap_content"
                                     android:background="@color/negro"
                                     android:padding="5dp"
-                                    android:gravity="center"
                                     android:orientation="horizontal">
 
 
@@ -200,20 +193,14 @@
                                         android:id="@+id/text_no_pres"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_gravity="right"
-                                        android:textSize="28dp"
+                                        android:gravity="center_horizontal"
+                                        android:paddingLeft="15dp"
+                                        android:drawableLeft="@drawable/circulo_x_b"
+                                        android:textSize="20dp"
                                         android:textColor="@color/blanco"
                                         android:text="@string/no_prestamo" />
 
-
-
                                 </LinearLayout>
-
-
-
-
-
-
                             </LinearLayout>
 
                             <LinearLayout
@@ -223,7 +210,180 @@
                                 android:paddingRight="10dp"
                                 android:paddingLeft="10dp"
                                 android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
                                 android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/text_0011"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="70"
+                                    android:layout_gravity="right"
+                                    android:textSize="16dp"
+                                    android:textColor="@color/negro"
+                                    android:text="@string/val_ult_prestamo" />
+
+                                <TextView
+                                    android:id="@+id/text_val_ult_pres"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="30"
+                                    android:layout_gravity="right"
+                                    android:textSize="16dp"
+                                    android:textColor="@color/colorAccent"
+                                    android:text="$xxxx.xx" />
+
+
+
+                            </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/text_0012"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="70"
+                                        android:layout_gravity="right"
+                                        android:textSize="16dp"
+                                        android:textColor="@color/negro"
+                                        android:text="@string/fec_ult_prestamo" />
+
+                                    <TextView
+                                        android:id="@+id/text_fch_ult_pres"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="30"
+                                        android:layout_gravity="right"
+                                        android:textSize="16dp"
+                                        android:textColor="@color/colorAccent"
+                                        android:text="dd/mm/aaaa" />
+
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/op_soli_activa_msj"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingRight="10dp"
+                                android:paddingLeft="10dp"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/text_msj_soli_activa_espera"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:background="@color/negro"
+                                    android:orientation="horizontal"
+                                    android:visibility="gone">
+
+                                    <TextView
+                                        android:id="@+id/text_msj_001"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_horizontal"
+                                        android:paddingLeft="15dp"
+                                        android:drawableLeft="@drawable/espera_soli"
+                                        android:textSize="18dp"
+                                        android:textColor="@color/blanco"
+                                        android:text="@string/msj_soli_prestamo_espera" />
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:id="@+id/text_msj_soli_activa_aceptada"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:background="@color/negro"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/text_msj_002"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_horizontal"
+                                        android:paddingLeft="15dp"
+                                        android:drawableLeft="@drawable/soli_acep"
+                                        android:textSize="18dp"
+                                        android:textColor="@color/verde"
+                                        android:text="@string/msj_soli_prestamo_aceptada" />
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:id="@+id/text_msj_soli_activa_negada"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:background="@color/negro"
+                                    android:orientation="horizontal"
+                                    android:visibility="gone">
+
+                                    <TextView
+                                        android:id="@+id/text_msj_003"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_horizontal"
+                                        android:paddingLeft="15dp"
+                                        android:drawableTop="@drawable/no_money"
+                                        android:textSize="18dp"
+                                        android:textColor="@color/rojo"
+                                        android:text="@string/msj_soli_prestamo_negada" />
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:id="@+id/txt_msj_soli_e_a"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:orientation="horizontal"
+                                    android:visibility="gone">
+
+                                    <TextView
+                                        android:id="@+id/txt0012"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="70"
+                                        android:layout_gravity="center"
+                                        android:textSize="18dp"
+                                        android:textColor="@color/negro"
+                                        android:text="@string/msj_monto_a_prestar" />
+                                    <TextView
+                                        android:id="@+id/text_val_soli_activa"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="30"
+                                        android:layout_gravity="center"
+                                        android:textSize="18dp"
+                                        android:textColor="@color/colorAccent"
+                                        android:text="$xxxx.xx" />
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/op_soli_acep_msj"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingRight="10dp"
+                                android:paddingLeft="10dp"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -231,27 +391,32 @@
                                     android:gravity="center"
                                     android:orientation="horizontal">
 
-
+                                    <TextView
+                                        android:id="@+id/text_004"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="70"
+                                        android:layout_gravity="right"
+                                        android:textSize="16dp"
+                                        android:textColor="@color/negro"
+                                        android:text="@string/soli_aceptada" />
 
                                     <TextView
-                                        android:id="@+id/text_no"
-                                        android:layout_width="wrap_content"
+                                        android:id="@+id/text_val_pres"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
+                                        android:layout_weight="30"
                                         android:layout_gravity="right"
-                                        android:textSize="18dp"
-                                        android:textColor="@color/blanco"
-                                        android:text="@string/no_prestamo" />
+                                        android:textSize="16dp"
+                                        android:textColor="@color/colorAccent"
+                                        android:text="$xxxx.xx" />
 
 
 
                                 </LinearLayout>
 
-
-
-
-
-
                             </LinearLayout>
+
 
 
 
@@ -301,6 +466,8 @@
 
 
 
+
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -336,7 +503,8 @@
                 android:layout_weight="55"
                 android:padding="5dp"
                 android:gravity="top"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <ImageButton
                     android:id="@+id/btn_aportar"

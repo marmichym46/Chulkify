@@ -22,7 +22,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.chulkify.transacciones_pg.AportesActivity;
+import com.example.chulkify.transacciones_pg.transaccionesActivity;
 import com.example.chulkify.Manejo_fechas;
 import com.example.chulkify.R;
 import com.example.chulkify.envio_solicitud_comu.solicitudes.Soli_notifi;
@@ -121,7 +121,7 @@ public class menu_comunidad extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 consulta_datos();
-                startActivity(new Intent(menu_comunidad.this, AportesActivity.class));
+                startActivity(new Intent(menu_comunidad.this, transaccionesActivity.class));
                 //Toast.makeText(menu_inicio.this, "url", Toast.LENGTH_SHORT).show();
             }
         });
@@ -181,7 +181,7 @@ public class menu_comunidad extends AppCompatActivity {
     }
     private void cargar_datos(){
         String cog_comu = codg_comu.replace(" ", "%20");
-        String l_consult_comu=getString(R.string.link_consul_comunidad);
+        String l_consult_comu=getString(R.string.link_consultar_comunidad);
         String url = l_consult_comu+"?codigo_comu="+cog_comu;
         comu_clien.post(url, new AsyncHttpResponseHandler() {
             @Override

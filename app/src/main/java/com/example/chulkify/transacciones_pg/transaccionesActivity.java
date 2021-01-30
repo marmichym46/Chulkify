@@ -22,7 +22,7 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 
-public class AportesActivity extends AppCompatActivity {
+public class transaccionesActivity extends AppCompatActivity {
 
 
     private SharedPreferences preferences;
@@ -83,7 +83,7 @@ public class AportesActivity extends AppCompatActivity {
         btn_aportar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AportesActivity.this, Aportar.class));
+                startActivity(new Intent(transaccionesActivity.this, Aportar.class));
                 //Toast.makeText(menu_inicio.this, "url", Toast.LENGTH_SHORT).show();
             }
         });
@@ -93,7 +93,7 @@ public class AportesActivity extends AppCompatActivity {
         btn_retiros.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AportesActivity.this, retiro.class));
+                startActivity(new Intent(transaccionesActivity.this, retiro.class));
                 //Toast.makeText(menu_inicio.this, "url", Toast.LENGTH_SHORT).show();
             }
         });
@@ -104,7 +104,7 @@ public class AportesActivity extends AppCompatActivity {
         btn_historial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AportesActivity.this, Activity_historial_transaccion.class));
+                startActivity(new Intent(transaccionesActivity.this, Activity_historial_transaccion.class));
                 //Toast.makeText(menu_inicio.this, "url", Toast.LENGTH_SHORT).show();
             }
         });
@@ -166,7 +166,7 @@ public class AportesActivity extends AppCompatActivity {
                 if (statusCode == 200) {
                     String respuesta = new String(responseBody);
                     if (respuesta.equalsIgnoreCase("null")) {
-                        Toast.makeText(AportesActivity.this, "Error ...!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(transaccionesActivity.this, "Error ...!!", Toast.LENGTH_SHORT).show();
                     } else {
                         try {
                             JSONObject jsonObj = new JSONObject(respuesta);
@@ -188,7 +188,7 @@ public class AportesActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(AportesActivity.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+                Toast.makeText(transaccionesActivity.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
 
 
             }});
@@ -213,7 +213,7 @@ public class AportesActivity extends AppCompatActivity {
                 if (statusCode == 200) {
                     String respuesta = new String(responseBody);
                     if (respuesta.equalsIgnoreCase("null")) {
-                        Toast.makeText(AportesActivity.this, "Error ...!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(transaccionesActivity.this, "Error ...!!", Toast.LENGTH_SHORT).show();
                     } else {
                         try {
 
@@ -240,7 +240,7 @@ public class AportesActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(AportesActivity.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+                Toast.makeText(transaccionesActivity.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
 
 
             }});
@@ -265,7 +265,7 @@ public class AportesActivity extends AppCompatActivity {
                 if (statusCode == 200) {
                     String respuesta = new String(responseBody);
                     if (respuesta.equalsIgnoreCase("null")) {
-                        Toast.makeText(AportesActivity.this, "Error ...!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(transaccionesActivity.this, "Error ...!!", Toast.LENGTH_SHORT).show();
                     } else {
                         try {
 
@@ -291,7 +291,7 @@ public class AportesActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(AportesActivity.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+                Toast.makeText(transaccionesActivity.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
 
 
             }});
@@ -315,7 +315,7 @@ public class AportesActivity extends AppCompatActivity {
                 if (statusCode == 200) {
                     String respuesta = new String(responseBody);
                     if (respuesta.equalsIgnoreCase("null")) {
-                        Toast.makeText(AportesActivity.this, "Error ...!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(transaccionesActivity.this, "Error ...!!", Toast.LENGTH_SHORT).show();
                     } else {
                         try {
 
@@ -340,7 +340,7 @@ public class AportesActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(AportesActivity.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+                Toast.makeText(transaccionesActivity.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
 
 
             }});
