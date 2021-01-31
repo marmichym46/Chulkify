@@ -162,6 +162,23 @@
     <string name="cancelar">Cancelar Solicitud</string>
     <string name="inf_solicitud_prestamo">Informacion de Solicitud Prestamo</string>
     <string name="bienvenida_prestamos">Estos son tus Prestamo:</string>
+    <string name="val_prestamo">Prestamo</string>
+    <string name="prestamo">Cargar datos de Prestamo</string>
+    <string name="conf_prestamo">Confirmar Prestamo:</string>
+    <string name="valor_prestar">Valor a Prestar:</string>
+    <string name="interes">Interes(5%):</string>
+    <string name="diferido">Diferido:</string>
+    <string name="valor_cuota">Valor de la cuota:</string>
+    <string name="total_prestamo">Total prestamo:</string>
+    <string name="fecha_limite"> Fecha Limite:</string>
+    <string name="soli_pretamo"> Solicitar Prestamo</string>
+    <string name="val_meses">Meses</string>
+
+
+    <string name="x_valor">xxxx.xx:</string>
+    <string name="x_fecha">dd/mm/aa:</string>
+
+
 
     <!-- Strings historial transacciones -->
 
