@@ -66,6 +66,7 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
     private int  dia, mes, anio, hora, minutos, segundos;
     private String  diaS, mesS, anioS,horaS, minutosS, segundosS, minutosa, usuario2;
     private int minutos_aux;
+    String n_comu;
 
 
 
@@ -84,6 +85,7 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
 
         preferences = getContext().getSharedPreferences("Preferences", MODE_PRIVATE);
         usuario = preferences.getString("cedula_usuario", null);
+        n_comu = preferences.getString("nombre_comu", null);
         request= Volley.newRequestQueue(getContext());
         buscar_usuario_bd =new AsyncHttpClient();
         cargarservice();
@@ -107,8 +109,11 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
 
         AsyncHttpClient cargar_soli  = new AsyncHttpClient();
         String cog_comu = usuario.replace(" ", "%20");
+        String nmb_comu = n_comu.replace(" ", "_");
+
+        
         String l_crg_soli =getString(R.string.link_captura_solicitud);
-        String url=l_crg_soli+"?ci_us="+cog_comu;
+        String url=l_crg_soli+"?ci_us="+cog_comu+"&n_comu="+nmb_comu;
         cargar_soli.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -219,9 +224,10 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
 
         AsyncHttpClient aceptar  = new AsyncHttpClient();
         final int ident=identificador;
+        String nmb_comu = n_comu.replace(" ", "_");
         String idt=String.valueOf(ident);
         String l_acep_soli=getString(R.string.link_aceptar_solicitudes);
-        String url = l_acep_soli+"?id="+ident+"&fe="+fechacrea;
+        String url = l_acep_soli+"?id="+ident+"&fe="+fechacrea+"&n_comu="+nmb_comu;
         aceptar.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

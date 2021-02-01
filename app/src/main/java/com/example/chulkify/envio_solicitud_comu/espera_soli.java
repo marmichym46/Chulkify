@@ -41,7 +41,7 @@ public class espera_soli extends AppCompatActivity {
     private String nombre_comu, aceptadas, espera, negadas, usuario, resp,res, comunidad;
     private int n_aceptadas, n_espera, n_negadas;
     private String version, url="null";
-
+    String n_comu;
 
 
     @Override
@@ -61,6 +61,7 @@ public class espera_soli extends AppCompatActivity {
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
         usuario = preferences.getString("cedula_usuario", null);
         comunidad = preferences.getString("nombre_comu", null);
+        n_comu=preferences.getString("nomb_comu_solicitud", null);
         version = preferences.getString("version", null);
         //Toast.makeText(espera_soli.this, usuario, Toast.LENGTH_SHORT).show();
 
@@ -84,7 +85,7 @@ public class espera_soli extends AppCompatActivity {
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               cancelar_soli(usuario);
+               cancelar_soli(usuario, n_comu);
             }
         });
 
@@ -93,8 +94,9 @@ public class espera_soli extends AppCompatActivity {
 
     private void cargar_datos(){
         String codigo_comunidad = usuario.replace(" ", "%20");
+        String n_comunidad = n_comu.replace(" ", "_");
         String link_consult=getString(R.string.link_consultar_estd_soli_union);
-        String url = link_consult+"?ci_us="+codigo_comunidad;
+        String url = link_consult+"?ci_us="+codigo_comunidad+"&n_comu="+n_comunidad;
         buscar_soli.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -114,11 +116,11 @@ public class espera_soli extends AppCompatActivity {
                                 n_espera=0;
                                 n_negadas=0;
                                 for (int i = 1; i < parts.length; i++) {
-                                    int aux =Integer.valueOf(parts[i]);
-                                    if (aux == 1){n_espera++;}
-                                    else if (aux== 2){n_negadas++;
+                                    String aux =parts[i];
+                                    if (aux.equals("ESPERA")){n_espera++;}
+                                    else if (aux.equals("NEGADA")){n_negadas++;
                                         tv_mensaje.setVisibility(View.VISIBLE);}
-                                    else if (aux ==3){n_aceptadas++;}
+                                    else if (aux.equals("ACEPTADA")){n_aceptadas++;}
                                 }
                             }
                             tv_nombre_comu.setText(comunidad);
@@ -145,6 +147,57 @@ public class espera_soli extends AppCompatActivity {
 
 
     }
+
+
+    private void cancelar_soli(String usu, String comu){
+        AsyncHttpClient rechazar  = new AsyncHttpClient();
+        String n_comunidad = comu.replace(" ", "_");
+        String link_cancelar=getString(R.string.link_btn_cancelar_soli);
+        String url = link_cancelar+"?id="+usu+"&n_comu="+n_comunidad;
+        //Toast.makeText(espera_soli.this, "Entro"+ n_comunidad, Toast.LENGTH_SHORT).show();
+        rechazar.post(url, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                if (statusCode == 200) {
+                    String respuesta = new String(responseBody);
+                    if (respuesta.equalsIgnoreCase("null")) {
+                        Toast.makeText(espera_soli.this, "Error...!!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        try {
+
+                            JSONObject jsonObj = new JSONObject(respuesta);
+                            String resp = jsonObj.getString("dato");
+
+                            if (resp.equals("cancelar")){
+                                Toast.makeText(espera_soli.this, "Has cancelado la colicitud de union a comunidad", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(espera_soli.this, inicio.class));
+                            } else {
+                                Toast.makeText(espera_soli.this, "Error...!", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(espera_soli.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+
+
+            }
+
+
+        });
+
+
+    }
+
+
+
     private void cargar_caducidad(){
 
         String codigo_comunidad = usuario.replace(" ", "%20");
@@ -204,55 +257,6 @@ public class espera_soli extends AppCompatActivity {
 
 
 
-
-
-    }
-
-
-
-
-    private void cancelar_soli(String usuario){
-        AsyncHttpClient rechazar  = new AsyncHttpClient();
-        String ident=usuario;
-
-        String url = "http://www.marlonmym.tk/chulki/consulta_solicitudes/cancelar.php?id="+ident;
-        rechazar.post(url, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                if (statusCode == 200) {
-                    String respuesta = new String(responseBody);
-                    if (respuesta.equalsIgnoreCase("null")) {
-                        Toast.makeText(espera_soli.this, "Error...!!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        try {
-
-                            JSONObject jsonObj = new JSONObject(respuesta);
-                            String resp = jsonObj.getString("dato");
-
-                            if (resp.equals("cancelar")){
-                                Toast.makeText(espera_soli.this, "Has cancelado la colicitud de union a comunidad", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(espera_soli.this, inicio.class));
-                            } else {
-                                Toast.makeText(espera_soli.this, "Error...!", Toast.LENGTH_SHORT).show();
-
-                            }
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(espera_soli.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
-
-
-            }
-
-
-        });
 
 
     }
@@ -371,7 +375,8 @@ if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.N){
 
 
         String ci_usuario = dato.replace(" ", "%20");
-        String url = "http://www.marlonmym.tk/chulki/links/version.php?url_ac="+ci_usuario;
+        String l_lvs= getString(R.string.link_actualizar);
+        String url = l_lvs+"?url_ac="+ci_usuario;
         //Toast.makeText(Login.this, url, Toast.LENGTH_SHORT).show();
 
         buscar_url.post(url, new AsyncHttpResponseHandler() {

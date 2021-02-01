@@ -11,6 +11,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chulkify.Manejo_fechas;
+import com.example.chulkify.menus_usuarios.menu_comunidad;
 import com.example.chulkify.transacciones_pg.reportes.Activity_historial_transaccion;
 import com.example.chulkify.transacciones_pg.aportes.Aportar;
 import com.example.chulkify.R;
@@ -31,7 +33,7 @@ public class transaccionesActivity extends AppCompatActivity {
     //Variables para capturar preferencias
     private String ci_us_1, gp_1, cg_gp_1, taza,hoy_tran, retiros_hoy, maximo,nombre_us_usu,fecha_hoy,fondos_us, linea_aportes;
     private TextView tv_comunidad, tv_fecha, tv_usuario_us, tv_fondos, tv_ap_hoy, tv_mensaje, tv_rt_hoy;
-    private String msj_prestamo;
+    private String msj_prestamo, fecha;
     private Button btn_actualizar;
 
     @Override
@@ -55,6 +57,9 @@ public class transaccionesActivity extends AppCompatActivity {
         fondos_us=preferences.getString("fondos_us", null);
         linea_aportes=preferences.getString("linea_ap", null);
 
+        Manejo_fechas n_p =new Manejo_fechas();
+        fecha = n_p.fecha_actual();
+
 
         String ln_ap=linea_aportes;
         String[] parts = ln_ap.split("/");
@@ -74,7 +79,7 @@ public class transaccionesActivity extends AppCompatActivity {
         tv_fondos=findViewById(R.id.tv_fondos);
         tv_ap_hoy=findViewById(R.id.tv_ap_hoy);
         tv_rt_hoy=findViewById(R.id.tv_rt_hoy);
-        tv_mensaje=findViewById(R.id.tv_mensaje);consultar_fondos();
+        tv_mensaje=findViewById(R.id.tv_mensaje);
 
 
 
@@ -121,13 +126,19 @@ public class transaccionesActivity extends AppCompatActivity {
             }
         });
 
-        cargar_datos();
+
         cargar_datos();
     }
 
     public  void cargar_datos(){
 
-        consultar_fondos();
+        consultar_datos();
+
+        preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+        hoy_tran=preferences.getString("aportes_hoy", null);
+        retiros_hoy=preferences.getString("retiro_hoy", null);
+        fondos_us=preferences.getString("fondos_us", null);
+        linea_aportes=preferences.getString("linea_ap", null);
 
         String ln_ap=linea_aportes;
         String[] parts = ln_ap.split("/");
@@ -151,61 +162,14 @@ public class transaccionesActivity extends AppCompatActivity {
     }
 
 
-    public void consultar_fondos(){
+    public void consultar_datos(){
         //String ap="null";
         aportar_conm = new AsyncHttpClient();
 
-
         String ci_us = ci_us_1.toString().replace(" ", "%20");
-
-        String url = "http://www.marlonmym.tk/chulki/aportar/consultar_fondos.php?ci_us="+ci_us;
-
-        aportar_conm.post(url, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                if (statusCode == 200) {
-                    String respuesta = new String(responseBody);
-                    if (respuesta.equalsIgnoreCase("null")) {
-                        Toast.makeText(transaccionesActivity.this, "Error ...!!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        try {
-                            JSONObject jsonObj = new JSONObject(respuesta);
-                            String ap = jsonObj.getString("dato");
-                            SharedPreferences.Editor editor=preferences.edit();
-                            editor.putString("fondos_us", ap);
-                            editor.apply();
-                            preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
-                            fondos_us=preferences.getString("fondos_us", null);
-                            consulta_hoy();
-
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(transaccionesActivity.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
-
-
-            }});
-
-        // preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
-        // hoy_tran=preferences.getString("aportes_hoy", null);
-        // Toast.makeText(Aportar.this, hoy_tran, Toast.LENGTH_SHORT).show();
-
-    }
-    public void consulta_hoy(){
-        //String ap="null";
-        aportar_conm = new AsyncHttpClient();
-
-
-        String ci_us = ci_us_1.toString().replace(" ", "%20");
-        String fecha22 = fecha_hoy.toString().replace(" ", "%20");
-        String url = "http://www.marlonmym.tk/chulki/aportar/aporte_hoy.php?ci_us="+ci_us+"&fecha="+fecha22;
+        String fecha22 = fecha.toString().replace(" ", "%20");
+        String l_consulta=getString(R.string.link_consulta_datos);
+        String url = l_consulta+"?ci_us="+ci_us+"&fecha="+fecha22;
 
         aportar_conm.post(url, new AsyncHttpResponseHandler() {
             @Override
@@ -220,64 +184,19 @@ public class transaccionesActivity extends AppCompatActivity {
 
                             JSONObject jsonObj = new JSONObject(respuesta);
                             String ap = jsonObj.getString("dato");
+                            String[] parts=ap.split("%%");
+
                             SharedPreferences.Editor editor=preferences.edit();
-                            editor.putString("aportes_hoy", ap);
+                            editor.putString("fondos_us", parts[0]);
+                            editor.putString("aportes_hoy", parts[1]);
+                            editor.putString("retiro_hoy", parts[2]);
+                            editor.putString("linea_ap", parts[3]);
                             editor.apply();
+
+
+
                             preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
                             hoy_tran=preferences.getString("aportes_hoy", null);
-                            T_retiros_hoy();
-
-
-
-
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(transaccionesActivity.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
-
-
-            }});
-
-        // preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
-        // hoy_tran=preferences.getString("aportes_hoy", null);
-        // Toast.makeText(Aportar.this, hoy_tran, Toast.LENGTH_SHORT).show();
-
-    }
-    public void T_retiros_hoy(){
-        //String ap="null";
-        aportar_conm = new AsyncHttpClient();
-
-
-        String ci_us = ci_us_1.toString().replace(" ", "%20");
-        String fecha22 = fecha_hoy.toString().replace(" ", "%20");
-        String url = "http://www.marlonmym.tk/chulki/retirar/retiro_hoy.php?ci_us="+ci_us+"&fecha="+fecha22;
-
-        aportar_conm.post(url, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                if (statusCode == 200) {
-                    String respuesta = new String(responseBody);
-                    if (respuesta.equalsIgnoreCase("null")) {
-                        Toast.makeText(transaccionesActivity.this, "Error ...!!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        try {
-
-
-                            JSONObject jsonObj = new JSONObject(respuesta);
-                            String ap = jsonObj.getString("dato");
-                            SharedPreferences.Editor editor=preferences.edit();
-                            editor.putString("retiro_hoy", ap);
-                            editor.apply();
-                            preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
-                            retiros_hoy=preferences.getString("retiro_hoy", null);
-                            verificar_pres_dispo();
 
 
 
@@ -288,67 +207,10 @@ public class transaccionesActivity extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Toast.makeText(transaccionesActivity.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
-
-
             }});
-
-        // preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
-        // hoy_tran=preferences.getString("aportes_hoy", null);
-        // Toast.makeText(Aportar.this, hoy_tran, Toast.LENGTH_SHORT).show();
-
-    }
-    public void verificar_pres_dispo(){
-        //String ap="null";
-        aportar_conm = new AsyncHttpClient();
-
-
-        String ci_us = ci_us_1.toString().replace(" ", "%20");
-        String url = "http://www.marlonmym.tk/chulki/prestamos/consulta_bandera_prestamo.php?ci_us="+ci_us;
-
-        aportar_conm.post(url, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                if (statusCode == 200) {
-                    String respuesta = new String(responseBody);
-                    if (respuesta.equalsIgnoreCase("null")) {
-                        Toast.makeText(transaccionesActivity.this, "Error ...!!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        try {
-
-
-                            JSONObject jsonObj = new JSONObject(respuesta);
-                            String ap = jsonObj.getString("dato");
-                            SharedPreferences.Editor editor=preferences.edit();
-                            editor.putString("linea_ap", ap);
-                            editor.apply();
-                            preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
-                            hoy_tran=preferences.getString("aportes_hoy", null);
-                            retiros_hoy=preferences.getString("retiro_hoy", null);
-                            fondos_us=preferences.getString("fondos_us", null);
-                            linea_aportes=preferences.getString("linea_ap", null);
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(transaccionesActivity.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
-
-
-            }});
-
-        // preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
-        // hoy_tran=preferences.getString("aportes_hoy", null);
-        // Toast.makeText(Aportar.this, hoy_tran, Toast.LENGTH_SHORT).show();
-
     }
 
 

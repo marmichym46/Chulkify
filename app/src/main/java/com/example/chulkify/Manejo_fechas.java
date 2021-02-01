@@ -77,6 +77,36 @@ public class Manejo_fechas {
         fecha = diaS+"/"+mesS+"/"+anioS+"/"+horaS+"/"+minutosS+"/"+segundosS;
         return fecha;
     }
+    public String hora_actual_formato(){
+        Calendar fecha_a = Calendar.getInstance();
+        Date date = new Date();
+
+        dia= fecha_a.get(Calendar.DAY_OF_MONTH);
+        mes= fecha_a.get(Calendar.MONTH)+1;
+        anio= fecha_a.get(Calendar.YEAR);
+
+        diaS= String.valueOf(dia);
+        mesS = String.valueOf(mes);
+        anioS = String.valueOf(anio);
+
+
+        SimpleDateFormat h= new SimpleDateFormat("kk");
+        horaS=h.format(date);
+        hora=Integer.valueOf(horaS);
+
+        SimpleDateFormat m= new SimpleDateFormat("mm");
+        minutosS=m.format(date);
+        SimpleDateFormat mm= new SimpleDateFormat("m");
+        minutos=Integer.parseInt(mm.format(date));
+        minutosa=String.valueOf(minutos);
+        SimpleDateFormat s= new SimpleDateFormat("ss");
+        segundosS=s.format(date);
+        segundos=Integer.valueOf(segundosS);
+
+
+        fecha = horaS+"/"+minutosS+"/"+segundosS;
+        return fecha;
+    }
     public String caducidad(){
         Calendar fecha_a = Calendar.getInstance();
         Date date = new Date();

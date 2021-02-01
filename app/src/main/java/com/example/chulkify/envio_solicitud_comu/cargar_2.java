@@ -78,21 +78,26 @@ public class cargar_2 extends AppCompatActivity {
 
 
     private void datos_us(){
-        String ccc= "%22"+usuario+"%22";
-        String cog_comu = ccc.replace(" ", "%20");
+
+
+        String cog_comu = usuario.replace(" ", "%20");
         String url_link = getString(R.string.link_buscar_usuarios);
         String url = url_link+"?codigo_comu="+cog_comu;
+        //Toast.makeText(cargar_2.this, url , Toast.LENGTH_SHORT).show();
         comu_clien.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
                 if (statusCode == 200) {
                     String respuesta = new String(responseBody);
                     if (respuesta.equalsIgnoreCase("null")) {
                         Toast.makeText(cargar_2.this, "Error al cargar datos", Toast.LENGTH_SHORT).show();
                     } else {
                         try {
+
                             JSONObject jsonObj = new JSONObject(respuesta);
                             res=jsonObj.getString("dato");
+                            //Toast.makeText(cargar_2.this, "entro:"+res , Toast.LENGTH_SHORT).show();
                             String[] parts = res.split("/");
                             if (parts[1] == "dato_null"){
                                 Toast.makeText(cargar_2.this, "Error al cargar datos", Toast.LENGTH_SHORT).show();
@@ -100,10 +105,10 @@ public class cargar_2 extends AppCompatActivity {
                                 for (int i = 1; i < parts.length; i++) {
                                     nnn = parts[i];
                                     String[] parts2 = nnn.split("%%");
-                                    String usuario_soli=parts[1];
-                                    String ci_soli=parts[0];
+                                    String usuario_soli=parts2[1];
+                                    String ci_soli=parts2[0];
                                     enviar_solicitudes(ci_soli);
-                                    Toast.makeText(cargar_2.this, "Solicitud enviada a:" + ci_soli, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(cargar_2.this, "Solicitud enviada a:" + usuario_soli, Toast.LENGTH_SHORT).show();
 
                                 }
                                 Toast.makeText(getApplicationContext(), "las solicitudes fueron enviadas con exito ...!!!", Toast.LENGTH_SHORT).show();

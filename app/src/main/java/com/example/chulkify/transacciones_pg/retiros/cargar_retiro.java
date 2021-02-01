@@ -17,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.chulkify.R;
+import com.example.chulkify.transacciones_pg.aportes.cargar_transacciones;
 import com.example.chulkify.transacciones_pg.transaccionesActivity;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -69,7 +70,7 @@ public class cargar_retiro extends AppCompatActivity {
 
     private void cargar_datos(){
 
-        consultar_datos();
+        consulta_datos();
 
         SharedPreferences.Editor editor=preferences.edit();
         editor.putString("val_aportar", "null");
@@ -79,69 +80,60 @@ public class cargar_retiro extends AppCompatActivity {
 
     }
 
-    public void aportar() {
+    public void aportar(){
+        //String ap="null";
         aportar_conm = new AsyncHttpClient();
+        String ci_us = ci_us_1.toString().replace(" ", "%20");
+        String fecha22 = fecha1.toString().replace(" ", "%20");
+        String ci_us2 = ci_us_1.trim();
+        String aporte2 = val_aportar.trim();
+        String fecha2 = fecha1.toString().trim();
+        String gp2 = gp_1.replace(" ", "%20").trim();
+        String cg_gp2 = cg_gp_1.trim();
+        String hora2 = hora1.toString().trim();
+        String l_ap=getString(R.string.link_retirar);
 
-        final String ci_us = ci_us_1.trim();
-        final String aporte = val_aportar.trim();
-        final String fecha = fecha1.toString().trim();
-        final String hora = hora1.toString().trim();
-        final String gp = gp_1.replace(" ", "%20").trim();
-        final String cg_gp = cg_gp_1.trim();
+        String url = l_ap+"?ci_us="+ci_us2+"&aporte="+aporte2+"&fecha="+fecha2+"&gp="+gp2+"&cg_gp="+cg_gp2+"&hora="+hora2;
 
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://www.marlonmym.tk/chulki/retirar/retirar_us.php", new Response.Listener<String>() {
+        aportar_conm.post(url, new AsyncHttpResponseHandler() {
             @Override
-            public void onResponse(String response) {
-                if (response.equalsIgnoreCase("transaccion_correcta")) {
-                    Toast.makeText(getApplicationContext(), "la transaccion se realizo con exito ...!!!", Toast.LENGTH_SHORT).show();
-                    cargar_datos();
-                    progressDialog.dismiss();
-                } else {
-                    Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                if (statusCode == 200) {
+                    String respuesta = new String(responseBody);
+                    if (respuesta.equalsIgnoreCase("null")) {
+                        Toast.makeText(cargar_retiro.this, "Error ...!!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        try {
+
+                            Toast.makeText(getApplicationContext(), "la transaccion se realizo con exito ...!!!", Toast.LENGTH_SHORT).show();
+                            cargar_datos();
+
+                            //Toast.makeText(getApplicationContext(), "datos cargados...!!!"+parts[0]+" - "+parts[1]+" - "+parts[2]+" - "+parts[3]+" - ", Toast.LENGTH_SHORT).show();
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
-
-
             }
-        }, new Response.ErrorListener() {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(cargar_retiro.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
 
 
-                Map<String, String> parametros = new HashMap<String, String>();
-
-
-                parametros.put("ci_us", ci_us);
-                parametros.put("aporte", aporte);
-                parametros.put("fecha", fecha);
-                parametros.put("hora", hora);
-                parametros.put("gp", gp);
-                parametros.put("cg_gp", cg_gp);
-                return parametros;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(cargar_retiro.this);
-        requestQueue.add(stringRequest);
-
-
+            }});
 
     }
 
-    public void consultar_datos(){
+    public void consulta_datos(){
         //String ap="null";
         aportar_conm = new AsyncHttpClient();
 
-
         String ci_us = ci_us_1.toString().replace(" ", "%20");
         String fecha22 = fecha1.toString().replace(" ", "%20");
-        String url = "http://www.marlonmym.tk/chulki/consultas/consultas_ap_rt_fd_lap.php?ci_us="+ci_us+"&fecha="+fecha22;
+        String l_consulta=getString(R.string.link_consulta_datos);
+        String url = l_consulta+"?ci_us="+ci_us+"&fecha="+fecha22;
 
         aportar_conm.post(url, new AsyncHttpResponseHandler() {
             @Override
@@ -164,23 +156,16 @@ public class cargar_retiro extends AppCompatActivity {
                             editor.putString("retiro_hoy", parts[2]);
                             editor.putString("linea_ap", parts[3]);
                             editor.apply();
-
-
-
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
                 }
             }
-
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Toast.makeText(cargar_retiro.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
-
-
             }});
-
     }
 
 

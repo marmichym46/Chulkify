@@ -22,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chulkify.prestamos.cargahistorial;
 import com.example.chulkify.transacciones_pg.transaccionesActivity;
 import com.example.chulkify.Manejo_fechas;
 import com.example.chulkify.R;
@@ -51,8 +52,10 @@ public class menu_comunidad extends AppCompatActivity {
     private  int id_comu;
     private String nomb,most_fecha, n_comu, m_usuario, conv_total_us,total_us_comu, cog_cm;
     private Button btn_actualizar;
+    ImageButton btn_prestamos;
     private EditText codigo_cop;
     private String ci_us_1,fecha1,hoy_tran;
+    String aux;
 
     private String fecha;
     private int  dia, mes, anio;
@@ -73,7 +76,7 @@ public class menu_comunidad extends AppCompatActivity {
         codg_comu = preferences.getString("codigo_comu",null);
         fecha_at = preferences.getString("fecha_actual",null);
         total_us_comu= String.valueOf(preferences.getInt("total_usuario_comu",0));
-
+        btn_prestamos = (ImageButton) findViewById(R.id.btn_prestamos);
         ci_us_1=usuario;
 
 
@@ -96,6 +99,20 @@ public class menu_comunidad extends AppCompatActivity {
         editor.putString("fecha_actual", fecha);
         editor.apply();
         mostrar_datos();
+
+        preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+        String linea_aportes=preferences.getString("linea_ap", null);
+
+        String ln_ap=linea_aportes;
+        String[] parts = ln_ap.split("/");
+        if (parts[0].equals("0")||parts[0].equals("2")||parts[0].equals("3")||parts[0].equals("1")||parts[0].equals("4")||parts[0].equals("5")){
+            aux="no_prestamos";
+        }else {
+            btn_prestamos.setVisibility(View.VISIBLE);
+        }
+
+
+
         btn_actualizar = (Button) findViewById(R.id.btn_refres);
         btn_actualizar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,6 +120,7 @@ public class menu_comunidad extends AppCompatActivity {
                 mostrar_datos();
             }
         });
+
 
 
         //Boton notificaciones
@@ -122,6 +140,17 @@ public class menu_comunidad extends AppCompatActivity {
             public void onClick(View view) {
                 consulta_datos();
                 startActivity(new Intent(menu_comunidad.this, transaccionesActivity.class));
+                //Toast.makeText(menu_inicio.this, "url", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        //Boton prestamos
+
+        btn_prestamos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(menu_comunidad.this, cargahistorial.class));
                 //Toast.makeText(menu_inicio.this, "url", Toast.LENGTH_SHORT).show();
             }
         });
@@ -225,6 +254,9 @@ public class menu_comunidad extends AppCompatActivity {
         n_comu = preferences.getString("nombre_comu", null);
         codg_comu = preferences.getString("codigo_comu",null);
         total_us_comu= String.valueOf(preferences.getInt("total_usuario_comu",0));
+
+
+
 
 
         most_fecha= fecha;

@@ -12,7 +12,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chulkify.Manejo_fechas;
 import com.example.chulkify.R;
+import com.example.chulkify.menus_usuarios.menu_comunidad;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -61,12 +63,11 @@ public class Aportar extends AppCompatActivity {
         maximo=preferences.getString("maximo", null);
 
         //captura la fecha
-        fecha1=devolver_fecha();
-        fecha2=devolver_fecha_formato();
-        hora1=devolver_hora();
+        Manejo_fechas mf=new Manejo_fechas();
+        fecha1=mf.fecha_actual();
+        hora1=mf.hora_actual_formato();
 
-        calcular_ap();
-        calcular_ap();
+        consulta_datos();
 
 
         //istanciar controles del xml de la actividad
@@ -85,31 +86,31 @@ public class Aportar extends AppCompatActivity {
         //LinearLayoutManager lm = new LinearLayoutManager(tarjeta1);
 
         cargar_datos();
-        cargar_datos();
 //Boton realizar aporte
         btn_realizar_aporte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+                hoy_tran=preferences.getString("aportes_hoy", null);
 
                 Double val11 =Double.parseDouble(hoy_tran);
                 Double val21 =Double.parseDouble(maximo);
                 Double val31 = val21-val11;
 
 
-               if(val31<(Double.parseDouble(val_aportar.getText().toString()))){
-                   Toast.makeText(Aportar.this, "excedio el maximo de aporte en el dia ", Toast.LENGTH_SHORT).show();
-               }else {
-
 
                 if (val_aportar.getText().toString().isEmpty()) {
                     Toast.makeText(Aportar.this, "Hay campos en blanco ", Toast.LENGTH_SHORT).show();
                 } else {
+                    if(val31<(Double.parseDouble(val_aportar.getText().toString()))){
+                        Toast.makeText(Aportar.this, "excedio el maximo de aporte en el dia ", Toast.LENGTH_SHORT).show();
+                    }else {
+                            cargar_transaccion();
+                    }
 
-
-
-                    cargar_transaccion();}
+                }
             }
-            }
+
 
         });
 
@@ -134,101 +135,17 @@ public class Aportar extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ocultar_tarjeta();
-                calcular_ap();
+                consulta_datos();
                 cargar_datos();
             }
         });
 
     }
 
-    public  String devolver_fecha(){
-        String f="0";
-        Calendar fecha_a = Calendar.getInstance();
-        Date date = new Date();
-        dia= fecha_a.get(Calendar.DAY_OF_MONTH);
-        mes= fecha_a.get(Calendar.MONTH)+1;
-        anio= fecha_a.get(Calendar.YEAR);
-
-        diaS= String.valueOf(dia);
-        mesS = String.valueOf(mes);
-        anioS = String.valueOf(anio);
-
-        SimpleDateFormat h= new SimpleDateFormat("kk");
-        horaS=h.format(date);
-        hora=Integer.valueOf(horaS);
-        SimpleDateFormat m= new SimpleDateFormat("mm");
-        minutosS=m.format(date);
-        SimpleDateFormat mm= new SimpleDateFormat("m");
-        minutos=Integer.parseInt(mm.format(date));
-        minutosa=String.valueOf(minutos);
-        SimpleDateFormat s= new SimpleDateFormat("ss");
-        segundosS=s.format(date);
-        segundos=Integer.valueOf(segundosS);
-
-        f = diaS+"/"+mesS+"/"+anioS;
-
-        return f;
-    }
-
-    public  String devolver_hora(){
-        String f="0";
-        Calendar fecha_a = Calendar.getInstance();
-        Date date = new Date();
-        dia= fecha_a.get(Calendar.DAY_OF_MONTH);
-        mes= fecha_a.get(Calendar.MONTH)+1;
-        anio= fecha_a.get(Calendar.YEAR);
-
-        diaS= String.valueOf(dia);
-        mesS = String.valueOf(mes);
-        anioS = String.valueOf(anio);
-
-        SimpleDateFormat h= new SimpleDateFormat("kk");
-        horaS=h.format(date);
-        hora=Integer.valueOf(horaS);
-        SimpleDateFormat m= new SimpleDateFormat("mm");
-        minutosS=m.format(date);
-        SimpleDateFormat mm= new SimpleDateFormat("m");
-        minutos=Integer.parseInt(mm.format(date));
-        minutosa=String.valueOf(minutos);
-        SimpleDateFormat s= new SimpleDateFormat("ss");
-        segundosS=s.format(date);
-        segundos=Integer.valueOf(segundosS);
-
-        f = horaS+":"+minutosS+":"+segundosS;
-
-        return f;
-    }
-
-    public  String devolver_fecha_formato(){
-        String f="0";
-        Calendar fecha_a = Calendar.getInstance();
-        Date date = new Date();
-        dia= fecha_a.get(Calendar.DAY_OF_MONTH);
-        mes= fecha_a.get(Calendar.MONTH)+1;
-        anio= fecha_a.get(Calendar.YEAR);
-
-        diaS= String.valueOf(dia);
-        mesS = String.valueOf(mes);
-        anioS = String.valueOf(anio);
-
-        SimpleDateFormat h= new SimpleDateFormat("kk");
-        horaS=h.format(date);
-        hora=Integer.valueOf(horaS);
-        SimpleDateFormat m= new SimpleDateFormat("mm");
-        minutosS=m.format(date);
-        SimpleDateFormat mm= new SimpleDateFormat("m");
-        minutos=Integer.parseInt(mm.format(date));
-        minutosa=String.valueOf(minutos);
-        SimpleDateFormat s= new SimpleDateFormat("ss");
-        segundosS=s.format(date);
-        segundos=Integer.valueOf(segundosS);
-
-        f = diaS+"/"+mesS+"/"+anioS+"  -  "+horaS+":"+minutosS+":"+segundosS;
-
-        return f;
-    }
-
     public void cargar_datos(){
+
+        preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+        hoy_tran=preferences.getString("aportes_hoy", null);
 
         String val_fecha="hoy: "+fecha1+"    Aportes de hoy: $"+hoy_tran;
 
@@ -262,6 +179,54 @@ public class Aportar extends AppCompatActivity {
     public void ocultar_tarjeta(){
         tarjeta1.setVisibility(View.GONE);
     }
+
+
+    public void consulta_datos(){
+        //String ap="null";
+        aportar_conm = new AsyncHttpClient();
+        Manejo_fechas n_p =new Manejo_fechas();
+        String fecha = n_p.fecha_actual();
+
+        String ci_us = ci_us_1.toString().replace(" ", "%20");
+        String fecha22 = fecha.toString().replace(" ", "%20");
+        String l_consulta=getString(R.string.link_consulta_datos);
+        String url = l_consulta+"?ci_us="+ci_us+"&fecha="+fecha22;
+
+        aportar_conm.post(url, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                if (statusCode == 200) {
+                    String respuesta = new String(responseBody);
+                    if (respuesta.equalsIgnoreCase("null")) {
+                        Toast.makeText(Aportar.this, "Error ...!!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        try {
+
+
+                            JSONObject jsonObj = new JSONObject(respuesta);
+                            String ap = jsonObj.getString("dato");
+                            String[] parts=ap.split("%%");
+
+                            SharedPreferences.Editor editor=preferences.edit();
+                            editor.putString("fondos_us", parts[0]);
+                            editor.putString("aportes_hoy", parts[1]);
+                            editor.putString("retiro_hoy", parts[2]);
+                            editor.putString("linea_ap", parts[3]);
+                            editor.apply();
+
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(Aportar.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+            }});
+    }
+
 
     /*public void aportar() {
         aportar_conm = new AsyncHttpClient();
@@ -319,56 +284,7 @@ public class Aportar extends AppCompatActivity {
 
     }*/
 
-    public void calcular_ap(){
-        //String ap="null";
-        aportar_conm = new AsyncHttpClient();
 
-
-        String ci_us = ci_us_1.toString().replace(" ", "%20");
-        String fecha = fecha1.toString().replace(" ", "%20");
-        String url = "http://www.marlonmym.tk/chulki/aportar/aporte_hoy.php?ci_us="+ci_us+"&fecha="+fecha;
-
-        aportar_conm.post(url, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                if (statusCode == 200) {
-                    String respuesta = new String(responseBody);
-                    if (respuesta.equalsIgnoreCase("null")) {
-                        Toast.makeText(Aportar.this, "Error ...!!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        try {
-
-
-                            JSONObject jsonObj = new JSONObject(respuesta);
-                            String ap = jsonObj.getString("dato");
-                            SharedPreferences.Editor editor=preferences.edit();
-                            editor.putString("aportes_hoy", ap);
-                            editor.apply();
-                            preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
-                            hoy_tran=preferences.getString("aportes_hoy", null);
-
-
-
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(Aportar.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
-
-
-            }});
-
-       // preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
-       // hoy_tran=preferences.getString("aportes_hoy", null);
-       // Toast.makeText(Aportar.this, hoy_tran, Toast.LENGTH_SHORT).show();
-
-    }
 
 
 }

@@ -47,6 +47,7 @@ public class unir_comunidad extends AppCompatActivity {
             public void onClick(View view) {
                 SharedPreferences.Editor editor=preferences.edit();
                 editor.putString("codigo_comu_solicitud",  (codg_buscar.getText().toString()));
+                //editor.putString("nomb_comu_solicitud",  (codg_buscar.getText().toString()));
                 editor.apply();
                 tv_nombre_comu.setText("-");
                 tv_n_integrantes_comu.setText("-");
@@ -83,6 +84,12 @@ public class unir_comunidad extends AppCompatActivity {
                                 String  dt = jsonObj.getString("dato");
                                 String[] parts=dt.split("%%");
 
+                                /*
+                                SharedPreferences.Editor editor=preferences.edit();
+                                editor.putString("fecha_actual",cd.fecha_actual() );
+                                editor.apply();
+                                 */
+
                                 nombre_comu =parts[0];
                                 n_integrantes_comu =  parts[1];
                                 ubi_comu = parts[2];
@@ -92,6 +99,9 @@ public class unir_comunidad extends AppCompatActivity {
                                 tv_n_integrantes_comu.setText(n_integrantes_comu);
                                 tv_ubi_comu.setText(ubi_comu);
                                 tv_admin_comu.setText(admin_comu);
+                                SharedPreferences.Editor editor=preferences.edit();
+                                editor.putString("nomb_comu_solicitud",  nombre_comu);
+                                editor.apply();
                                 btn_enviar_soli_comu.setEnabled(true);
                             } catch (Exception e) {
                                 e.printStackTrace();

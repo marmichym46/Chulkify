@@ -26,6 +26,8 @@ public class cargahistorial extends AppCompatActivity {
     private AsyncHttpClient comu_clien;
     private String usuario;
     private String res, nnn;
+    private
+    String cedula_us, nomb_comu;
 
     private String fechacrea, fechacadu;
     private int  dia, mes, anio, hora, minutos, segundos;
@@ -40,8 +42,8 @@ public class cargahistorial extends AppCompatActivity {
         setContentView(R.layout.activity_cargahistorial);
 
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
-        usuario = preferences.getString("nombre_comu", null);
-        usuario2 =preferences.getString("cedula_usuario", null);
+        nomb_comu = preferences.getString("nombre_comu", null);
+        cedula_us =preferences.getString("cedula_usuario", null);
         Manejo_fechas fc = new Manejo_fechas();
         fechacrea=fc.fechaYhora_actual();
         fechacadu=fc.caducidad();
@@ -58,10 +60,10 @@ public class cargahistorial extends AppCompatActivity {
 
     }
     private void datos_us(){
-        String cedula = usuario2.replace(" ", "%20");
-        String cog_comu = usuario.replace(" ", "%20");
+        String cedula = cedula_us.replace(" ", "%20");
+        String cog_comu = nomb_comu.replace(" ", "_");
         String url_link = getString(R.string.link_consultar_prestamos);
-        String url = url_link+"?ci="+cog_comu+"&ci_us"+cedula;
+        String url = url_link+"?n_comu="+cog_comu+"&ci_us"+cedula;
         comu_clien.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -73,21 +75,16 @@ public class cargahistorial extends AppCompatActivity {
                         try {
                             JSONObject jsonObj = new JSONObject(respuesta);
                             res=jsonObj.getString("dato");
-                            if(res.equals("NO_HAY")){
+                            if(res.equals("NO_PRESTAMO") || res.equals("PAGADO") || res.equals("PAGADO_R")){
+                                cconsulta_sol_pres();
+
                                 SharedPreferences.Editor editor= preferences.edit();
-                                editor.putString("estado_prestamos","No_prestamos");
+                                editor.putString("estado_prestamos",res);
                                 editor.apply();
                                 startActivity(new Intent(cargahistorial.this, Activity_menu_prestamos.class));
-                            }
-                            else if((res.equals("PAGADO"))||(res.equals("LIQUIDADO"))||(res.equals("PAGADO_R"))) {
-
-                                enviar_solicitudes();
-
-
-                            }
-                            else if((res.equals("PAGANDO"))||(res.equals("MORA"))||(res.equals("REFINANCIADO"))){
+                            } else if((res.equals("PAGANDO"))||(res.equals("MORA"))||(res.equals("REFINANCIADO"))){
                                 SharedPreferences.Editor editor= preferences.edit();
-                                editor.putString("estado_prestamos","si_prestamos_pagando");
+                                editor.putString("estado_prestamos",res);
                                 editor.apply();
                                 startActivity(new Intent(cargahistorial.this, Activity_menu_prestamos.class));
                             }
@@ -108,33 +105,26 @@ public class cargahistorial extends AppCompatActivity {
         });
     }
 
-    private void enviar_solicitudes(){
-
-        String ci_emisor = usuario2.replace(" ", "%20");
-
-
-        String url_link2 = getString(R.string.link_estado_solicitud_prestamos);
-        String url = url_link2+"?ci_us="+ci_emisor;
-
+    private void cconsulta_sol_pres(){
+        String cedula = cedula_us.replace(" ", "%20");
+        String url_link = getString(R.string.link_estado_solicitud_prestamos);
+        String url = url_link+"?ci_us"+cedula;
         comu_clien.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
                 if (statusCode == 200) {
-
                     String respuesta = new String(responseBody);
                     if (respuesta.equalsIgnoreCase("null")) {
                         Toast.makeText(cargahistorial.this, "Error al cargar datos", Toast.LENGTH_SHORT).show();
                     } else {
                         try {
                             JSONObject jsonObj = new JSONObject(respuesta);
-                            String respt=jsonObj.getString("dato");
+                            String res2=jsonObj.getString("dato");
 
-                            SharedPreferences.Editor editor= preferences.edit();
-                            editor.putString("estado_prestamos","si_prestamos_pagados");
-                            editor.putString("estado_solicitud_prestamos", respt);
-                            editor.apply();
-                            startActivity(new Intent(cargahistorial.this, Activity_menu_prestamos.class));
+
+                                SharedPreferences.Editor editor= preferences.edit();
+                                editor.putString("estado_soli_pres",res2);
+                                editor.apply();
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -142,11 +132,13 @@ public class cargahistorial extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Toast.makeText(cargahistorial.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+
+
 }
