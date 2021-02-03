@@ -67,6 +67,7 @@ public class menu_comunidad extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_comunidad);
+
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
         version = preferences.getString("version", null);
         usuario = preferences.getString("cedula_usuario", null);

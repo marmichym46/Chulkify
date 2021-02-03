@@ -17,14 +17,8 @@
     <string name="link_rechazar_solicitud">http://www.marlonmym.tk/chulkify/soli_comunidad/rechazar.php</string>
     <string name="link_aportar">http://www.marlonmym.tk/chulkify/aportar/aportar_us.php</string>
     <string name="link_retirar">http://www.marlonmym.tk/chulkify/retirar/retirar_us.php</string>
-
-    <!--falta crear-->
-    <string name="link_consultar_prestamos">http://www.marlonmym.tk/chulki/prestamos/consulta_prestamos.php</string>
-    <string name="link_estado_solicitud_prestamos">http://www.marlonmym.tk/chulki/prestamos/estado_soli_prestamo.php</string>
-    <!--falta crear-->
-
-
-
+    <string name="link_consultar_prestamos">http://www.marlonmym.tk/chulkify/prestamos/preparar_soli_pres.php</string>
+    <string name="link_estado_solicitud_prestamos">http://www.marlonmym.tk/chulkify/prestamos/estado_soli_prestamo.php</string>
     <!--links -->
 
 
@@ -42,6 +36,16 @@
     <string name="soli_espera_o_negada">mensaje solicitud en espera o negada</string>
     <string name="soli_aceptada">Tiene una solicitud  de prestamos aceptadas, el monto a prestar es de:</string>
     <string name="msj_monto_a_prestar">El monto a prestar es:</string>
+    <string name="prestamo_liquidado_msj">Su ultimo prestamo fue liquidado por acumulacion de cuotas en MORA</string>
+    
+    <string name="msj_prestamo_pagando">    Usted esta pagando un prestamo</string>
+    <string name="msj_prestamo_refinanciado">  El prestamo que esta pagando esta refinanciado</string>
+    <string name="msj_prestamo_mora">  El prestamo actual tiene un saldo por pagar de la cuota anterior, PONGASE AL DIA CON SUS PAGOS PARA EVITAR DEBITOS EN SU CUENTA Y EN LA DE LOS MIEMBROS DEL GRUPO </string>
+    <string name="msj_prestamo_refi_mora">  Su prestamo actual esta refinanciado y tiene una cuota atrazada, PORFAVOR PONERCE AL DIA PARA EVITAR PERJUICIOS EN LA COMUNIDAD</string>
+    <string name="cuota_actual">La cuota actual es:</string>
+    <string name="valor_pago_cuota">El valor de la cuota es:</string>
+    <string name="saldo_cuota">el saldo a pagar es:</string>
+    <string name="saldo_mora">el saldo de la cuota atrazada es:</string>
 
     <string name="msj_soli_prestamo_espera">TIENE UNA SOLICITUD DE PRESTAMO EN ESPERA</string>
     <string name="msj_soli_prestamo_negada">SU SOLICITUD DE PRESTAMO FUE NEGADA, CANCELE LA SOLICITUD Y PONGASE EN CONTACTO CON LOS INTEGRANTES DE SU GRUPO PARA GENERAR UNA NUEVA SOLICITUD</string>
