@@ -61,12 +61,8 @@ public class cargahistorial extends AppCompatActivity {
     private void datos_us(){
         String cedula = cedula_us.replace(" ", "%20");
         String n_comu = nomb_comu.replace(" ", "_");
-
         String url_link = getString(R.string.link_consultar_prestamos);
         String url = url_link+"?n_comu="+n_comu+"&ci_us="+cedula;
-        //Toast.makeText(cargahistorial.this, url, Toast.LENGTH_SHORT).show();
-
-
         comu_clien.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -78,18 +74,14 @@ public class cargahistorial extends AppCompatActivity {
                         try {
                             JSONObject jsonObj = new JSONObject(respuesta);
                             String res_unido=jsonObj.getString("dato");
-
                             String [] res_sp = res_unido.split("/");
                             String res=res_sp[1];
                             Toast.makeText(cargahistorial.this, res, Toast.LENGTH_SHORT).show();
-
                             if(res.equals("NO_HAY") || res.equals("PAGADO") || res.equals("PAGADO_R")|| res.equals("LIQUIDADO")){
                                 cconsulta_sol_pres();
-
                                 SharedPreferences.Editor editor= preferences.edit();
                                 editor.putString("estado_prestamos",res);
                                 editor.apply();
-
                             } else {
                                 SharedPreferences.Editor editor= preferences.edit();
                                 editor.putString("estado_prestamos",res);
@@ -127,8 +119,6 @@ public class cargahistorial extends AppCompatActivity {
                             String [] res_sp2 = res_unido2.split("/");
                             String res2=res_sp2[1];
                             Toast.makeText(cargahistorial.this, res2, Toast.LENGTH_SHORT).show();
-
-
                                 SharedPreferences.Editor editor= preferences.edit();
                                 editor.putString("estado_soli_pres",res2);
                                 editor.apply();

@@ -25,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chulkify.menus_usuarios.menu_comunidad;
 import com.example.chulkify.prestamos.cargahistorial;
 import com.example.chulkify.transacciones_pg.transaccionesActivity;
 import com.example.chulkify.Manejo_fechas;
@@ -183,22 +184,46 @@ public class Activity_menu_prestamos extends AppCompatActivity {
             }
 
         }
-        else if (estado_prestamo.equals("REFINANCIADO") ){
-
+        else if (estado_prestamo.equals("PAGANDO") ){
+            OPIV.setVisibility(View.VISIBLE);
+            AA1.setVisibility(View.VISIBLE);
+            B2.setVisibility(View.VISIBLE);
+            B4.setVisibility(View.VISIBLE);
         }
         else if (estado_prestamo.equals("REFINANCIADO") ){
-
+            OPIV.setVisibility(View.VISIBLE);
+            AA2.setVisibility(View.VISIBLE);
+            B2.setVisibility(View.VISIBLE);
+            B4.setVisibility(View.VISIBLE);
         }
-
-
-
+        else if (estado_prestamo.equals("MORA") ){
+            OPIV.setVisibility(View.VISIBLE);
+            AA3.setVisibility(View.VISIBLE);
+            AA4.setVisibility(View.VISIBLE);
+            B2.setVisibility(View.VISIBLE);
+            B4.setVisibility(View.VISIBLE);
+        }else if (estado_prestamo.equals("REFINANCIADO_MORA") ){
+            OPIV.setVisibility(View.VISIBLE);
+            AA5.setVisibility(View.VISIBLE);
+            AA4.setVisibility(View.VISIBLE);
+            B2.setVisibility(View.VISIBLE);
+            B4.setVisibility(View.VISIBLE);
+        }
 
         else{
             Toast.makeText(Activity_menu_prestamos.this, "error", Toast.LENGTH_SHORT).show();
 
         }
 
+//Boton SOLICITUD
 
+        B1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Activity_menu_prestamos.this, activity_solicitar_prestamo.class));
+                //Toast.makeText(menu_inicio.this, "url", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
 

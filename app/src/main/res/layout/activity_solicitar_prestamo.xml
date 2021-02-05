@@ -89,13 +89,13 @@
 
 
                     <EditText
-                        android:id="@+id/edt_valor_aportar"
+                        android:id="@+id/edt_valor_prestamo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="70"
                         android:ems="5"
                         android:background="@drawable/caja_stilo_valores"
-                        android:textSize="30dp"
+                        android:textSize="23dp"
                         android:textColor="@color/blanco"
                         android:fontFamily="sans-serif-black"
                         android:inputType="number"
@@ -121,7 +121,7 @@
                         android:paddingLeft="2dp"
                         android:text="@string/val_prestamo"
                         android:textColor="@color/negro"
-                        android:textSize="25dp" />
+                        android:textSize="19dp" />
 
                 </LinearLayout>
                 <LinearLayout
@@ -160,7 +160,7 @@
                         android:layout_height="wrap_content"
                         android:ems="5"
                         android:background="@drawable/tema_blanco_trans"
-                        android:textSize="30dp"
+                        android:textSize="22dp"
                         android:textColor="@color/blanco"
                         android:fontFamily="sans-serif-black"
                         android:layout_weight="70"
@@ -183,13 +183,13 @@
 
                     <TextView
                         android:id="@+id/textView9l02"
-                        android:layout_width="151dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-black"
                         android:paddingLeft="2dp"
                         android:text="@string/val_meses"
                         android:textColor="@color/negro"
-                        android:textSize="25dp" />
+                        android:textSize="18dp" />
 
                 </LinearLayout>
                 <LinearLayout
@@ -236,6 +236,7 @@
 
 
             <LinearLayout
+                android:id="@+id/ll_datos_prestamo"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="60"
@@ -329,7 +330,7 @@
                                         android:text="-" />
 
                                     <TextView
-                                        android:id="@+id/txt_usuario_tran"
+                                        android:id="@+id/txt_usuario"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:textColor="@color/colorPrimary"
@@ -458,7 +459,7 @@
                                         android:textColor="@color/colorPrimary"
                                         android:text="0" />
                                     <TextView
-                                        android:id="@+id/txt_f_limite"
+                                        android:id="@+id/txt_fecha_limite"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:textColor="@color/colorPrimary"
@@ -516,14 +517,14 @@
                     android:id="@+id/btn_soli_prestamo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/blanco"
-                    android:drawableLeft="@drawable/correcto"
-                    android:drawableTint="@color/verde"
-                    android:drawablePadding="12dp"
-                    android:paddingRight="20dp"
-                    android:paddingLeft="20dp"
                     android:background="@drawable/tema_boton"
-                    android:text="@string/soli_pretamo" />
+                    android:drawableLeft="@drawable/correcto"
+                    android:drawablePadding="12dp"
+                    android:drawableTint="@color/verde"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="@string/soli_pretamo"
+                    android:textColor="@color/blanco" />
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
