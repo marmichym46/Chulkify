@@ -112,8 +112,10 @@ public class activity_solicitar_prestamo extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Double valprestar =Double.parseDouble(val_prestamo.toString());
+                Double valprestar =Double.parseDouble(val_prestamo.getText().toString());
                 Double valmaximo_p =Double.parseDouble(valor_max);
+                String plazo=meses.getSelectedItem().toString();
+
 
                 /*
                 Double val31 = 0.05;
@@ -130,7 +132,14 @@ public class activity_solicitar_prestamo extends AppCompatActivity {
                 if (val_prestamo.getText().toString().isEmpty()) {
                     Toast.makeText(activity_solicitar_prestamo.this, "Hay campos en blanco ", Toast.LENGTH_SHORT).show();
                 } else {
-                    //if (valprestar > valmaximo_p)
+                    if (valprestar > valmaximo_p){
+                       Toast.makeText(activity_solicitar_prestamo.this, "Ha sobrepasado el limite de prerstamo, su valor maximo para prestar es de:   $"+valor_max, Toast.LENGTH_SHORT).show();
+                    }else{
+                        cargar_datos(valprestar, plazo);
+
+                    }
+
+
 
                 }
 
@@ -143,10 +152,33 @@ public class activity_solicitar_prestamo extends AppCompatActivity {
 
     }
 
-    public static int convertir_dooble(double num){
-        String strNum=num+"";
-        int indice=strNum.indexOf(".");
-        return Integer.parseInt(strNum.substring(0,  indice));
+    public void cargar_datos(double num, String plazo1){
+
+        String val1=String.valueOf(num);
+        double val3 =num * 0.05;
+        double subtotal=num + val3;
+        double pz=Double.parseDouble(plazo1);
+        double cuota= subtotal/pz;
+        double total = cuota * pz;
+        String fecha_pz= "0";
+        Manejo_fechas mf = new Manejo_fechas();
+        if(plazo1.equals("3")){fecha_pz=mf.mes3_fin();}
+        else if(plazo1.equals("6")){fecha_pz=mf.mes6_fin();}
+        else if(plazo1.equals("9")){fecha_pz=mf.mes9_fin();}
+        else if(plazo1.equals("12")){fecha_pz=mf.mes12_fin();}
+
+
+        String [] fh1=fecha_pz.split("/");
+        String fh2=fh1[0]+"/"+fh1[1]+"/"+fh1[2]+"  -  "+fh1[3]+":"+fh1[4]+":"+fh1[5];
+
+
+        valor_prestar.setText(val1);
+        interes.setText(String.valueOf(val3));
+        diferido.setText(plazo1);
+        valor_cuota.setText(String.valueOf(cuota));
+        total_prestamo.setText(String.valueOf(total));
+        fecha_limite.setText(fh2);
+
     }
 
 
