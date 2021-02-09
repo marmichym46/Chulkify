@@ -99,18 +99,26 @@ public class menu_comunidad extends AppCompatActivity {
         SharedPreferences.Editor editor=preferences.edit();
         editor.putString("fecha_actual", fecha);
         editor.apply();
-        mostrar_datos();
+       mostrar_datos();
 
-        preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
         String linea_aportes=preferences.getString("linea_ap", null);
+
+
 
         String ln_ap=linea_aportes;
         String[] parts = ln_ap.split("/");
+
+       // Toast.makeText(menu_comunidad.this, "Error ...!!"+ linea_aportes, Toast.LENGTH_SHORT).show();
+
         if (parts[0].equals("0")||parts[0].equals("2")||parts[0].equals("3")||parts[0].equals("1")||parts[0].equals("4")||parts[0].equals("5")){
             aux="no_prestamos";
         }else {
+           // Toast.makeText(menu_comunidad.this, "entro...!!!", Toast.LENGTH_SHORT).show();
             btn_prestamos.setVisibility(View.VISIBLE);
         }
+
+
 
 
 
@@ -189,7 +197,9 @@ public class menu_comunidad extends AppCompatActivity {
                             editor.putString("retiro_hoy", parts[2]);
                             editor.putString("linea_ap", parts[3]);
                             editor.apply();
+                            String aux2="dt1: "+parts[0]+"dt2: "+parts[1]+"dt3: "+parts[2]+"dt4: "+parts[3];
 
+                           // Toast.makeText(menu_comunidad.this, "Error ...!!"+ aux2, Toast.LENGTH_SHORT).show();
 
 
                             preferences = getSharedPreferences("Preferences", MODE_PRIVATE);

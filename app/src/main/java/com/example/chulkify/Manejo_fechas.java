@@ -147,7 +147,6 @@ public class Manejo_fechas {
         segundos=Integer.parseInt(ss.format(date));
         return segundos;
     }
-
     public String caducidad(){
         Calendar fecha_a = Calendar.getInstance();
         Date date = new Date();
@@ -500,7 +499,9 @@ public class Manejo_fechas {
 
     }
 
-    public String mesInicio(){
+    /*prestamos*/
+
+    public String mes1_inicio(){
         String aux_fecha=caducidad();
         String [] f=aux_fecha.split("/");
 
@@ -511,159 +512,60 @@ public class Manejo_fechas {
         int minutos = Integer.parseInt(f[4]);
         int segundos = Integer.parseInt(f[5]);
 
-
-        if ((anio%4)==0){
-            if (mes == 1){
-                if ((dia <= 29) && (dia >= 1)){
-                    mes=mes+1;
-                }
-                else if (dia == 30){
-                    mes=mes+1;
-                    dia=29;
-                }
-                else if (dia == 31){
-                    mes=mes+1;
-                    dia=29;
-                }
-            }
-            else if (mes == 2){
-                    mes=mes+1;
-            }
-            else if (mes == 3){
-                if ((dia <= 30) && (dia >= 1)){
-                    mes=mes+1;
-                }
-                else if (dia == 31){
-                    mes=mes+1;
-                    dia=30;
-                }
-            }
-            else if (mes == 4){
-                mes=mes+1;
-            }
-            else if (mes == 5){
-                if ((dia <= 30) && (dia >= 1)){
-                    mes=mes+1;
-                }
-                else if (dia == 31){
-                    mes=mes+1;
-                    dia=30;
-                }
-            }
-            else if (mes == 6){
-                mes=mes+1;
-            }
-            else if (mes == 7){
-                mes=mes+1;
-            }
-            else if (mes == 8){
-                if ((dia <= 30) && (dia >= 1)){
-                    mes=mes+1;
-                }
-                else if (dia == 31){
-                    mes=mes+1;
-                    dia=30;
-                }
-            }
-            else if (mes == 9){
-                mes=mes+1;
-            }
-            else if (mes == 10){
-                if ((dia <= 30) && (dia >= 1)){
-                    mes=mes+1;
-                }
-                else if (dia == 31){
-                    mes=mes+1;
-                    dia=30;
-                }
-            }
-            else if (mes == 11){
-                mes=mes+1;
-            }
-            else if (mes == 12){
-                    mes=1;
-                    anio=anio+1;
-
-            }
-        }
-        else {
-            if (mes == 1){
-                if ((dia <= 28) && (dia >= 1)){
-                    mes=mes+1;
-                }
-                else if (dia == 29){
-                    mes=mes+1;
-                    dia=28;
-                }
-                else if (dia == 30){
-                    mes=mes+1;
-                    dia=28;
-                }
-                else if (dia == 31){
-                    mes=mes+1;
-                    dia=28;
-                }
-            }
-            else if (mes == 2){
-                mes=mes+1;
-            }
-            else if (mes == 3){
-                if ((dia <= 30) && (dia >= 1)){
-                    mes=mes+1;
-                }
-                else if (dia == 31){
-                    mes=mes+1;
-                    dia=30;
-                }
-            }
-            else if (mes == 4){
-                mes=mes+1;
-            }
-            else if (mes == 5){
-                if ((dia <= 30) && (dia >= 1)){
-                    mes=mes+1;
-                }
-                else if (dia == 31){
-                    mes=mes+1;
-                    dia=30;
-                }
-            }
-            else if (mes == 6){
-                mes=mes+1;
-            }
-            else if (mes == 7){
-                mes=mes+1;
-            }
-            else if (mes == 8){
-                if ((dia <= 30) && (dia >= 1)){
-                    mes=mes+1;
-                }
-                else if (dia == 31){
-                    mes=mes+1;
-                    dia=30;
-                }
-            }
-            else if (mes == 9){
-                mes=mes+1;
-            }
-            else if (mes == 10){
-                if ((dia <= 30) && (dia >= 1)){
-                    mes=mes+1;
-                }
-                else if (dia == 31){
-                    mes=mes+1;
-                    dia=30;
-                }
-            }
-            else if (mes == 11){
-                mes=mes+1;
-            }
-            else if (mes == 12){
+        if ((dia<=10)||(dia>=1)){
+            if (mes==12){
                 mes=1;
                 anio=anio+1;
-
+            }else {
+                mes=mes+1;
             }
+            dia=6;
+        }else {
+            if (mes==11){
+                mes=1;
+                anio=anio+1;
+            }else if (mes==12){
+                mes=2;
+                anio=anio+1;
+            }else {
+                mes=mes+2;
+            }
+            dia=6;
         }
+
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+
+
+        String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_mes;
+    }
+    public String mes1_fin(){
+        String aux_fecha=mes1_inicio();
+        String [] f=aux_fecha.split("/");
+
+        int anio = Integer.parseInt(f[2]);
+        int mes = Integer.parseInt(f[1]);
+        int dia = Integer.parseInt(f[0]);
+        int hora = Integer.parseInt(f[3]);
+        int minutos = Integer.parseInt(f[4]);
+        int segundos = Integer.parseInt(f[5]);
+
+
+            if (mes == 12) {
+                mes = 1;
+                anio = anio + 1;
+            } else {
+                mes = mes + 1;
+            }
+            dia = 5;
+
 
         String aaaa= String.valueOf(anio);
         String mmmm= String.valueOf(mes);
@@ -678,8 +580,8 @@ public class Manejo_fechas {
         return fecha_mes;
     }
 
-    public String mes_1(){
-        String aux_fecha=mesInicio();
+    public String mes2_inicio(){
+        String aux_fecha=mes1_fin();
         String [] f=aux_fecha.split("/");
 
         int anio = Integer.parseInt(f[2]);
@@ -688,161 +590,11 @@ public class Manejo_fechas {
         int hora = Integer.parseInt(f[3]);
         int minutos = Integer.parseInt(f[4]);
         int segundos = Integer.parseInt(f[5]);
-        int incremento=1;
 
 
-        if ((anio%4)==0){
-            if (mes == 1){
-                if ((dia <= 29) && (dia >= 1)){
-                    mes=mes+incremento;
-                }
-                else if (dia == 30){
-                    mes=mes+incremento;
-                    dia=29;
-                }
-                else if (dia == 31){
-                    mes=mes+incremento;
-                    dia=29;
-                }
-            }
-            else if (mes == 2){
-                mes=mes+incremento;
-            }
-            else if (mes == 3){
-                if ((dia <= 30) && (dia >= 1)){
-                    mes=mes+incremento;
-                }
-                else if (dia == 31){
-                    mes=mes+incremento;
-                    dia=30;
-                }
-            }
-            else if (mes == 4){
-                mes=mes+incremento;
-            }
-            else if (mes == 5){
-                if ((dia <= 30) && (dia >= 1)){
-                    mes=mes+incremento;
-                }
-                else if (dia == 31){
-                    mes=mes+incremento;
-                    dia=30;
-                }
-            }
-            else if (mes == 6){
-                mes=mes+incremento;
-            }
-            else if (mes == 7){
-                mes=mes+incremento;
-            }
-            else if (mes == 8){
-                if ((dia <= 30) && (dia >= 1)){
-                    mes=mes+incremento;
-                }
-                else if (dia == 31){
-                    mes=mes+incremento;
-                    dia=30;
-                }
-            }
-            else if (mes == 9){
-                mes=mes+incremento;
-            }
-            else if (mes == 10){
-                if ((dia <= 30) && (dia >= 1)){
-                    mes=mes+incremento;
-                }
-                else if (dia == 31){
-                    mes=mes+incremento;
-                    dia=30;
-                }
-            }
-            else if (mes == 11){
-                mes=mes+incremento;
-            }
-            else if (mes == 12){
-                mes=incremento;
-                anio=anio+1;
+            dia=6;
 
-            }
-        }
-        else {
-            if (mes == 1){
-                if ((dia <= 28) && (dia >= 1)){
-                    mes=mes+incremento;
-                }
-                else if (dia == 29){
-                    mes=mes+incremento;
-                    dia=28;
-                }
-                else if (dia == 30){
-                    mes=mes+incremento;
-                    dia=28;
-                }
-                else if (dia == 31){
-                    mes=mes+incremento;
-                    dia=28;
-                }
-            }
-            else if (mes == 2){
-                mes=mes+incremento;
-            }
-            else if (mes == 3){
-                if ((dia <= 30) && (dia >= 1)){
-                    mes=mes+incremento;
-                }
-                else if (dia == 31){
-                    mes=mes+incremento;
-                    dia=30;
-                }
-            }
-            else if (mes == 4){
-                mes=mes+incremento;
-            }
-            else if (mes == 5){
-                if ((dia <= 30) && (dia >= 1)){
-                    mes=mes+incremento;
-                }
-                else if (dia == 31){
-                    mes=mes+incremento;
-                    dia=30;
-                }
-            }
-            else if (mes == 6){
-                mes=mes+incremento;
-            }
-            else if (mes == 7){
-                mes=mes+incremento;
-            }
-            else if (mes == 8){
-                if ((dia <= 30) && (dia >= 1)){
-                    mes=mes+incremento;
-                }
-                else if (dia == 31){
-                    mes=mes+incremento;
-                    dia=30;
-                }
-            }
-            else if (mes == 9){
-                mes=mes+incremento;
-            }
-            else if (mes == 10){
-                if ((dia <= 30) && (dia >= 1)){
-                    mes=mes+incremento;
-                }
-                else if (dia == 31){
-                    mes=mes+incremento;
-                    dia=30;
-                }
-            }
-            else if (mes == 11){
-                mes=mes+incremento;
-            }
-            else if (mes == 12){
-                mes=incremento;
-                anio=anio+1;
 
-            }
-        }
 
         String aaaa= String.valueOf(anio);
         String mmmm= String.valueOf(mes);
@@ -856,8 +608,8 @@ public class Manejo_fechas {
         String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
         return fecha_mes;
     }
-    public String mes_2(){
-        String aux_fecha=mesInicio();
+    public String mes2_fin(){
+        String aux_fecha=mes2_inicio();
         String [] f=aux_fecha.split("/");
 
         int anio = Integer.parseInt(f[2]);
@@ -866,157 +618,16 @@ public class Manejo_fechas {
         int hora = Integer.parseInt(f[3]);
         int minutos = Integer.parseInt(f[4]);
         int segundos = Integer.parseInt(f[5]);
-        int incremento=2;
 
 
-        if ((anio%4)==0){
-            if (mes == 1){
-                    mes=mes+incremento;
-            }
-            else if (mes == 2){
-                mes=mes+incremento;
-            }
-            else if (mes == 3){
-                mes=mes+incremento;
-            }
-            else if (mes == 4){
-                mes=mes+incremento;
-            }
-            else if (mes == 5){
-                mes=mes+incremento;
-            }
-            else if (mes == 6){
-                mes=mes+incremento;
-            }
-            else if (mes == 7){
-                if ((dia <= 30) && (dia >= 1)){
-                    mes=mes+incremento;
-                }
-                else if (dia == 31){
-                    mes=mes+incremento;
-                    dia=30;
-                }
-            }
-            else if (mes == 8){
-                mes=mes+incremento;
-            }
-            else if (mes == 9){
-                mes=mes+incremento;
-            }
-            else if (mes == 10){
-                mes=mes+incremento;
-            }
-            else if (mes == 11){
-                mes=mes+incremento;
-                anio=anio+1;
-            }
-            else if (mes == 12) {
-                anio = anio + 1;
-                if ((anio % 4) == 0) {
-
-                    if ((dia <= 29) && (dia >= 1)) {
-                        mes = mes + incremento;
-                    } else if (dia == 30) {
-                        mes = mes + incremento;
-                        dia = 28;
-                    } else if (dia == 31) {
-                        mes = mes + incremento;
-                        dia = 28;
-                    }
-                }
-                else {
-                    if ((dia <= 28) && (dia >= 1)){
-                        mes=mes+incremento;
-                    }
-                    else if (dia == 29){
-                        mes=mes+incremento;
-                        dia=28;
-                    }
-                    else if (dia == 30){
-                        mes=mes+incremento;
-                        dia=28;
-                    }
-                    else if (dia == 31){
-                        mes=mes+incremento;
-                        dia=28;
-                    }
-                }
-            }
+        if (mes == 12) {
+            mes = 1;
+            anio = anio + 1;
+        } else {
+            mes = mes + 1;
         }
-        else {
-            if (mes == 1){
-                mes=mes+incremento;
-            }
-            else if (mes == 2){
-                mes=mes+incremento;
-            }
-            else if (mes == 3){
-                mes=mes+incremento;
-            }
-            else if (mes == 4){
-                mes=mes+incremento;
-            }
-            else if (mes == 5){
-                mes=mes+incremento;
-            }
-            else if (mes == 6){
-                mes=mes+incremento;
-            }
-            else if (mes == 7){
-                if ((dia <= 30) && (dia >= 1)){
-                    mes=mes+incremento;
-                }
-                else if (dia == 31){
-                    mes=mes+incremento;
-                    dia=30;
-                }
-            }
-            else if (mes == 8){
-                mes=mes+incremento;
-            }
-            else if (mes == 9){
-                mes=mes+incremento;
-            }
-            else if (mes == 10){
-                mes=mes+incremento;
-            }
-            else if (mes == 11){
-                mes=mes+incremento;
-                anio=anio+1;
-            }
-            else if (mes == 12) {
-                anio = anio + 1;
-                if ((anio % 4) == 0) {
+        dia = 5;
 
-                    if ((dia <= 29) && (dia >= 1)) {
-                        mes = mes + incremento;
-                    } else if (dia == 30) {
-                        mes = mes + incremento;
-                        dia = 28;
-                    } else if (dia == 31) {
-                        mes = mes + incremento;
-                        dia = 28;
-                    }
-                }
-                else {
-                    if ((dia <= 28) && (dia >= 1)){
-                        mes=mes+incremento;
-                    }
-                    else if (dia == 29){
-                        mes=mes+incremento;
-                        dia=28;
-                    }
-                    else if (dia == 30){
-                        mes=mes+incremento;
-                        dia=28;
-                    }
-                    else if (dia == 31){
-                        mes=mes+incremento;
-                        dia=28;
-                    }
-                }
-            }
-        }
 
         String aaaa= String.valueOf(anio);
         String mmmm= String.valueOf(mes);
@@ -1030,8 +641,9 @@ public class Manejo_fechas {
         String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
         return fecha_mes;
     }
-    public String mes_3(){
-        String aux_fecha=mesInicio();
+
+    public String mes3_inicio(){
+        String aux_fecha=mes2_fin();
         String [] f=aux_fecha.split("/");
 
         int anio = Integer.parseInt(f[2]);
@@ -1040,171 +652,665 @@ public class Manejo_fechas {
         int hora = Integer.parseInt(f[3]);
         int minutos = Integer.parseInt(f[4]);
         int segundos = Integer.parseInt(f[5]);
-        int incremento=3;
 
 
-        if ((anio%4)==0){
-            if (mes == 1){
-                if ((dia <= 30) && (dia >= 1)){
-                    mes=mes+incremento;
-                }
-                else if (dia == 31){
-                    mes=mes+incremento;
-                    dia=30;
-                }
+        dia=6;
 
-            }
-            else if (mes == 2){
-                mes=mes+incremento;
-            }
-            else if (mes == 3){
-                if ((dia <= 30) && (dia >= 1)){
-                    mes=mes+incremento;
-                }
-                else if (dia == 31){
-                    mes=mes+incremento;
-                    dia=30;
-                }
-            }
-            else if (mes == 4){
-                mes=mes+incremento;
-            }
-            else if (mes == 5){
-                mes=mes+incremento;
-            }
-            else if (mes == 6){
-                mes=mes+incremento;
-            }
-            else if (mes == 7){
-                mes=mes+incremento;
-            }
-            else if (mes == 8){
-                if ((dia <= 30) && (dia >= 1)){
-                    mes=mes+incremento;
-                }
-                else if (dia == 31){
-                    mes=mes+incremento;
-                    dia=30;
-                }
-            }
-            else if (mes == 9){
-                mes=mes+incremento;
-            }
-            else if (mes == 10){
-                mes=mes+incremento;
-                anio=anio+1;
-            }
-            else if (mes == 11){
-                mes=mes+incremento;
-                anio=anio+1;
-            }
-            else if (mes == 12) {
-                anio = anio + 1;
-                if ((anio % 4) == 0) {
 
-                    if ((dia <= 29) && (dia >= 1)) {
-                        mes = mes + incremento;
-                    } else if (dia == 30) {
-                        mes = mes + incremento;
-                        dia = 28;
-                    } else if (dia == 31) {
-                        mes = mes + incremento;
-                        dia = 28;
-                    }
-                }
-                else {
-                    if ((dia <= 28) && (dia >= 1)){
-                        mes=mes+incremento;
-                    }
-                    else if (dia == 29){
-                        mes=mes+incremento;
-                        dia=28;
-                    }
-                    else if (dia == 30){
-                        mes=mes+incremento;
-                        dia=28;
-                    }
-                    else if (dia == 31){
-                        mes=mes+incremento;
-                        dia=28;
-                    }
-                }
-            }
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+
+
+        String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_mes;
+    }
+    public String mes3_fin(){
+        String aux_fecha=mes3_inicio();
+        String [] f=aux_fecha.split("/");
+
+        int anio = Integer.parseInt(f[2]);
+        int mes = Integer.parseInt(f[1]);
+        int dia = Integer.parseInt(f[0]);
+        int hora = Integer.parseInt(f[3]);
+        int minutos = Integer.parseInt(f[4]);
+        int segundos = Integer.parseInt(f[5]);
+
+
+        if (mes == 12) {
+            mes = 1;
+            anio = anio + 1;
+        } else {
+            mes = mes + 1;
         }
-        else {
-            if (mes == 1){
-                mes=mes+incremento;
-            }
-            else if (mes == 2){
-                mes=mes+incremento;
-            }
-            else if (mes == 3){
-                mes=mes+incremento;
-            }
-            else if (mes == 4){
-                mes=mes+incremento;
-            }
-            else if (mes == 5){
-                mes=mes+incremento;
-            }
-            else if (mes == 6){
-                mes=mes+incremento;
-            }
-            else if (mes == 7){
-                if ((dia <= 30) && (dia >= 1)){
-                    mes=mes+incremento;
-                }
-                else if (dia == 31){
-                    mes=mes+incremento;
-                    dia=30;
-                }
-            }
-            else if (mes == 8){
-                mes=mes+incremento;
-            }
-            else if (mes == 9){
-                mes=mes+incremento;
-            }
-            else if (mes == 10){
-                mes=mes+incremento;
-            }
-            else if (mes == 11){
-                mes=mes+incremento;
-                anio=anio+1;
-            }
-            else if (mes == 12) {
-                anio = anio + 1;
-                if ((anio % 4) == 0) {
+        dia = 5;
 
-                    if ((dia <= 29) && (dia >= 1)) {
-                        mes = mes + incremento;
-                    } else if (dia == 30) {
-                        mes = mes + incremento;
-                        dia = 28;
-                    } else if (dia == 31) {
-                        mes = mes + incremento;
-                        dia = 28;
-                    }
-                }
-                else {
-                    if ((dia <= 28) && (dia >= 1)){
-                        mes=mes+incremento;
-                    }
-                    else if (dia == 29){
-                        mes=mes+incremento;
-                        dia=28;
-                    }
-                    else if (dia == 30){
-                        mes=mes+incremento;
-                        dia=28;
-                    }
-                    else if (dia == 31){
-                        mes=mes+incremento;
-                        dia=28;
-                    }
-                }
-            }
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+
+
+        String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_mes;
+    }
+
+    public String mes4_inicio(){
+        String aux_fecha=mes3_fin();
+        String [] f=aux_fecha.split("/");
+
+        int anio = Integer.parseInt(f[2]);
+        int mes = Integer.parseInt(f[1]);
+        int dia = Integer.parseInt(f[0]);
+        int hora = Integer.parseInt(f[3]);
+        int minutos = Integer.parseInt(f[4]);
+        int segundos = Integer.parseInt(f[5]);
+
+
+        dia=6;
+
+
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+
+
+        String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_mes;
+    }
+    public String mes4_fin(){
+        String aux_fecha=mes4_inicio();
+        String [] f=aux_fecha.split("/");
+
+        int anio = Integer.parseInt(f[2]);
+        int mes = Integer.parseInt(f[1]);
+        int dia = Integer.parseInt(f[0]);
+        int hora = Integer.parseInt(f[3]);
+        int minutos = Integer.parseInt(f[4]);
+        int segundos = Integer.parseInt(f[5]);
+
+
+        if (mes == 12) {
+            mes = 1;
+            anio = anio + 1;
+        } else {
+            mes = mes + 1;
         }
+        dia = 5;
+
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+
+
+        String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_mes;
+    }
+
+    public String mes5_inicio(){
+        String aux_fecha=mes4_fin();
+        String [] f=aux_fecha.split("/");
+
+        int anio = Integer.parseInt(f[2]);
+        int mes = Integer.parseInt(f[1]);
+        int dia = Integer.parseInt(f[0]);
+        int hora = Integer.parseInt(f[3]);
+        int minutos = Integer.parseInt(f[4]);
+        int segundos = Integer.parseInt(f[5]);
+
+
+        dia=6;
+
+
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+
+
+        String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_mes;
+    }
+    public String mes5_fin(){
+        String aux_fecha=mes5_inicio();
+        String [] f=aux_fecha.split("/");
+
+        int anio = Integer.parseInt(f[2]);
+        int mes = Integer.parseInt(f[1]);
+        int dia = Integer.parseInt(f[0]);
+        int hora = Integer.parseInt(f[3]);
+        int minutos = Integer.parseInt(f[4]);
+        int segundos = Integer.parseInt(f[5]);
+
+
+        if (mes == 12) {
+            mes = 1;
+            anio = anio + 1;
+        } else {
+            mes = mes + 1;
+        }
+        dia = 5;
+
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+
+
+        String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_mes;
+    }
+
+    public String mes6_inicio(){
+        String aux_fecha=mes5_fin();
+        String [] f=aux_fecha.split("/");
+
+        int anio = Integer.parseInt(f[2]);
+        int mes = Integer.parseInt(f[1]);
+        int dia = Integer.parseInt(f[0]);
+        int hora = Integer.parseInt(f[3]);
+        int minutos = Integer.parseInt(f[4]);
+        int segundos = Integer.parseInt(f[5]);
+
+
+        dia=6;
+
+
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+
+
+        String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_mes;
+    }
+    public String mes6_fin(){
+        String aux_fecha=mes6_inicio();
+        String [] f=aux_fecha.split("/");
+
+        int anio = Integer.parseInt(f[2]);
+        int mes = Integer.parseInt(f[1]);
+        int dia = Integer.parseInt(f[0]);
+        int hora = Integer.parseInt(f[3]);
+        int minutos = Integer.parseInt(f[4]);
+        int segundos = Integer.parseInt(f[5]);
+
+
+        if (mes == 12) {
+            mes = 1;
+            anio = anio + 1;
+        } else {
+            mes = mes + 1;
+        }
+        dia = 5;
+
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+
+
+        String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_mes;
+    }
+
+
+    public String mes7_inicio(){
+        String aux_fecha=mes6_fin();
+        String [] f=aux_fecha.split("/");
+
+        int anio = Integer.parseInt(f[2]);
+        int mes = Integer.parseInt(f[1]);
+        int dia = Integer.parseInt(f[0]);
+        int hora = Integer.parseInt(f[3]);
+        int minutos = Integer.parseInt(f[4]);
+        int segundos = Integer.parseInt(f[5]);
+
+
+        dia=6;
+
+
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+
+
+        String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_mes;
+    }
+    public String mes7_fin(){
+        String aux_fecha=mes7_inicio();
+        String [] f=aux_fecha.split("/");
+
+        int anio = Integer.parseInt(f[2]);
+        int mes = Integer.parseInt(f[1]);
+        int dia = Integer.parseInt(f[0]);
+        int hora = Integer.parseInt(f[3]);
+        int minutos = Integer.parseInt(f[4]);
+        int segundos = Integer.parseInt(f[5]);
+
+
+        if (mes == 12) {
+            mes = 1;
+            anio = anio + 1;
+        } else {
+            mes = mes + 1;
+        }
+        dia = 5;
+
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+
+
+        String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_mes;
+    }
+
+    public String mes8_inicio(){
+        String aux_fecha=mes7_fin();
+        String [] f=aux_fecha.split("/");
+
+        int anio = Integer.parseInt(f[2]);
+        int mes = Integer.parseInt(f[1]);
+        int dia = Integer.parseInt(f[0]);
+        int hora = Integer.parseInt(f[3]);
+        int minutos = Integer.parseInt(f[4]);
+        int segundos = Integer.parseInt(f[5]);
+
+
+        dia=6;
+
+
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+
+
+        String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_mes;
+    }
+    public String mes8_fin(){
+        String aux_fecha=mes8_inicio();
+        String [] f=aux_fecha.split("/");
+
+        int anio = Integer.parseInt(f[2]);
+        int mes = Integer.parseInt(f[1]);
+        int dia = Integer.parseInt(f[0]);
+        int hora = Integer.parseInt(f[3]);
+        int minutos = Integer.parseInt(f[4]);
+        int segundos = Integer.parseInt(f[5]);
+
+
+        if (mes == 12) {
+            mes = 1;
+            anio = anio + 1;
+        } else {
+            mes = mes + 1;
+        }
+        dia = 5;
+
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+
+
+        String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_mes;
+    }
+
+    public String mes9_inicio(){
+        String aux_fecha=mes8_fin();
+        String [] f=aux_fecha.split("/");
+
+        int anio = Integer.parseInt(f[2]);
+        int mes = Integer.parseInt(f[1]);
+        int dia = Integer.parseInt(f[0]);
+        int hora = Integer.parseInt(f[3]);
+        int minutos = Integer.parseInt(f[4]);
+        int segundos = Integer.parseInt(f[5]);
+
+
+        dia=6;
+
+
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+
+
+        String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_mes;
+    }
+    public String mes9_fin(){
+        String aux_fecha=mes9_inicio();
+        String [] f=aux_fecha.split("/");
+
+        int anio = Integer.parseInt(f[2]);
+        int mes = Integer.parseInt(f[1]);
+        int dia = Integer.parseInt(f[0]);
+        int hora = Integer.parseInt(f[3]);
+        int minutos = Integer.parseInt(f[4]);
+        int segundos = Integer.parseInt(f[5]);
+
+
+        if (mes == 12) {
+            mes = 1;
+            anio = anio + 1;
+        } else {
+            mes = mes + 1;
+        }
+        dia = 5;
+
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+
+
+        String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_mes;
+    }
+
+    public String mes10_inicio(){
+        String aux_fecha=mes9_fin();
+        String [] f=aux_fecha.split("/");
+
+        int anio = Integer.parseInt(f[2]);
+        int mes = Integer.parseInt(f[1]);
+        int dia = Integer.parseInt(f[0]);
+        int hora = Integer.parseInt(f[3]);
+        int minutos = Integer.parseInt(f[4]);
+        int segundos = Integer.parseInt(f[5]);
+
+
+        dia=6;
+
+
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+
+
+        String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_mes;
+    }
+    public String mes10_fin(){
+        String aux_fecha=mes10_inicio();
+        String [] f=aux_fecha.split("/");
+
+        int anio = Integer.parseInt(f[2]);
+        int mes = Integer.parseInt(f[1]);
+        int dia = Integer.parseInt(f[0]);
+        int hora = Integer.parseInt(f[3]);
+        int minutos = Integer.parseInt(f[4]);
+        int segundos = Integer.parseInt(f[5]);
+
+
+        if (mes == 12) {
+            mes = 1;
+            anio = anio + 1;
+        } else {
+            mes = mes + 1;
+        }
+        dia = 5;
+
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+
+
+        String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_mes;
+    }
+
+    public String mes11_inicio(){
+        String aux_fecha=mes10_fin();
+        String [] f=aux_fecha.split("/");
+
+        int anio = Integer.parseInt(f[2]);
+        int mes = Integer.parseInt(f[1]);
+        int dia = Integer.parseInt(f[0]);
+        int hora = Integer.parseInt(f[3]);
+        int minutos = Integer.parseInt(f[4]);
+        int segundos = Integer.parseInt(f[5]);
+
+
+        dia=6;
+
+
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+
+
+        String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_mes;
+    }
+    public String mes11_fin(){
+        String aux_fecha=mes11_inicio();
+        String [] f=aux_fecha.split("/");
+
+        int anio = Integer.parseInt(f[2]);
+        int mes = Integer.parseInt(f[1]);
+        int dia = Integer.parseInt(f[0]);
+        int hora = Integer.parseInt(f[3]);
+        int minutos = Integer.parseInt(f[4]);
+        int segundos = Integer.parseInt(f[5]);
+
+
+        if (mes == 12) {
+            mes = 1;
+            anio = anio + 1;
+        } else {
+            mes = mes + 1;
+        }
+        dia = 5;
+
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+
+
+        String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_mes;
+    }
+
+    public String mes12_inicio(){
+        String aux_fecha=mes11_fin();
+        String [] f=aux_fecha.split("/");
+
+        int anio = Integer.parseInt(f[2]);
+        int mes = Integer.parseInt(f[1]);
+        int dia = Integer.parseInt(f[0]);
+        int hora = Integer.parseInt(f[3]);
+        int minutos = Integer.parseInt(f[4]);
+        int segundos = Integer.parseInt(f[5]);
+
+
+        dia=6;
+
+
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+
+
+        String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_mes;
+    }
+    public String mes12_fin(){
+        String aux_fecha=mes12_inicio();
+        String [] f=aux_fecha.split("/");
+
+        int anio = Integer.parseInt(f[2]);
+        int mes = Integer.parseInt(f[1]);
+        int dia = Integer.parseInt(f[0]);
+        int hora = Integer.parseInt(f[3]);
+        int minutos = Integer.parseInt(f[4]);
+        int segundos = Integer.parseInt(f[5]);
+
+
+        if (mes == 12) {
+            mes = 1;
+            anio = anio + 1;
+        } else {
+            mes = mes + 1;
+        }
+        dia = 5;
+
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+
+
+        String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_mes;
+    }
+
+    public String mes13_inicio(){
+        String aux_fecha=mes12_fin();
+        String [] f=aux_fecha.split("/");
+
+        int anio = Integer.parseInt(f[2]);
+        int mes = Integer.parseInt(f[1]);
+        int dia = Integer.parseInt(f[0]);
+        int hora = Integer.parseInt(f[3]);
+        int minutos = Integer.parseInt(f[4]);
+        int segundos = Integer.parseInt(f[5]);
+
+
+        dia=6;
+
+
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+
+
+        String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_mes;
+    }
+    public String mes13_fin(){
+        String aux_fecha=mes13_inicio();
+        String [] f=aux_fecha.split("/");
+
+        int anio = Integer.parseInt(f[2]);
+        int mes = Integer.parseInt(f[1]);
+        int dia = Integer.parseInt(f[0]);
+        int hora = Integer.parseInt(f[3]);
+        int minutos = Integer.parseInt(f[4]);
+        int segundos = Integer.parseInt(f[5]);
+
+
+        if (mes == 12) {
+            mes = 1;
+            anio = anio + 1;
+        } else {
+            mes = mes + 1;
+        }
+        dia = 5;
+
 
         String aaaa= String.valueOf(anio);
         String mmmm= String.valueOf(mes);

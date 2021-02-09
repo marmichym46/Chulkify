@@ -63,11 +63,14 @@ public class cargar_1 extends AppCompatActivity {
 
                             JSONObject jsonObj = new JSONObject(respuesta);
                             SharedPreferences.Editor editor=preferences.edit();
-                            editor.putString("ciudad_comu", jsonObj.getString("ciudad_comu"));
+
+                            String aux1="dt1"+jsonObj.getInt("id_comu")+"dt2"+jsonObj.getString("nombre_comu")+"dt3"+jsonObj.getString("codigo_comu")+"dt4"+ jsonObj.getInt("total_usuario_comu");
                             editor.putInt("id_comu", jsonObj.getInt("id_comu"));
                             editor.putString("nombre_comu", jsonObj.getString("nombre_comu"));
                             editor.putString("codigo_comu", jsonObj.getString("codigo_comu"));
                             editor.putInt("total_usuario_comu", jsonObj.getInt("total_usuario_comu"));
+                            //Toast.makeText(cargar_1.this, "ENTRO 4545    -"+aux1, Toast.LENGTH_SHORT).show();
+
                             editor.apply();
                         } catch (Exception e) {
                             e.printStackTrace();

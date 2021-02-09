@@ -132,6 +132,7 @@ public class Login extends AppCompatActivity {
                                         editor.putString("pass", jsonObj.getString("contrasena_us"));
                                         editor.putString("fecha_union_grupo", jsonObj.getString("fecha_union_comu_us"));
                                         editor.putString("estado_usuario", jsonObj.getString("estado_gru_us"));
+                                        editor.putString("linea_ap",jsonObj.getString("histo_aport_us"));
                                         editor.apply();
 
                                         Intent intent = null;

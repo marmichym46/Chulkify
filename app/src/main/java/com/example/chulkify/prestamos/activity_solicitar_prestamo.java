@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.chulkify.Manejo_fechas;
 import com.example.chulkify.R;
+import com.example.chulkify.inicio;
 import com.example.chulkify.transacciones_pg.aportes.Aportar;
 
 public class activity_solicitar_prestamo extends AppCompatActivity {
@@ -26,6 +27,9 @@ public class activity_solicitar_prestamo extends AppCompatActivity {
     private Spinner meses;
     private String fecha1, fecha2, hora1;
     private LinearLayout tarjeta1;
+    private String fondo_us, fondo_comu;
+    private double fondo_us2, fondo_comu2;
+    private  int fd_us, fd_comu;
 
     //Variables para capturar preferencias
     private String ci_us_1, gp_1, cg_gp_1, taza,hoy_tran, maximo;
@@ -34,12 +38,15 @@ public class activity_solicitar_prestamo extends AppCompatActivity {
     //variables para capturar fecha
     private int  dia, mes, anio, hora, minutos, segundos;
     private String  diaS, mesS, anioS,horaS, minutosS, segundosS, minutosa;
+    String valor_max;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solicitar_prestamo);
 
+        val_prestamo=findViewById(R.id.edt_valor_prestamo);
         valor_prestar=findViewById(R.id.txt_v_prestar);
         interes=findViewById(R.id.txt_v_interes);
         diferido=findViewById(R.id.txt_diferido);
@@ -59,18 +66,53 @@ public class activity_solicitar_prestamo extends AppCompatActivity {
         taza=preferences.getString("taza", null);
         hoy_tran=preferences.getString("aportes_hoy", null);
         maximo=preferences.getString("maximo", null);
+        fondo_us=preferences.getString("fondos_usuario", null);
+        fondo_comu=preferences.getString("fondos_comunidad", null);
+
+        fondo_us2=(Double.parseDouble(fondo_us))*2;
+        fondo_comu2=Double.parseDouble(fondo_comu);
+        /*String fd_us2=String.valueOf(fondo_us2);
+        String [] fd_us_aux=fd_us2.split(".");
+        //String fd_us3=fd_us_aux[0]);
+
+         */
+        //fd_us=convertir_dooble(fondo_us2);
+        //Toast.makeText(activity_solicitar_prestamo.this, fd_us, Toast.LENGTH_SHORT).show();
+/*
+
+        fd_us=Integer.parseInt(String.valueOf(fondo_us2));
+        fondo_comu2=Math.floor(Double.parseDouble(fondo_comu));
+        fd_comu=Integer.parseInt(String.valueOf(fondo_comu2));
+        Toast.makeText(activity_solicitar_prestamo.this, fd_us, Toast.LENGTH_SHORT).show();
+
+
+
+ */
+        if (fondo_us2 > fondo_comu2){
+            valor_max=String.valueOf(fondo_us2);
+            val_prestamo.setText(valor_max);
+            //Toast.makeText(activity_solicitar_prestamo.this, "el fondo del usuario es mayor", Toast.LENGTH_SHORT).show();
+        }else if (fondo_comu2 >= fondo_us2){
+            valor_max=String.valueOf(fondo_us2);
+            val_prestamo.setText(valor_max);
+            //Toast.makeText(activity_solicitar_prestamo.this, "el fondo de la comunidad es mayor", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(activity_solicitar_prestamo.this, "error", Toast.LENGTH_SHORT).show();
+
+        }
 
         Manejo_fechas mf= new Manejo_fechas();
-
         //captura la fecha
         fecha1=mf.fecha_actual();
         fecha2=mf.fechaYhora_actual();
+
+       //if (fondo_us > fondo_comu)
 
         btn_cargar_datos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Double val11 =Double.parseDouble(valor_prestar.toString());
+                Double val11 =Double.parseDouble(val_prestamo.toString());
                 Double val21 =Double.parseDouble(meses.getSelectedItem().toString());
                 Double val31 = 0.05;
 
@@ -90,4 +132,13 @@ public class activity_solicitar_prestamo extends AppCompatActivity {
 
 
     }
+
+    public static int convertir_dooble(double num){
+        String strNum=num+"";
+        int indice=strNum.indexOf(".");
+        return Integer.parseInt(strNum.substring(0,  indice));
+    }
+
+
+
 }
