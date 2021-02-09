@@ -89,7 +89,7 @@ public class activity_solicitar_prestamo extends AppCompatActivity {
 
  */
         if (fondo_us2 > fondo_comu2){
-            valor_max=String.valueOf(fondo_us2);
+            valor_max=String.valueOf(fondo_comu2);
             val_prestamo.setText(valor_max);
             //Toast.makeText(activity_solicitar_prestamo.this, "el fondo del usuario es mayor", Toast.LENGTH_SHORT).show();
         }else if (fondo_comu2 >= fondo_us2){
@@ -112,8 +112,10 @@ public class activity_solicitar_prestamo extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Double val11 =Double.parseDouble(val_prestamo.toString());
-                Double val21 =Double.parseDouble(meses.getSelectedItem().toString());
+                Double valprestar =Double.parseDouble(val_prestamo.toString());
+                Double valmaximo_p =Double.parseDouble(valor_max);
+
+                /*
                 Double val31 = 0.05;
 
                 Double interes= val11*val31;
@@ -123,6 +125,14 @@ public class activity_solicitar_prestamo extends AppCompatActivity {
 
                 Double total= val_cuota*val21;
 
+                 */
+
+                if (val_prestamo.getText().toString().isEmpty()) {
+                    Toast.makeText(activity_solicitar_prestamo.this, "Hay campos en blanco ", Toast.LENGTH_SHORT).show();
+                } else {
+                    //if (valprestar > valmaximo_p)
+
+                }
 
 
             }
