@@ -19,6 +19,7 @@
     <string name="link_retirar">http://www.marlonmym.tk/chulkify/retirar/retirar_us.php</string>
     <string name="link_consultar_prestamos">http://www.marlonmym.tk/chulkify/prestamos/preparar_soli_pres.php</string>
     <string name="link_estado_solicitud_prestamos">http://www.marlonmym.tk/chulkify/prestamos/estado_soli_prestamo.php</string>
+    <string name="link_consulta_fondos_us_comu">http://www.marlonmym.tk/chulkify/prestamos/cargar_fondos.php</string>
     <!--links -->
 
 
@@ -27,6 +28,16 @@
     <string name="taza_transaccion">0.25</string>
     <string name="maximo">500</string>
     <!--constantes-->
+
+    <!--cardviw-->
+    <string name="tipo_solicitud">Solicitud de:</string>
+    <string name="v_prestamo">El valor a prestar es de:</string>
+    <string name="d_prestamo">Diferido a:</string>
+    <!--cardviw-->
+
+
+
+
 
     <!--prestamos-->
     <string name="msj_ini_prestamos">Prestamos</string>
