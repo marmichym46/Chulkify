@@ -2,6 +2,7 @@ package com.example.chulkify.prestamos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 
 import com.example.chulkify.Manejo_fechas;
 import com.example.chulkify.R;
+import com.example.chulkify.envio_solicitud_comu.cargar_2;
+import com.example.chulkify.envio_solicitud_comu.unir_comunidad;
 import com.example.chulkify.inicio;
 import com.example.chulkify.transacciones_pg.aportes.Aportar;
 
@@ -39,6 +42,7 @@ public class activity_solicitar_prestamo extends AppCompatActivity {
     private int  dia, mes, anio, hora, minutos, segundos;
     private String  diaS, mesS, anioS,horaS, minutosS, segundosS, minutosa;
     String valor_max;
+    LinearLayout datos_prestamo;
 
 
     @Override
@@ -57,6 +61,7 @@ public class activity_solicitar_prestamo extends AppCompatActivity {
         btn_cargar_datos=findViewById(R.id.btn_cargar_prestamo);
         btn_soli_prestamo=findViewById(R.id.btn_soli_prestamo);
         meses=findViewById(R.id.smeses);
+        datos_prestamo=(LinearLayout)findViewById(R.id.ll_datos_prestamo);
 
         //capturar preferencias
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
@@ -106,7 +111,6 @@ public class activity_solicitar_prestamo extends AppCompatActivity {
         fecha1=mf.fecha_actual();
         fecha2=mf.fechaYhora_actual();
 
-       //if (fondo_us > fondo_comu)
 
         btn_cargar_datos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,39 +119,33 @@ public class activity_solicitar_prestamo extends AppCompatActivity {
                 Double valprestar =Double.parseDouble(val_prestamo.getText().toString());
                 Double valmaximo_p =Double.parseDouble(valor_max);
                 String plazo=meses.getSelectedItem().toString();
-
-
-                /*
-                Double val31 = 0.05;
-
-                Double interes= val11*val31;
-                Double subtotal= val11+interes;
-                Double auxiliar= subtotal/val21;
-                Double val_cuota= Math.round(auxiliar*100.0)/100.0;
-
-                Double total= val_cuota*val21;
-
-                 */
-
                 if (val_prestamo.getText().toString().isEmpty()) {
                     Toast.makeText(activity_solicitar_prestamo.this, "Hay campos en blanco ", Toast.LENGTH_SHORT).show();
                 } else {
                     if (valprestar > valmaximo_p){
-                       Toast.makeText(activity_solicitar_prestamo.this, "Ha sobrepasado el limite de prerstamo, su valor maximo para prestar es de:   $"+valor_max, Toast.LENGTH_SHORT).show();
+                       Toast.makeText(activity_solicitar_prestamo.this, "Ha sobrepasado el limite de prerstamo, su valor maximo para prestar es de:   $"+valor_max, Toast.LENGTH_LONG).show();
                     }else{
                         cargar_datos(valprestar, plazo);
-
                     }
-
-
-
                 }
-
-
             }
-
         });
 
+
+
+        btn_soli_prestamo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String vl11=val_prestamo.getText().toString();
+                String val2=meses.getSelectedItem().toString();
+                SharedPreferences.Editor editor=preferences.edit();
+                editor.putString("valor_prestar",val_prestamo.getText().toString());
+                editor.putString("diferido_prestamo",meses.getSelectedItem().toString());
+                editor.apply();
+
+                startActivity(new Intent(activity_solicitar_prestamo.this, Activity_enviar_solicitud_prestamo.class));
+            }
+        });
 
 
     }
@@ -159,7 +157,9 @@ public class activity_solicitar_prestamo extends AppCompatActivity {
         double subtotal=num + val3;
         double pz=Double.parseDouble(plazo1);
         double cuota= subtotal/pz;
-        double total = cuota * pz;
+        double cuotaR= redondearDecimales(cuota, 2);
+
+        double total = redondearDecimales((cuotaR * pz), 2);;
         String fecha_pz= "0";
         Manejo_fechas mf = new Manejo_fechas();
         if(plazo1.equals("3")){fecha_pz=mf.mes3_fin();}
@@ -175,10 +175,24 @@ public class activity_solicitar_prestamo extends AppCompatActivity {
         valor_prestar.setText(val1);
         interes.setText(String.valueOf(val3));
         diferido.setText(plazo1);
-        valor_cuota.setText(String.valueOf(cuota));
+        valor_cuota.setText(String.valueOf(cuotaR));
         total_prestamo.setText(String.valueOf(total));
         fecha_limite.setText(fh2);
+        datos_prestamo.setVisibility(View.VISIBLE);
+        btn_soli_prestamo.setVisibility(View.VISIBLE);
 
+    }
+
+
+
+    public static double redondearDecimales(double valorInicial, int numeroDecimales) {
+        double parteEntera, resultado;
+        resultado = valorInicial;
+        parteEntera = Math.floor(resultado);
+        resultado=(resultado-parteEntera)*Math.pow(10, numeroDecimales);
+        resultado=Math.round(resultado);
+        resultado=(resultado/Math.pow(10, numeroDecimales))+parteEntera;
+        return resultado;
     }
 
 

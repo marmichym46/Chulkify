@@ -167,7 +167,8 @@
                                 android:drawableLeft="@drawable/acep"
                                 android:padding="10dp"
                                 android:text="@string/acep"
-                                android:textColor="@color/blanco" />
+                                android:textColor="@color/blanco"
+                                android:enabled="false"/>
                             </LinearLayout>
 
                             <LinearLayout
@@ -185,7 +186,8 @@
                                 android:drawableLeft="@drawable/neg"
                                 android:paddingLeft="10dp"
                                 android:text="@string/recha"
-                                android:textColor="@color/negro" />
+                                android:textColor="@color/negro"
+                                 android:enabled="false"/>
                             </LinearLayout>
 
                         </LinearLayout>
