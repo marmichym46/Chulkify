@@ -21,6 +21,11 @@
     <string name="link_consultar_prestamos">http://www.marlonmym.tk/chulkify/prestamos/preparar_soli_pres.php</string>
     <string name="link_estado_solicitud_prestamos">http://www.marlonmym.tk/chulkify/prestamos/estado_soli_prestamo.php</string>
     <string name="link_consulta_fondos_us_comu">http://www.marlonmym.tk/chulkify/prestamos/cargar_fondos.php</string>
+
+
+    <string name="link_gp_crea_pres">http://www.marlonmym.tk/chulkify/prestamos/gp_crear_prestamo.php</string>
+    <string name="link_us_crea_pres">http://www.marlonmym.tk/chulkify/prestamos/us_crear_prestamo.php</string>
+
     <!--links -->
 
 
@@ -28,12 +33,13 @@
     <string name="version">v3.0</string>
     <string name="taza_transaccion">0.25</string>
     <string name="maximo">500</string>
+    <string name="interes_prestamo">0.05</string>
     <!--constantes-->
 
     <!--cardviw-->
     <string name="tipo_solicitud">Solicitud de:</string>
-    <string name="v_prestamo">El valor a prestar es de:</string>
-    <string name="d_prestamo">Diferido a:</string>
+    <string name="v_prestamo">El valor a prestar es de:  </string>
+    <string name="d_prestamo">Diferido a:  </string>
     <!--cardviw-->
 
 
