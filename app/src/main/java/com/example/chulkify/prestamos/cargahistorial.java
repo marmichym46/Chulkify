@@ -81,17 +81,11 @@ public class cargahistorial extends AppCompatActivity {
                             String res=res_sp[1];
                             Consulta_fondos();
                             Toast.makeText(cargahistorial.this, res, Toast.LENGTH_SHORT).show();
-                            if(res.equals("NO_HAY") || res.equals("PAGADO") || res.equals("PAGADO_R")|| res.equals("LIQUIDADO")){
                                 cconsulta_sol_pres();
                                 SharedPreferences.Editor editor= preferences.edit();
                                 editor.putString("estado_prestamos",res);
                                 editor.apply();
-                            } else {
-                                SharedPreferences.Editor editor= preferences.edit();
-                                editor.putString("estado_prestamos",res);
-                                editor.putString("estado_soli_pres","NO HAY");
-                                editor.apply();
-                            }
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

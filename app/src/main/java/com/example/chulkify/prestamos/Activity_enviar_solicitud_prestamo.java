@@ -22,12 +22,13 @@ import cz.msebera.android.httpclient.Header;
 public class Activity_enviar_solicitud_prestamo extends AppCompatActivity {
 
     private SharedPreferences preferences;
-    private AsyncHttpClient comu_clien, regis_gp, regis_us;
+    private AsyncHttpClient comu_clien, regis_gp, regis_us, regis_us33;
 
     private String usuario, cg_comu, val_prestamo, plaz_prestamo;
     private String res, nnn, int_p;
     private String f_actual, nomb_comu;
-    private String [] fi, ff;
+    private String[]  fi = new String[13];
+    private String[]  ff = new String[13];
 
 
     private String fechacrea, fechacadu;
@@ -40,13 +41,18 @@ public class Activity_enviar_solicitud_prestamo extends AppCompatActivity {
         cg_comu = preferences.getString("comunidad", null);
         usuario =preferences.getString("cedula_usuario", null);
         val_prestamo=preferences.getString("valor_prestar", null);
+
         plaz_prestamo=preferences.getString("diferido_prestamo", null);
         int_p=preferences.getString("interes_prestamo", null);
         nomb_comu = preferences.getString("nombre_comu", null);
 
 
         Manejo_fechas mf = new Manejo_fechas();
+
+        fechacrea=mf.fechaYhora_actual();
+        fechacadu=mf.caducidad();
         f_actual= mf.fecha_actual();
+
         fi[0]=mf.mes1_inicio();
         fi[1]=mf.mes2_inicio();
         fi[2]=mf.mes3_inicio();
@@ -75,6 +81,7 @@ public class Activity_enviar_solicitud_prestamo extends AppCompatActivity {
 
 
 
+
        /* Toast.makeText(Activity_enviar_solicitud_prestamo.this, cg_comu, Toast.LENGTH_SHORT).show();
         Toast.makeText(Activity_enviar_solicitud_prestamo.this, usuario, Toast.LENGTH_SHORT).show();
         Toast.makeText(Activity_enviar_solicitud_prestamo.this, val_prestamo, Toast.LENGTH_SHORT).show();
@@ -82,12 +89,11 @@ public class Activity_enviar_solicitud_prestamo extends AppCompatActivity {
 
 
         */
-        Manejo_fechas fc = new Manejo_fechas();
-        fechacrea=fc.fechaYhora_actual();
-        fechacadu=fc.caducidad();
+
         comu_clien = new AsyncHttpClient();
         regis_gp = new AsyncHttpClient();
         regis_us = new AsyncHttpClient();
+        regis_us33 = new AsyncHttpClient();
 
        datos_us();
         new Handler().postDelayed(new Runnable() {
@@ -156,8 +162,6 @@ public class Activity_enviar_solicitud_prestamo extends AppCompatActivity {
             }
         });
     }
-
-
     private void enviar_solicitudes(String dato){
 
 
@@ -200,6 +204,8 @@ public class Activity_enviar_solicitud_prestamo extends AppCompatActivity {
     }
 
 
+
+
     private void crear_prestamo_gp(){
         double valpres=Double.parseDouble(val_prestamo);
         double valint =Double.parseDouble(int_p);
@@ -238,12 +244,23 @@ public class Activity_enviar_solicitud_prestamo extends AppCompatActivity {
                         Toast.makeText(Activity_enviar_solicitud_prestamo.this, "Error al cargar datos", Toast.LENGTH_SHORT).show();
                     } else {
                         try {
+
+                            ult_prestamo();
+                            //preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+                            //String ult_p = preferences.getString("id_ult_prestamo", null);
+
+                            //Toast.makeText(getApplicationContext(), "entro"+ult_p, Toast.LENGTH_SHORT).show();
+
+/*
                             int i_p=Integer.parseInt(plaz_prestamo);
                             for(int i = 0; i < i_p; i++){
                                 int aux1 = i+1;
+                                Toast.makeText(getApplicationContext(), "entro"+plaz_prestamo + i, Toast.LENGTH_SHORT).show();
                                 String aux2 = String.valueOf(aux1);
                                 crear_prestamo_us(fi[i], ff[i], aux2);
                             }
+
+ */
 
                             //Toast.makeText(getApplicationContext(), "la solicitud fue enviada con exito ...!!!", Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {
@@ -255,12 +272,12 @@ public class Activity_enviar_solicitud_prestamo extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(Activity_enviar_solicitud_prestamo.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Activity_enviar_solicitud_prestamo.this, "Error Desconocido. 000002"+responseBody, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void crear_prestamo_us(String fch_i, String fch_f, String n_cuota){
+    private void crear_prestamo_us(String fch_i, String fch_f, String n_cuota, String id_pres){
         double valpres=Double.parseDouble(val_prestamo);
         double valint =Double.parseDouble(int_p);
         double pz=Double.parseDouble(plaz_prestamo);
@@ -273,13 +290,14 @@ public class Activity_enviar_solicitud_prestamo extends AppCompatActivity {
         String n_comu = nomb_comu.replace(" ", "_");
         String ct_p =String.valueOf(cut_c).replace(" ", "%20");
         String n_ct =n_cuota.replace(" ", "%20");
-
+        String f_crea = f_actual.replace(" ", "%20");
         String f_ini=fch_i.replace(" ", "%20");
         String f_fin=fch_f.replace(" ", "%20");
         String url_link4 = getString(R.string.link_us_crea_pres);
+        String id_p =id_pres.replace(" ", "%20");
 
 
-        String url = url_link4+"?ci_us="+ci_us+"&v_cuota="+ct_p+"&n_comu="+n_comu+"&n_cuota="+n_ct+"&f_ini="+f_ini+"&f_fin="+f_fin;
+        String url = url_link4+"?ci_us="+ci_us+"&v_cuota="+ct_p+"&n_comu="+n_comu+"&n_cuota="+n_ct+"&f_ini="+f_ini+"&f_fin="+f_fin+"&f_crea="+f_crea+"&id_p="+id_p;
 
         //Toast.makeText(getApplicationContext(), url, Toast.LENGTH_SHORT).show();
         regis_us.post(url, new AsyncHttpResponseHandler() {
@@ -294,7 +312,7 @@ public class Activity_enviar_solicitud_prestamo extends AppCompatActivity {
                     } else {
                         try {
 
-                            Toast.makeText(getApplicationContext(), "Solicitudes enviadas con exito ...!!!", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "Solicitudes enviadas con exito ...!!!", Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -304,10 +322,64 @@ public class Activity_enviar_solicitud_prestamo extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(Activity_enviar_solicitud_prestamo.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Activity_enviar_solicitud_prestamo.this, "Error Desconocido. 00001"+responseBody, Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+    private void ult_prestamo(){
+
+
+        String ci_us = usuario.replace(" ", "%20");
+        String n_comu = nomb_comu.replace(" ", "_");
+
+        String url_link5 = getString(R.string.link_ult_prestamo);
+
+
+        String url = url_link5+"?ci_us="+ci_us+"&n_comu="+n_comu;
+
+        //Toast.makeText(getApplicationContext(), url, Toast.LENGTH_SHORT).show();
+        regis_us33.post(url, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                if (statusCode == 200) {
+
+                    String respuesta = new String(responseBody);
+                    if (respuesta.equalsIgnoreCase("null")) {
+                        Toast.makeText(Activity_enviar_solicitud_prestamo.this, "Error al cargar datos", Toast.LENGTH_SHORT).show();
+                    } else {
+                        try {
+                            //Toast.makeText(getApplicationContext(),"entro nuevamente1:   ", Toast.LENGTH_SHORT).show();
+
+                            JSONObject jsonObj2 = new JSONObject(respuesta);
+                            String res_id=jsonObj2.getString("dato");
+                          Toast.makeText(getApplicationContext(),"entro nuevamente:   " + res_id, Toast.LENGTH_SHORT).show();
+
+                            int i_p=Integer.parseInt(plaz_prestamo);
+                            for(int i = 0; i < i_p; i++){
+                                int aux1 = i+1;
+                                Toast.makeText(getApplicationContext(), "entro"+plaz_prestamo + i, Toast.LENGTH_SHORT).show();
+                                String aux2 = String.valueOf(aux1);
+                                crear_prestamo_us(fi[i], ff[i], aux2,res_id);}
+
+
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(Activity_enviar_solicitud_prestamo.this, "Error Desconocido. 00001"+responseBody, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 
 
     public static double redondearDecimales(double valorInicial, int numeroDecimales) {

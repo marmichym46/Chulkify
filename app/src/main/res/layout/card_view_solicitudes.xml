@@ -216,8 +216,7 @@
                                     android:background="@drawable/tema_boton"
                                     android:drawableLeft="@drawable/acep"
                                     android:text="@string/acep"
-                                    android:textColor="@color/blanco"
-                                    android:enabled="false"/>
+                                    android:textColor="@color/blanco"/>
                             </LinearLayout>
 
                             <LinearLayout
@@ -235,8 +234,7 @@
                                     android:background="@drawable/tema_boton_gris"
                                     android:drawableLeft="@drawable/neg"
                                     android:text="@string/recha"
-                                    android:textColor="@color/negro"
-                                    android:enabled="false"/>
+                                    android:textColor="@color/negro"/>
                             </LinearLayout>
 
                         </LinearLayout>

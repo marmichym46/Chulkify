@@ -301,10 +301,10 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
     public void cancelarSolicitud(final int identificador, final String usuario_soli){
         AsyncHttpClient rechazar  = new AsyncHttpClient();
         final int ident=identificador;
-
+        String nmb_comu = n_comu.replace(" ", "_");
         String idt=String.valueOf(ident);
         String l_recha_soli=getString(R.string.link_rechazar_solicitud);
-        String url = l_recha_soli+"?id="+ident;
+        String url = l_recha_soli+"?id="+ident+"&n_comu="+nmb_comu;
         rechazar.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

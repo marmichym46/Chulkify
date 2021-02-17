@@ -25,12 +25,12 @@
 
     <string name="link_gp_crea_pres">http://www.marlonmym.tk/chulkify/prestamos/gp_crear_prestamo.php</string>
     <string name="link_us_crea_pres">http://www.marlonmym.tk/chulkify/prestamos/us_crear_prestamo.php</string>
-
+    <string name="link_ult_prestamo">http://www.marlonmym.tk/chulkify/prestamos/ult_prestamo.php</string>
     <!--links -->
 
 
     <!--constantes-->
-    <string name="version">v3.0</string>
+    <string name="version">v3.2</string>
     <string name="taza_transaccion">0.25</string>
     <string name="maximo">500</string>
     <string name="interes_prestamo">0.05</string>
