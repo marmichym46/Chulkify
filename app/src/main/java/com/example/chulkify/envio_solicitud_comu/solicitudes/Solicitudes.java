@@ -12,10 +12,17 @@ public class Solicitudes {
     private String nombre_us;
     private String apellido_us;
     private String usuario_us;
+    private String tipo_s;
+    private String valor_p;
+    private String plazo_p;
+    private String msj1;
+    private String msj2;
+
 
     public Solicitudes(){}
 
-    public Solicitudes(int id_notif, String ci_emi_notif, String ci_recep_notif, String estado_notif, String estado_g_notif, String tipo_notif, String fecha_crea_notif, String fecha_cadu_notif, String nombre_us, String apellido_us, String usuario_us) {
+
+    public Solicitudes(int id_notif, String ci_emi_notif, String ci_recep_notif, String estado_notif, String estado_g_notif, String tipo_notif, String fecha_crea_notif, String fecha_cadu_notif, String nombre_us, String apellido_us, String usuario_us, String tipo_s, String valor_p, String plazo_p, String msj1, String msj2) {
         this.id_notif = id_notif;
         this.ci_emi_notif = ci_emi_notif;
         this.ci_recep_notif = ci_recep_notif;
@@ -27,6 +34,51 @@ public class Solicitudes {
         this.nombre_us = nombre_us;
         this.apellido_us = apellido_us;
         this.usuario_us = usuario_us;
+        this.tipo_s = tipo_s;
+        this.valor_p = valor_p;
+        this.plazo_p = plazo_p;
+        this.msj1 = msj1;
+        this.msj2 = msj2;
+    }
+
+    public String getMsj1() {
+        return msj1;
+    }
+
+    public void setMsj1(String msj1) {
+        this.msj1 = msj1;
+    }
+
+    public String getMsj2() {
+        return msj2;
+    }
+
+    public void setMsj2(String msj2) {
+        this.msj2 = msj2;
+    }
+
+    public String getTipo_s() {
+        return tipo_s;
+    }
+
+    public void setTipo_s(String tipo_s) {
+        this.tipo_s = tipo_s;
+    }
+
+    public String getValor_p() {
+        return valor_p;
+    }
+
+    public void setValor_p(String valor_p) {
+        this.valor_p = valor_p;
+    }
+
+    public String getPlazo_p() {
+        return plazo_p;
+    }
+
+    public void setPlazo_p(String plazo_p) {
+        this.plazo_p = plazo_p;
     }
 
     public int getId_notif() {

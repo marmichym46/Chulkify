@@ -103,13 +103,17 @@ public class Activity_menu_prestamos extends AppCompatActivity {
         estado_prestamo=e1.toString().trim();
         estado_soli_pres=e2.toString().trim();
 
-        if (estado_prestamo.equals("NO_HAY")){
+        if (estado_prestamo.equals("NO_HAY") ||  estado_prestamo.equals("ESPERA")){
+
+
             if (estado_soli_pres.equals("NO_HAY") || estado_soli_pres.equals("CANCELADA")){
                 OPI.setVisibility(View.VISIBLE);
                 B1.setVisibility(View.VISIBLE);
             }
             else if (estado_soli_pres.equals("ESPERA")){
-               OPIII.setVisibility(View.VISIBLE);
+                Toast.makeText(Activity_menu_prestamos.this, "entro espera", Toast.LENGTH_SHORT).show();
+
+                OPIII.setVisibility(View.VISIBLE);
                 OPIII_1.setVisibility(View.VISIBLE);
                 OPIII_4.setVisibility(View.VISIBLE);
                 B2.setVisibility(View.VISIBLE);

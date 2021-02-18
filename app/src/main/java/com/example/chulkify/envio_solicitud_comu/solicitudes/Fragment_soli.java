@@ -146,10 +146,38 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
                                 String nnn=rpt2[3];
                                 String aaa=rpt2[4];
 
+                                String t_solicitud= rpt2[5];
+                                String tipo_solicitud= null;
+                                String valor_prestar= rpt2[6];
+                                String plazo_prestar= rpt2[7];
+                                String msj1=getString(R.string.v_prestamo);
+                                String msj2=getString(R.string.d_prestamo);
+
+
+                                if (t_solicitud.equals("SOLICITUD_UNION")){
+                                    tipo_solicitud= "UNION A GRUPO";
+                                }
+                                else if (t_solicitud.equals("SOLICITUD_PRESTAMO")){
+                                    tipo_solicitud= "PRESTAMO";
+                                }
+                                else {
+                                    tipo_solicitud= "ERROR";
+                                }
+
+                                String mensaje1="";
+                                String mensaje2="";
+
+                                if (!valor_prestar.equals("NULO")){
+                                    mensaje1="$ "+valor_prestar;
+                                }
+                                if (!plazo_prestar.equals("NULO")){
+                                    mensaje2=plazo_prestar+"  MESES";
+                                }
+
                                 //Toast.makeText(getContext(), "soli==>   "+ nnn+"soli==> "+aaa+"soli==> "+aux+"soli==> "+fecha+"soli==> ", Toast.LENGTH_LONG).show();
 
                                 //Toast.makeText(getContext(), id_usuario, Toast.LENGTH_SHORT).show();
-                                agregarTarjetasDeSolicitud(nnn,aaa,aux,fecha,id_us);
+                                agregarTarjetasDeSolicitud(nnn,aaa,aux,fecha,id_us,tipo_solicitud,mensaje1,mensaje2,msj1,msj2);
 
                             }
 
@@ -185,7 +213,7 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
         }
     }
 
-    public void agregarTarjetasDeSolicitud(String nombre_usu, String apellidi_usu, String usuario_usu, String fecha_crea,int id_us){
+    public void agregarTarjetasDeSolicitud(String nombre_usu, String apellidi_usu, String usuario_usu, String fecha_crea,int id_us, String t_s, String v_p, String p_p, String msj1, String msj2){
 
         Solicitudes solicitudes = new Solicitudes();
         solicitudes.setNombre_us(nombre_usu);
@@ -193,6 +221,11 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
         solicitudes.setUsuario_us(usuario_usu);
         solicitudes.setFecha_crea_notif(fecha_crea);
         solicitudes.setId_notif(id_us);
+        solicitudes.setTipo_s(t_s);
+        solicitudes.setValor_p(v_p);
+        solicitudes.setPlazo_p(p_p);
+        solicitudes.setMsj1(msj1);
+        solicitudes.setMsj2(msj2);
         listSolicitudes.add(0,solicitudes);
         actualizarTarjetas();
     }
@@ -268,10 +301,10 @@ public class Fragment_soli extends Fragment implements Response.ErrorListener, R
     public void cancelarSolicitud(final int identificador, final String usuario_soli){
         AsyncHttpClient rechazar  = new AsyncHttpClient();
         final int ident=identificador;
-
+        String nmb_comu = n_comu.replace(" ", "_");
         String idt=String.valueOf(ident);
         String l_recha_soli=getString(R.string.link_rechazar_solicitud);
-        String url = l_recha_soli+"?id="+ident;
+        String url = l_recha_soli+"?id="+ident+"&n_comu="+nmb_comu;
         rechazar.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

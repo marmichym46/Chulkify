@@ -33,6 +33,7 @@ public class activity_solicitar_prestamo extends AppCompatActivity {
     private String fondo_us, fondo_comu;
     private double fondo_us2, fondo_comu2;
     private  int fd_us, fd_comu;
+    private Double interes_p;
 
     //Variables para capturar preferencias
     private String ci_us_1, gp_1, cg_gp_1, taza,hoy_tran, maximo;
@@ -73,26 +74,11 @@ public class activity_solicitar_prestamo extends AppCompatActivity {
         maximo=preferences.getString("maximo", null);
         fondo_us=preferences.getString("fondos_usuario", null);
         fondo_comu=preferences.getString("fondos_comunidad", null);
+        interes_p= Double.parseDouble(getString(R.string.interes_prestamo));
 
         fondo_us2=(Double.parseDouble(fondo_us))*2;
         fondo_comu2=Double.parseDouble(fondo_comu);
-        /*String fd_us2=String.valueOf(fondo_us2);
-        String [] fd_us_aux=fd_us2.split(".");
-        //String fd_us3=fd_us_aux[0]);
 
-         */
-        //fd_us=convertir_dooble(fondo_us2);
-        //Toast.makeText(activity_solicitar_prestamo.this, fd_us, Toast.LENGTH_SHORT).show();
-/*
-
-        fd_us=Integer.parseInt(String.valueOf(fondo_us2));
-        fondo_comu2=Math.floor(Double.parseDouble(fondo_comu));
-        fd_comu=Integer.parseInt(String.valueOf(fondo_comu2));
-        Toast.makeText(activity_solicitar_prestamo.this, fd_us, Toast.LENGTH_SHORT).show();
-
-
-
- */
         if (fondo_us2 > fondo_comu2){
             valor_max=String.valueOf(fondo_comu2);
             val_prestamo.setText(valor_max);
@@ -120,9 +106,13 @@ public class activity_solicitar_prestamo extends AppCompatActivity {
                 Double valmaximo_p =Double.parseDouble(valor_max);
                 String plazo=meses.getSelectedItem().toString();
                 if (val_prestamo.getText().toString().isEmpty()) {
+                    datos_prestamo.setVisibility(View.GONE);
+                    btn_soli_prestamo.setVisibility(View.GONE);
                     Toast.makeText(activity_solicitar_prestamo.this, "Hay campos en blanco ", Toast.LENGTH_SHORT).show();
                 } else {
                     if (valprestar > valmaximo_p){
+                        datos_prestamo.setVisibility(View.GONE);
+                        btn_soli_prestamo.setVisibility(View.GONE);
                        Toast.makeText(activity_solicitar_prestamo.this, "Ha sobrepasado el limite de prerstamo, su valor maximo para prestar es de:   $"+valor_max, Toast.LENGTH_LONG).show();
                     }else{
                         cargar_datos(valprestar, plazo);
@@ -136,11 +126,17 @@ public class activity_solicitar_prestamo extends AppCompatActivity {
         btn_soli_prestamo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Double valprestar =Double.parseDouble(val_prestamo.getText().toString());
+                double val3 =valprestar * interes_p;
+                String val3_s=String.valueOf(val3);
+
+
                 String vl11=val_prestamo.getText().toString();
                 String val2=meses.getSelectedItem().toString();
                 SharedPreferences.Editor editor=preferences.edit();
                 editor.putString("valor_prestar",val_prestamo.getText().toString());
                 editor.putString("diferido_prestamo",meses.getSelectedItem().toString());
+                editor.putString("interes_prestamo",val3_s);
                 editor.apply();
 
                 startActivity(new Intent(activity_solicitar_prestamo.this, Activity_enviar_solicitud_prestamo.class));
@@ -153,7 +149,7 @@ public class activity_solicitar_prestamo extends AppCompatActivity {
     public void cargar_datos(double num, String plazo1){
 
         String val1=String.valueOf(num);
-        double val3 =num * 0.05;
+        double val3 =num * interes_p;
         double subtotal=num + val3;
         double pz=Double.parseDouble(plazo1);
         double cuota= subtotal/pz;

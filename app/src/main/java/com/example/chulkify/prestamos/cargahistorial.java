@@ -80,17 +80,12 @@ public class cargahistorial extends AppCompatActivity {
                             String [] res_sp = res_unido.split("/");
                             String res=res_sp[1];
                             Consulta_fondos();
-                            //Toast.makeText(cargahistorial.this, res, Toast.LENGTH_SHORT).show();
-                            if(res.equals("NO_HAY") || res.equals("PAGADO") || res.equals("PAGADO_R")|| res.equals("LIQUIDADO")){
+                            Toast.makeText(cargahistorial.this, res, Toast.LENGTH_SHORT).show();
                                 cconsulta_sol_pres();
                                 SharedPreferences.Editor editor= preferences.edit();
                                 editor.putString("estado_prestamos",res);
                                 editor.apply();
-                            } else {
-                                SharedPreferences.Editor editor= preferences.edit();
-                                editor.putString("estado_prestamos",res);
-                                editor.apply();
-                            }
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -122,7 +117,7 @@ public class cargahistorial extends AppCompatActivity {
                             String res_unido2=jsonObj.getString("dato");
                             String [] res_sp2 = res_unido2.split("/");
                             String res2=res_sp2[1];
-                            //Toast.makeText(cargahistorial.this, res2, Toast.LENGTH_SHORT).show();
+                           Toast.makeText(cargahistorial.this, res2, Toast.LENGTH_SHORT).show();
                                 SharedPreferences.Editor editor= preferences.edit();
                                 editor.putString("estado_soli_pres",res2);
                                 editor.apply();
@@ -143,8 +138,9 @@ public class cargahistorial extends AppCompatActivity {
     private void Consulta_fondos(){
         String cedula = cedula_us.replace(" ", "%20");
         String codigo_gp = cg_gp.replace(" ", "%20");
+        String n_comu = nomb_comu.replace(" ", "_");
         String url_link2 = getString(R.string.link_consulta_fondos_us_comu);
-        String url = url_link2+"?ci_us="+cedula+"&cg_gp="+codigo_gp;
+        String url = url_link2+"?ci_us="+cedula+"&cg_gp="+codigo_gp+"&n_comu="+n_comu;
         comu_clien3.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -158,7 +154,7 @@ public class cargahistorial extends AppCompatActivity {
                             String res_unido3=jsonObj.getString("dato");
                             String [] res_sp3 = res_unido3.split("%%");
 
-                            //Toast.makeText(cargahistorial.this, "$"+res_sp3[0]+"----$"+res_sp3[1], Toast.LENGTH_SHORT).show();
+                            Toast.makeText(cargahistorial.this, "$"+res_sp3[0]+"----$"+res_sp3[1], Toast.LENGTH_SHORT).show();
                             SharedPreferences.Editor editor= preferences.edit();
                             editor.putString("fondos_usuario",res_sp3[0]);
                             editor.putString("fondos_comunidad",res_sp3[1]);

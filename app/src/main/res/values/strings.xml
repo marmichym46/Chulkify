@@ -10,6 +10,7 @@
     <string name="link_consulta_comu_admin">http://www.marlonmym.tk/chulkify/consultas/consulta_comu_admin.php</string>
     <string name="link_buscar_usuarios">http://www.marlonmym.tk/chulkify/soli_comunidad/buscar_usu_per_comu.php</string>
     <string name="link_generar_solicitud_ing_grupo">http://www.marlonmym.tk/chulkify/soli_comunidad/add_notificacion.php</string>
+    <string name="link_generar_solicitud_prestamos">http://www.marlonmym.tk/chulkify/soli_comunidad/add_notificacion_pres.php</string>
     <string name="link_consultar_estd_soli_union">http://www.marlonmym.tk/chulkify/soli_comunidad/soli_estados.php</string>
     <string name="link_btn_cancelar_soli">http://www.marlonmym.tk/chulkify/soli_comunidad/cancelar.php</string>
     <string name="link_captura_solicitud">http://www.marlonmym.tk/chulkify/soli_comunidad/capturar_solicitudes.php</string>
@@ -20,23 +21,26 @@
     <string name="link_consultar_prestamos">http://www.marlonmym.tk/chulkify/prestamos/preparar_soli_pres.php</string>
     <string name="link_estado_solicitud_prestamos">http://www.marlonmym.tk/chulkify/prestamos/estado_soli_prestamo.php</string>
     <string name="link_consulta_fondos_us_comu">http://www.marlonmym.tk/chulkify/prestamos/cargar_fondos.php</string>
+
+
+    <string name="link_gp_crea_pres">http://www.marlonmym.tk/chulkify/prestamos/gp_crear_prestamo.php</string>
+    <string name="link_us_crea_pres">http://www.marlonmym.tk/chulkify/prestamos/us_crear_prestamo.php</string>
+    <string name="link_ult_prestamo">http://www.marlonmym.tk/chulkify/prestamos/ult_prestamo.php</string>
     <!--links -->
 
 
     <!--constantes-->
-    <string name="version">v2.1</string>
+    <string name="version">v3.2</string>
     <string name="taza_transaccion">0.25</string>
     <string name="maximo">500</string>
+    <string name="interes_prestamo">0.05</string>
     <!--constantes-->
 
     <!--cardviw-->
     <string name="tipo_solicitud">Solicitud de:</string>
-    <string name="v_prestamo">El valor a prestar es de:</string>
-    <string name="d_prestamo">Diferido a:</string>
+    <string name="v_prestamo">El valor a prestar es de:  </string>
+    <string name="d_prestamo">Diferido a:  </string>
     <!--cardviw-->
-
-
-
 
 
     <!--prestamos-->
@@ -48,7 +52,7 @@
     <string name="soli_aceptada">Tiene una solicitud  de prestamos aceptadas, el monto a prestar es de:</string>
     <string name="msj_monto_a_prestar">El monto a prestar es:</string>
     <string name="prestamo_liquidado_msj">Su ultimo prestamo fue liquidado por acumulacion de cuotas en MORA</string>
-    
+
     <string name="msj_prestamo_pagando">    Usted esta pagando un prestamo</string>
     <string name="msj_prestamo_refinanciado">  El prestamo que esta pagando esta refinanciado</string>
     <string name="msj_prestamo_mora">  El prestamo actual tiene un saldo por pagar de la cuota anterior, PONGASE AL DIA CON SUS PAGOS PARA EVITAR DEBITOS EN SU CUENTA Y EN LA DE LOS MIEMBROS DEL GRUPO </string>
@@ -197,7 +201,6 @@
 
     <string name="x_valor">xxxx.xx:</string>
     <string name="x_fecha">dd/mm/aa:</string>
-
 
 
     <!-- Strings historial transacciones -->
