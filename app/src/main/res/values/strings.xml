@@ -43,6 +43,13 @@
     <!--cardviw-->
 
 
+
+    <!--espera-->
+    <string name="titulo_soli_pres">Has solicitado un prestamo de:</string>
+    <string name="difer_en">Diferido en:  </string>
+    <string name="cuotas_de">cuotas de :  </string>
+    <!--espera-->
+
     <!--prestamos-->
     <string name="msj_ini_prestamos">Prestamos</string>
     <string name="no_prestamo">USTED NO HA REALIZADO PRESTAMOS</string>

@@ -230,6 +230,17 @@ public class Activity_menu_prestamos extends AppCompatActivity {
         });
 
 
+        //Boton espera solicitud
+
+        B3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Activity_menu_prestamos.this, activity_espera_soli_prestamo.class));
+                //Toast.makeText(menu_inicio.this, "url", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
 
 
     }
