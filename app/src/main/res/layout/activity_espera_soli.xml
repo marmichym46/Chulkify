@@ -133,6 +133,7 @@
                     android:drawablePadding="12dp"
                     android:paddingRight="20dp"
                     android:paddingLeft="20dp"
+                    android:visibility="gone"
                     android:textColor="@color/negro" />
 
                 <TextView
@@ -161,7 +162,6 @@
                         android:drawableLeft="@drawable/info"
                         android:drawableTint="@color/rojo"
                         android:textSize="18dp"
-                        android:visibility="gone"
                         android:text="Tu solicitud fue rechazada por un usuario, cancelala y vuelve a intentar...!" />
 
                 </LinearLayout>

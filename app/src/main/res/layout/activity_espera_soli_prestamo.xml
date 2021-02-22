@@ -18,16 +18,20 @@
             android:layout_weight="15"
             android:orientation="vertical"/>
 
+
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="15"
+            android:layout_weight="20"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="30"
                 android:paddingLeft="30dp"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
@@ -35,63 +39,77 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18dp"
-                    android:text="@string/solicitud_caducara" />
+                    android:text="@string/titulo_soli_pres" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="55"
-                android:paddingLeft="40dp"
-                android:paddingRight="40dp"
+                android:layout_weight="30"
+                android:gravity="center"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:background="@color/t_gren2"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textView25"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="10"
-                        android:text="" />
-
-                    <TextView
-                        android:id="@+id/fecha_cadu"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="40"
-                        android:textSize="25dp"
-                        android:textColor="@color/blanco"
-                        android:text="dd/hh/aaaa" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="5"
-                        android:text="" />
-
-                    <TextView
-                        android:id="@+id/hora_cadu"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="35"
-                        android:textSize="25dp"
-                        android:textColor="@color/blanco"
-                        android:text="hh:mm:ss" />
-
-                    <TextView
-                        android:id="@+id/textView26"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="10"
-                        android:text="" />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/txt_valor_pres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorAccent"
+                    android:text="$ 0000.00" />
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="35"
+                android:gravity="center"
+                android:padding="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView2411"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="30"
+                    android:textSize="18dp"
+                    android:textColor="@color/negro"
+                    android:text="@string/difer_en" />
+
+                <TextView
+                    android:id="@+id/txt_diferido"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:textSize="18dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorAccent"
+                    android:text="n°" />
+
+                <TextView
+                    android:id="@+id/textView2413"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="30"
+                    android:textSize="18dp"
+                    android:textColor="@color/negro"
+                    android:text="@string/cuotas_de" />
+
+                <TextView
+                    android:id="@+id/txt_cuota"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorAccent"
+                    android:text="$ 0000.00" />
+            </LinearLayout>
+
+
+
+
+
 
 
             <LinearLayout
@@ -100,6 +118,8 @@
                 android:layout_weight="15"
                 android:orientation="vertical"/>
         </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -138,6 +158,30 @@
                         android:layout_height="0dp"
                         android:layout_weight="10"
                         android:text="" />
+
+
+                    <LinearLayout
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="30dp"
+                        android:paddingRight="30dp"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tv_mensaje"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:background="@color/negro"
+                            android:textColor="@color/rojo"
+                            android:drawableLeft="@drawable/info"
+                            android:drawableTint="@color/rojo"
+                            android:textSize="18dp"
+                            android:text="Tu solicitud fue rechazada por un usuario, cancelala y vuelve a intentar...!" />
+
+                    </LinearLayout>
 
                     <LinearLayout
 
@@ -268,6 +312,7 @@
                 android:paddingLeft="20dp"
                 android:background="@drawable/tema_boton"
                 android:drawableLeft="@drawable/cancelar"
+                android:visibility="gone"
                 android:text="@string/cancelar" />
         </LinearLayout>
 
