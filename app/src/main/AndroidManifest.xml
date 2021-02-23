@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/new_logo_ico_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".prestamos.Activity_enviar_solicitud_prestamo"></activity>
+        <activity android:name=".prestamos.cartilla_pagoActivity"></activity>
+        <activity android:name=".prestamos.Activity_enviar_solicitud_prestamo" />
         <activity android:name=".prestamos.activity_solicitar_prestamo" />
         <activity android:name=".prestamos.activity_espera_soli_prestamo" />
         <activity android:name=".prestamos.cargahistorial" />
