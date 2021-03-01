@@ -128,11 +128,10 @@ public class Activity_menu_prestamos extends AppCompatActivity {
 
             }
             else if (estado_soli_pres.equals("ACEPTADA")){
-                OPIII.setVisibility(View.VISIBLE);
-                OPIII_2.setVisibility(View.VISIBLE);
-                OPIII_4.setVisibility(View.VISIBLE);
+                OPIV.setVisibility(View.VISIBLE);
+                AA1.setVisibility(View.VISIBLE);
                 B2.setVisibility(View.VISIBLE);
-                B3.setVisibility(View.VISIBLE);
+                B4.setVisibility(View.VISIBLE);
 
             }
 
@@ -155,11 +154,10 @@ public class Activity_menu_prestamos extends AppCompatActivity {
                 B2.setVisibility(View.VISIBLE);
                 B3.setVisibility(View.VISIBLE);
             }else if (estado_soli_pres.equals("ACEPTADA")){
-                OPIII.setVisibility(View.VISIBLE);
-                OPIII_2.setVisibility(View.VISIBLE);
-                OPIII_4.setVisibility(View.VISIBLE);
+                OPIV.setVisibility(View.VISIBLE);
+                AA1.setVisibility(View.VISIBLE);
                 B2.setVisibility(View.VISIBLE);
-                B3.setVisibility(View.VISIBLE);
+                B4.setVisibility(View.VISIBLE);
             }
         } else if (estado_prestamo.equals("LIQUIDADO")){
 
@@ -181,10 +179,10 @@ public class Activity_menu_prestamos extends AppCompatActivity {
                 B2.setVisibility(View.VISIBLE);
                 B3.setVisibility(View.VISIBLE);
             }else if (estado_soli_pres.equals("ACEPTADA")){
-                OPIII_2.setVisibility(View.VISIBLE);
-                OPIII_4.setVisibility(View.VISIBLE);
+                OPIV.setVisibility(View.VISIBLE);
+                AA1.setVisibility(View.VISIBLE);
                 B2.setVisibility(View.VISIBLE);
-                B3.setVisibility(View.VISIBLE);
+                B4.setVisibility(View.VISIBLE);
             }
 
         }
@@ -240,6 +238,14 @@ public class Activity_menu_prestamos extends AppCompatActivity {
             }
         });
 
+
+        B4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Activity_menu_prestamos.this,cartilla_pagoActivity.class));
+                //Toast.makeText(menu_inicio.this, "url", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
 
