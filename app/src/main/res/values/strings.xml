@@ -43,7 +43,6 @@
     <!--cardviw-->
 
 
-
     <!--espera-->
     <string name="titulo_soli_pres">Has solicitado un prestamo de:</string>
     <string name="difer_en">Diferido en:  </string>
@@ -72,6 +71,17 @@
     <string name="msj_soli_prestamo_espera">TIENE UNA SOLICITUD DE PRESTAMO EN ESPERA</string>
     <string name="msj_soli_prestamo_negada">SU SOLICITUD DE PRESTAMO FUE NEGADA, CANCELE LA SOLICITUD Y PONGASE EN CONTACTO CON LOS INTEGRANTES DE SU GRUPO PARA GENERAR UNA NUEVA SOLICITUD</string>
     <string name="msj_soli_prestamo_aceptada">SU SOLICITUD DE PRESTAMO FUE ACEPTADA</string>
+
+    <string name="n_cuota_cartllia">Cuota N°: </string>
+    <string name="abonar">Abonar</string>
+    <string name="abonos">Abonos: </string>
+    <string name="saldo">Saldo: </string>
+    <string name="detalle">DETALLE</string>
+    <string name="cuotas_del_prestamo">Estas son las cuotas de tu prestamo</string>
+    <string name="msj_prestamo_mora_2">Recuerde pagar a tiempo para evitar perjuicios en su cuenta y en la de sus compañeros</string>
+    <string name="cartilla_pago">Cartilla de pago</string>
+    <string name="n_prestamo">Prestamo N°:</string>
+    <string name="v_prestamo_t">Valor del Prestamo</string>
     <!--prestamos-->
 
     <string name="app_name">Chulkify</string>
