@@ -44,7 +44,7 @@ public class activity_espera_soli_prestamo extends AppCompatActivity {
         tv_aceptadas = (TextView) findViewById(R.id.tv_n_i_comu);
         tv_espera = (TextView) findViewById(R.id.tv_ubi_comu);
         tv_negadas = (TextView) findViewById(R.id.tv_admin_comu);
-        tv_mensaje=(TextView) findViewById(R.id.tv_mensaje);
+        tv_mensaje=(TextView) findViewById(R.id.tv_mensaje_2);
         tv_v_pres=(TextView) findViewById(R.id.txt_valor_pres);
         tv_cuota=(TextView) findViewById(R.id.txt_cuota);
         tv_diferido=(TextView) findViewById(R.id.txt_diferido);
@@ -52,7 +52,7 @@ public class activity_espera_soli_prestamo extends AppCompatActivity {
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
         usuario = preferences.getString("cedula_usuario", null);
         comunidad = preferences.getString("nombre_comu", null);
-        n_comu=preferences.getString("nomb_comu_solicitud", null);
+        n_comu=preferences.getString("nombre_comu", null);
         version = preferences.getString("version", null);
 
         buscar_soli = new AsyncHttpClient();
@@ -66,7 +66,7 @@ public class activity_espera_soli_prestamo extends AppCompatActivity {
         tv_negadas.setText("-");
         //tv_fecha.setText("0000");
         //tv_hora.setText("1111");
-        cargar_datos();
+       cargar_datos();
 
         //Toast.makeText(espera_soli.this, version, Toast.LENGTH_SHORT).show();
         //buscar_url();
@@ -74,7 +74,7 @@ public class activity_espera_soli_prestamo extends AppCompatActivity {
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cancelar_soli(usuario, n_comu);
+               // cancelar_soli(usuario, n_comu);
             }
         });
 
@@ -86,7 +86,7 @@ public class activity_espera_soli_prestamo extends AppCompatActivity {
     private void cargar_datos(){
         String codigo_comunidad = usuario.replace(" ", "%20");
         String n_comunidad = n_comu.replace(" ", "_");
-        String link_consult=getString(R.string.link_consultar_estd_soli_union);
+        String link_consult=getString(R.string.link_estado_solicitud_prestamos);
         String url = link_consult+"?ci_us="+codigo_comunidad+"&n_comu="+n_comunidad;
         buscar_soli.post(url, new AsyncHttpResponseHandler() {
             @Override
@@ -100,7 +100,8 @@ public class activity_espera_soli_prestamo extends AppCompatActivity {
                             JSONObject jsonObj = new JSONObject(respuesta);
                             res=jsonObj.getString("dato");
                             String[] parts = res.split("/");
-                            if (parts[1] == "dato_null"){
+                            Toast.makeText(activity_espera_soli_prestamo.this, res, Toast.LENGTH_SHORT).show();
+                            if (parts[1] == "NO_HAY"){
                                 Toast.makeText(activity_espera_soli_prestamo.this, "Error al cargar datos", Toast.LENGTH_SHORT).show();
                             }else {
                                 n_aceptadas=0;
@@ -133,13 +134,9 @@ public class activity_espera_soli_prestamo extends AppCompatActivity {
 
         });
 
-
-
-
-
     }
 
-
+/*
     private void cancelar_soli(String usu, String comu){
         AsyncHttpClient rechazar  = new AsyncHttpClient();
         String n_comunidad = comu.replace(" ", "_");
@@ -186,4 +183,6 @@ public class activity_espera_soli_prestamo extends AppCompatActivity {
 
 
     }
+
+ */
 }

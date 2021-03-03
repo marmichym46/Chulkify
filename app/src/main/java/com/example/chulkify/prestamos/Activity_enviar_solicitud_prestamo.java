@@ -246,21 +246,8 @@ public class Activity_enviar_solicitud_prestamo extends AppCompatActivity {
                         try {
 
                             ult_prestamo();
-                            //preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
-                            //String ult_p = preferences.getString("id_ult_prestamo", null);
 
-                            //Toast.makeText(getApplicationContext(), "entro"+ult_p, Toast.LENGTH_SHORT).show();
 
-/*
-                            int i_p=Integer.parseInt(plaz_prestamo);
-                            for(int i = 0; i < i_p; i++){
-                                int aux1 = i+1;
-                                Toast.makeText(getApplicationContext(), "entro"+plaz_prestamo + i, Toast.LENGTH_SHORT).show();
-                                String aux2 = String.valueOf(aux1);
-                                crear_prestamo_us(fi[i], ff[i], aux2);
-                            }
-
- */
 
                             //Toast.makeText(getApplicationContext(), "la solicitud fue enviada con exito ...!!!", Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {
