@@ -508,9 +508,9 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("1");
 
         if ((dia<=10)||(dia>=1)){
             if (mes==12){
@@ -519,7 +519,7 @@ public class Manejo_fechas {
             }else {
                 mes=mes+1;
             }
-            dia=6;
+            dia=5;
         }else {
             if (mes==11){
                 mes=1;
@@ -530,7 +530,7 @@ public class Manejo_fechas {
             }else {
                 mes=mes+2;
             }
-            dia=6;
+            dia=5;
         }
 
 
@@ -553,9 +553,9 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("0");
 
 
             if (mes == 12) {
@@ -587,12 +587,13 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("1");
 
 
-            dia=6;
+
+        dia=5;
 
 
 
@@ -615,9 +616,9 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("0");
 
 
         if (mes == 12) {
@@ -649,12 +650,13 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("1");
 
 
-        dia=6;
+
+        dia=5;
 
 
 
@@ -677,9 +679,10 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("0");
+
 
 
         if (mes == 12) {
@@ -711,12 +714,13 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("1");
 
 
-        dia=6;
+
+        dia=5;
 
 
 
@@ -739,9 +743,9 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("0");
 
 
         if (mes == 12) {
@@ -773,12 +777,13 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("1");
 
 
-        dia=6;
+
+        dia=5;
 
 
 
@@ -801,9 +806,10 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("0");
+
 
 
         if (mes == 12) {
@@ -835,12 +841,13 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("1");
 
 
-        dia=6;
+
+        dia=5;
 
 
 
@@ -863,9 +870,10 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("0");
+
 
 
         if (mes == 12) {
@@ -898,12 +906,13 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("0");
 
 
-        dia=6;
+
+        dia=5;
 
 
 
@@ -926,9 +935,10 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("0");
+
 
 
         if (mes == 12) {
@@ -960,12 +970,13 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("1");
 
 
-        dia=6;
+
+        dia=5;
 
 
 
@@ -988,9 +999,10 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("0");
+
 
 
         if (mes == 12) {
@@ -1022,12 +1034,13 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("1");
 
 
-        dia=6;
+
+        dia=5;
 
 
 
@@ -1050,9 +1063,9 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("0");
 
 
         if (mes == 12) {
@@ -1084,12 +1097,13 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("1");
 
 
-        dia=6;
+
+        dia=5;
 
 
 
@@ -1112,9 +1126,10 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("0");
+
 
 
         if (mes == 12) {
@@ -1146,12 +1161,13 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("1");
 
 
-        dia=6;
+
+        dia=5;
 
 
 
@@ -1174,9 +1190,10 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("0");
+
 
 
         if (mes == 12) {
@@ -1208,12 +1225,13 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("0");
 
 
-        dia=6;
+
+        dia=5;
 
 
 
@@ -1236,9 +1254,10 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("0");
+
 
 
         if (mes == 12) {
@@ -1270,12 +1289,13 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("1");
 
 
-        dia=6;
+
+        dia=5;
 
 
 
@@ -1298,9 +1318,10 @@ public class Manejo_fechas {
         int anio = Integer.parseInt(f[2]);
         int mes = Integer.parseInt(f[1]);
         int dia = Integer.parseInt(f[0]);
-        int hora = Integer.parseInt(f[3]);
-        int minutos = Integer.parseInt(f[4]);
-        int segundos = Integer.parseInt(f[5]);
+        int hora = Integer.parseInt("0");
+        int minutos = Integer.parseInt("0");
+        int segundos = Integer.parseInt("0");
+
 
 
         if (mes == 12) {
@@ -1324,6 +1345,123 @@ public class Manejo_fechas {
         String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
         return fecha_mes;
     }
+
+
+    public String extremos_ini(){
+        Calendar fecha_a = Calendar.getInstance();
+        Date date = new Date();
+
+        dia= fecha_a.get(Calendar.DAY_OF_MONTH);
+        mes= fecha_a.get(Calendar.MONTH)+1;
+        anio= fecha_a.get(Calendar.YEAR);
+
+        hora=0;
+        minutos=0;
+        segundos=1;
+
+        if (dia==5){
+            dia= fecha_a.get(Calendar.DAY_OF_MONTH);
+            mes= fecha_a.get(Calendar.MONTH)+1;
+            anio= fecha_a.get(Calendar.YEAR);
+        }
+
+        else if (dia<5){
+            if (mes==1){
+                dia=5;
+                mes=12;
+                anio=anio-1;
+
+            }else{
+                dia=5;
+                mes=mes-1;
+                anio= fecha_a.get(Calendar.YEAR);
+            }
+        }
+
+        else if(dia>5){
+            dia=5;
+            mes= fecha_a.get(Calendar.MONTH)+1;
+            anio= fecha_a.get(Calendar.YEAR);
+        }
+
+
+
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+        String fecha_caducidad=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_caducidad;
+
+    }
+    public String extremos_fin(){
+        Calendar fecha_a = Calendar.getInstance();
+        Date date = new Date();
+
+        dia= fecha_a.get(Calendar.DAY_OF_MONTH);
+        mes= fecha_a.get(Calendar.MONTH)+1;
+        anio= fecha_a.get(Calendar.YEAR);
+
+        hora=0;
+        minutos=0;
+        segundos=0;
+
+        if (dia==5){
+            if (mes==12){
+
+                dia= fecha_a.get(Calendar.DAY_OF_MONTH);
+                mes= 1;
+                anio= anio+1;
+            }
+            else {
+                dia= fecha_a.get(Calendar.DAY_OF_MONTH);
+                mes= mes+1;
+                anio= fecha_a.get(Calendar.YEAR);
+            }
+
+        }
+
+        else if (dia<5){
+                dia=5;
+                mes= fecha_a.get(Calendar.MONTH)+1;
+                anio= fecha_a.get(Calendar.YEAR);
+
+        }
+
+        else if(dia>5){
+            if (mes==12){
+
+                dia= 5;
+                mes= 1;
+                anio= anio+1;
+            }
+            else {
+                dia= 5;
+                mes= mes+1;
+                anio= fecha_a.get(Calendar.YEAR);
+            }
+        }
+
+
+
+
+        String aaaa= String.valueOf(anio);
+        String mmmm= String.valueOf(mes);
+        String dddd= String.valueOf(dia);
+        String hhhh= String.valueOf(hora);
+        String mnt= String.valueOf(minutos);
+        String ssss= String.valueOf(segundos);
+
+        String fecha_caducidad=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
+        return fecha_caducidad;
+
+    }
+
+
 
 
 }

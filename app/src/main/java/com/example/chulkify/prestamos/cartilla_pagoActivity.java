@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chulkify.Manejo_fechas;
 import com.example.chulkify.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -25,13 +26,13 @@ public class cartilla_pagoActivity extends AppCompatActivity {
 
     private AsyncHttpClient consult_prest,consult_cuota;
 
-    LinearLayout ll_c1 ,ll_c2,ll_c3,ll_c4,ll_c5,ll_c6,ll_c7,ll_c8,ll_c9,ll_c10,ll_c11,ll_c12;
+    LinearLayout ly_caja_pago,ll_c1 ,ll_c2,ll_c3,ll_c4,ll_c5,ll_c6,ll_c7,ll_c8,ll_c9,ll_c10,ll_c11,ll_c12;
     Button btn_detalle_01,btn_detalle_02,btn_detalle_03,btn_detalle_04,btn_detalle_05,btn_detalle_06,btn_detalle_07,btn_detalle_08,btn_detalle_09,btn_detalle_10,btn_detalle_11,btn_detalle_12,btn_abonar;
     EditText edt_abono;
     TextView txt_nmb_us, Txt_nmb_comu, id_prest, vl_prest, ct_n_cuota, ct_estado, txt_valor_cuota, txt_abonos, txt_saldos;
     TextView estado_cuota01,estado_cuota02,estado_cuota03,estado_cuota04,estado_cuota05,estado_cuota06,estado_cuota07,estado_cuota08,estado_cuota09,estado_cuota10,estado_cuota11,estado_cuota12;
     String usuario, ci_us, n_comu;
-
+    String ext_ini, ext_fin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,8 @@ public class cartilla_pagoActivity extends AppCompatActivity {
         ll_c10=(LinearLayout) findViewById(R.id.lly_c10);
         ll_c11=(LinearLayout) findViewById(R.id.lly_c11);
         ll_c12=(LinearLayout) findViewById(R.id.lly_c12);
+        ly_caja_pago=(LinearLayout) findViewById(R.id.ly_caja_pago);
+
 
         //button
         btn_abonar=(Button) findViewById(R.id.btn_abonar);
@@ -108,6 +111,10 @@ public class cartilla_pagoActivity extends AppCompatActivity {
         txt_nmb_us.setText(usuario);
         Txt_nmb_comu.setText(n_comu);
         consulta_prestamo();
+
+
+
+
 
         btn_detalle_01.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -219,6 +226,9 @@ public class cartilla_pagoActivity extends AppCompatActivity {
 
 
 
+
+
+
     }
 
 
@@ -262,6 +272,8 @@ public class cartilla_pagoActivity extends AppCompatActivity {
                                     consulta_cuota(id_prestamo, "1");
                                     consulta_cuota(id_prestamo, "2");
                                     consulta_cuota(id_prestamo, "3");
+
+
 
                                 }
                                 else if (plazo_prestamo.equals("6")){
@@ -357,6 +369,23 @@ public class cartilla_pagoActivity extends AppCompatActivity {
                                 String fecha_ini=parts2[3];
                                 String fecha_fin=parts2[4];
                                 String estado=parts2[5];
+
+
+                                Manejo_fechas mf = new Manejo_fechas();
+                                ext_ini= mf.extremos_ini();
+                                ext_fin= mf.extremos_fin();
+                               // Toast.makeText(cartilla_pagoActivity.this, ext_ini+"**"+fecha_ini+"---"+ext_fin+"**"+fecha_fin, Toast.LENGTH_SHORT).show();
+
+                                if (fecha_ini.equals(ext_ini) && fecha_fin.equals(ext_fin)){
+                                    consulta_prestamo_cuota(n_cta);
+                                    ly_caja_pago.setVisibility(View.VISIBLE);
+                                }
+                                else {
+                                    ly_caja_pago.setVisibility(View.GONE);
+                                }
+
+
+
 
 
 
@@ -477,6 +506,10 @@ public class cartilla_pagoActivity extends AppCompatActivity {
         });
     }
 
+
+
+
+
     private void info_cuota(String id_p, final String n_cta){
 
         String ci_usu = ci_us.replace(" ", "%20");
@@ -518,6 +551,19 @@ public class cartilla_pagoActivity extends AppCompatActivity {
                                     txt_abonos.setText(valor_pago);
                                     txt_saldos.setText(valor_saldo);
                                     edt_abono.setHint(valor_saldo);
+
+                                Manejo_fechas mf = new Manejo_fechas();
+                                ext_ini= mf.extremos_ini();
+                                ext_fin= mf.extremos_fin();
+                                // Toast.makeText(cartilla_pagoActivity.this, ext_ini+"**"+fecha_ini+"---"+ext_fin+"**"+fecha_fin, Toast.LENGTH_SHORT).show();
+
+                                if (fecha_ini.equals(ext_ini) && fecha_fin.equals(ext_fin)){
+                                    //consulta_prestamo_cuota(n_cta);
+                                    ly_caja_pago.setVisibility(View.VISIBLE);
+                                }
+                                else {
+                                    ly_caja_pago.setVisibility(View.GONE);
+                                }
 
 
 

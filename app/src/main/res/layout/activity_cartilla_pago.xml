@@ -297,12 +297,14 @@
 
             </ScrollView>
             <LinearLayout
+                android:id="@+id/ly_caja_pago"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="20"
                 android:orientation="horizontal"
                 android:paddingRight="20dp"
-                android:paddingLeft="20dp">
+                android:paddingLeft="20dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="0dp"
