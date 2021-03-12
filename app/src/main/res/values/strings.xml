@@ -34,7 +34,7 @@
 
 
     <!--constantes-->
-    <string name="version">v3.4</string>
+    <string name="version">v3.5</string>
     <string name="taza_transaccion">0.25</string>
     <string name="maximo">500</string>
     <string name="interes_prestamo">0.05</string>
