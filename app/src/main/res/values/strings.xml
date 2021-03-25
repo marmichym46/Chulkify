@@ -30,11 +30,23 @@
 
     <string name="link_consult_prest">http://www.marlonmym.tk/chulkify/prestamos/cargar_ult_prestamo.php</string>
     <string name="link_consult_cuota">http://www.marlonmym.tk/chulkify/prestamos/cargar_cuota_prestamo.php</string>
+    <string name="link_pagar_cuota">http://www.marlonmym.tk/chulkify/prestamos/pagar_cuota.php</string>
+
+
     <!--links -->
 
 
+
+    <!--super su-->
+    <string name="sus_usuarios">Listar Usuarios</string>
+    <string name="sus_comunidad">Listar Comunidades</string>
+    <string name="listar">Listar : </string>
+    <string name="inf_sus">Informacion de usuarios registrados</string>
+    <!--super su-->
+
+
     <!--constantes-->
-    <string name="version">v3.5</string>
+    <string name="version">v3.6</string>
     <string name="taza_transaccion">0.25</string>
     <string name="maximo">500</string>
     <string name="interes_prestamo">0.05</string>
@@ -114,6 +126,7 @@
     <string name="qdeseas_hacer">¿Que deseas hacer?</string>
 
     <!--//mensajes barra de progreso -->
+    <string name="Superusu">Super Usuario</string>
     <string name="cargar">Cargando Datos...</string>
     <string name="cargar_aporte">Acreditando en su cuenta ...</string>
     <string name="cargar_retiro">Realizando debito en la cuenta ...</string>
