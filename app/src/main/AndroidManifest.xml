@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/new_logo_ico_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".login.cargar_admin_Activity"></activity>
+        <activity android:name=".super_usuario.listar_usuarios_Activity"></activity>
+        <activity android:name=".login.cargar_admin_Activity" />
         <activity android:name=".login.menu_super_us_Activity" />
         <activity android:name=".prestamos.cartilla_pagoActivity" />
         <activity android:name=".prestamos.Activity_enviar_solicitud_prestamo" />
