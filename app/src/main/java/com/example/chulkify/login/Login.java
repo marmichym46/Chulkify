@@ -22,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chulkify.inicio;
 import com.example.chulkify.menus_usuarios.menu_no_comunidad;
 import com.example.chulkify.Manejo_fechas;
 import com.example.chulkify.R;
@@ -144,6 +145,14 @@ public class Login extends AppCompatActivity {
                                             intent= new Intent(Login.this, cargar_1.class);
                                         }else if(n_tp.equals("US_ESPERA")){
                                             intent= new Intent(Login.this, cargar3.class);
+                                        }else if(n_tp.equals("SUPER_US")){
+                                            Toast.makeText(Login.this, "Entro!!", Toast.LENGTH_SHORT).show();
+
+                                            intent= new Intent(Login.this, cargar_admin_Activity.class);
+                                        }
+                                        else {
+                                            Toast.makeText(Login.this, "Errode tipo!!", Toast.LENGTH_SHORT).show();
+
                                         }
 
                                        startActivity(intent);

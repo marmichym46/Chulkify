@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.chulkify.login.cargar3;
+import com.example.chulkify.login.cargar_admin_Activity;
 import com.example.chulkify.login.cargar_1;
 import com.example.chulkify.login.menu_inicio;
 import com.example.chulkify.menus_usuarios.menu_no_comunidad;
@@ -208,8 +209,8 @@ public class inicio extends AppCompatActivity {
                                 intent= new Intent(inicio.this, cargar_1.class);
                             }else if(n_tp.equals("ADMIN_COMU")){
                                 intent= new Intent(inicio.this, cargar_1.class);
-                            }else if(n_tp.equals("US_ESPERA")){
-                                intent= new Intent(inicio.this, cargar3.class);
+                            }else if(n_tp.equals("SUPER_US")){
+                                intent= new Intent(inicio.this, cargar_admin_Activity.class);
                             }
 
 
