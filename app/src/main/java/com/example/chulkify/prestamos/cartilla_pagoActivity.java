@@ -24,14 +24,14 @@ import cz.msebera.android.httpclient.Header;
 public class cartilla_pagoActivity extends AppCompatActivity {
     private SharedPreferences preferences;
 
-    private AsyncHttpClient consult_prest,consult_cuota;
+    private AsyncHttpClient consult_prest,consult_cuota, consult_pago;
 
     LinearLayout ly_caja_pago,ll_c1 ,ll_c2,ll_c3,ll_c4,ll_c5,ll_c6,ll_c7,ll_c8,ll_c9,ll_c10,ll_c11,ll_c12;
     Button btn_detalle_01,btn_detalle_02,btn_detalle_03,btn_detalle_04,btn_detalle_05,btn_detalle_06,btn_detalle_07,btn_detalle_08,btn_detalle_09,btn_detalle_10,btn_detalle_11,btn_detalle_12,btn_abonar;
     EditText edt_abono;
     TextView txt_nmb_us, Txt_nmb_comu, id_prest, vl_prest, ct_n_cuota, ct_estado, txt_valor_cuota, txt_abonos, txt_saldos;
     TextView estado_cuota01,estado_cuota02,estado_cuota03,estado_cuota04,estado_cuota05,estado_cuota06,estado_cuota07,estado_cuota08,estado_cuota09,estado_cuota10,estado_cuota11,estado_cuota12;
-    String usuario, ci_us, n_comu;
+    String usuario, ci_us, n_comu, codg_gp;
     String ext_ini, ext_fin;
 
     @Override
@@ -101,18 +101,28 @@ public class cartilla_pagoActivity extends AppCompatActivity {
 
         consult_cuota = new AsyncHttpClient();
         consult_prest= new AsyncHttpClient();
+        consult_pago = new AsyncHttpClient();
 
 
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
         ci_us = preferences.getString("cedula_usuario", null);
         usuario = preferences.getString("nombre_usuario", null);
         n_comu = preferences.getString("nombre_comu", null);
+        codg_gp=preferences.getString("comunidad", null);
 
         txt_nmb_us.setText(usuario);
         Txt_nmb_comu.setText(n_comu);
         consulta_prestamo();
 
+        btn_abonar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                pagar_cuota();
+
+
+            }
+        });
 
 
 
@@ -506,10 +516,6 @@ public class cartilla_pagoActivity extends AppCompatActivity {
         });
     }
 
-
-
-
-
     private void info_cuota(String id_p, final String n_cta){
 
         String ci_usu = ci_us.replace(" ", "%20");
@@ -586,4 +592,61 @@ public class cartilla_pagoActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void pagar_cuota(){
+        String f_ci_us= ci_us.replace(" ", "%20");
+        String f_n_comu=n_comu.replace(" ", "_");
+        String f_id_prest= id_prest.getText().toString();
+        String f_n_cuota= ct_n_cuota.getText().toString();
+        String f_v_abono=  edt_abono.getText().toString();
+        String f_cdg_gp= codg_gp.replace(" ", "%20");
+
+        Manejo_fechas f_mf= new Manejo_fechas();
+        String f_fecha_act= f_mf.fechaYhora_actual();
+        String url_link5 = getString(R.string.link_pagar_cuota);
+        String url = url_link5+"?ci_us="+f_ci_us+"&n_comu="+f_n_comu+"&id_prest="+f_id_prest+"&n_cuota="+f_n_cuota+"&v_abono="+f_v_abono+"&cdg_gp="+f_cdg_gp+"&fecha="+f_fecha_act;
+        //Toast.makeText(cartilla_pagoActivity.this, f_ci_us+"-"+f_n_comu+"-"+f_id_prest+"-"+f_n_cuota+"-"+f_v_abono+"-"+f_cdg_gp+"-"+f_fecha_act , Toast.LENGTH_SHORT).show();
+
+        consult_pago.post(url, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                if (statusCode == 200) {
+                    String respuesta = new String(responseBody);
+                    if (respuesta.equalsIgnoreCase("null")) {
+                        Toast.makeText(cartilla_pagoActivity.this, "Error al cargar datos", Toast.LENGTH_SHORT).show();
+                    } else {
+                        try {
+
+                            Toast.makeText(cartilla_pagoActivity.this, "Transaccion: Realizada" , Toast.LENGTH_SHORT).show();
+                            edt_abono.setText("");
+                            consulta_prestamo();
+
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(cartilla_pagoActivity.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+        /*
+        {
+
+        String ci_usu = ci_us.replace(" ", "%20");
+        String nm_comu = n_comu.replace(" ", "_");
+        String url_link = getString(R.string.link_consult_prest);
+        String url = url_link+"?ci_us="+ci_usu+"&n_comu="+nm_comu;
+        //Toast.makeText(cargar_2.this, url , Toast.LENGTH_SHORT).show();
+
+    }
+
+         */
 }
