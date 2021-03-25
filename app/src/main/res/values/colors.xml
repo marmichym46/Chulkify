@@ -20,6 +20,9 @@
     <color name="celeste_claro">#C5F9F3</color>
     <color name="naranja">#FBC50D </color>
 
+    <color name="azul_oscuro_opacity">#8c036A83</color>
+    <color name="azul_oscuro">#036A83</color>
+
     <color name="azul_nor">#3B54DB</color>
     <color name="azul_pres">#3BA1DB</color>
 

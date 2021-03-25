@@ -38,8 +38,8 @@
 
 
     <!--super su-->
-    <string name="sus_usuarios">Usuarios</string>
-    <string name="sus_comunidad">Comunidades</string>
+    <string name="sus_usuarios">Listar Usuarios</string>
+    <string name="sus_comunidad">Listar Comunidades</string>
     <string name="listar">Listar : </string>
     <string name="inf_sus">Informacion de usuarios registrados</string>
     <!--super su-->

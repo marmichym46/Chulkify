@@ -152,7 +152,8 @@
                         android:layout_height="wrap_content"
                         android:paddingRight="10dp"
                         android:paddingLeft="10dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -257,67 +258,62 @@
                 android:textColor="@color/negro"
                 android:textSize="15dp" />
 
-            <HorizontalScrollView
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_gravity="center"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/azul_oscuro_opacity"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:paddingRight="35dp"
-                    android:paddingLeft="35dp"
-                    android:background="@drawable/tema_negro_trans"
-                    android:orientation="horizontal" >
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:padding="10dp"
+                    android:paddingRight="20dp">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingRight="20dp">
-
-                        <Button
-                            android:id="@+id/btn_list_usu"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/tema_boton5"
-                            android:drawableTop="@drawable/sus_list"
-                            android:drawablePadding="12dp"
-                            android:paddingLeft="5dp"
-                            android:paddingRight="5dp"
-                            android:textSize="12dp"
-                            android:text="@string/sus_usuarios"
-                            android:textColor="@color/colorAccent" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingRight="20dp">
-
-                        <Button
-                            android:id="@+id/btn_list_comu"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/tema_boton5"
-                            android:drawableTop="@drawable/listgroups"
-                            android:drawablePadding="12dp"
-                            android:paddingLeft="5dp"
-                            android:paddingRight="5dp"
-                            android:textSize="12dp"
-                            android:text="@string/sus_comunidad"
-                            android:textColor="@color/colorAccent" />
-
-                    </LinearLayout>
-
-
-
-
+                    <Button
+                        android:id="@+id/btn_list_usu"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/tema_boton5"
+                        android:drawableLeft="@drawable/list_sus_wt"
+                        android:drawablePadding="12dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:text="@string/sus_usuarios"
+                        android:textColor="@color/blanco"
+                        android:textSize="12dp" />
 
                 </LinearLayout>
 
-            </HorizontalScrollView>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:padding="10dp"
+                    android:paddingRight="20dp">
+
+                    <Button
+                        android:id="@+id/btn_list_comu"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/tema_boton5"
+                        android:drawableLeft="@drawable/list_groups_wt"
+                        android:drawablePadding="12dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:text="@string/sus_comunidad"
+                        android:textColor="@color/blanco"
+                        android:textSize="10dp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
         </LinearLayout>
 
         <LinearLayout
