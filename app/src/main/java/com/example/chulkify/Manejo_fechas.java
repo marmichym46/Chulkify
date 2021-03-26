@@ -1384,9 +1384,6 @@ public class Manejo_fechas {
             anio= fecha_a.get(Calendar.YEAR);
         }
 
-
-
-
         String aaaa= String.valueOf(anio);
         String mmmm= String.valueOf(mes);
         String dddd= String.valueOf(dia);
@@ -1445,9 +1442,6 @@ public class Manejo_fechas {
                 anio= fecha_a.get(Calendar.YEAR);
             }
         }
-
-
-
 
         String aaaa= String.valueOf(anio);
         String mmmm= String.valueOf(mes);

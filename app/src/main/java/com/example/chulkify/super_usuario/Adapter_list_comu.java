@@ -1,28 +1,27 @@
-package com.example.chulkify.prestamos.historial_prestamos;
+package com.example.chulkify.super_usuario;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.chulkify.transacciones_pg.reportes.Fragment_histo_ap;
-import com.example.chulkify.transacciones_pg.reportes.Fragment_histo_rt;
-import com.example.chulkify.transacciones_pg.reportes.Fragment_histo_tran;
+import com.example.chulkify.envio_solicitud_comu.solicitudes.Fragment_soli;
+import com.example.chulkify.notificaciones.notificaciones_1;
 
-public class Adapter_histo_prestamos extends FragmentPagerAdapter {
+public class Adapter_list_comu extends FragmentPagerAdapter {
 
-    public Adapter_histo_prestamos(FragmentManager fm)
+    public Adapter_list_comu(FragmentManager fm)
     {
         super(fm);
     }
 
+
     @Override
     public Fragment getItem(int position) {
         if(position==0){
-            return new Fragment_historial_prestamo();
+            return new ComunidadFragment();
         }
         return null;
-
     }
 
     @Override
@@ -35,11 +34,9 @@ public class Adapter_histo_prestamos extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         if(position==0){
-            return "historial_prestamo";
-
-    }
+            return "Comunidad";
+        }
         return null;
-
     }
 }
 

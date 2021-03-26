@@ -394,11 +394,6 @@ public class cartilla_pagoActivity extends AppCompatActivity {
                                     ly_caja_pago.setVisibility(View.GONE);
                                 }
 
-
-
-
-
-
                                 if (n_cta.equals("1")){
                                     estado_cuota01.setText(estado);
                                     ll_c1.setVisibility(View.VISIBLE);
