@@ -120,8 +120,6 @@ public class menu_comunidad extends AppCompatActivity {
 
 
 
-
-
         btn_actualizar = (Button) findViewById(R.id.btn_refres);
         btn_actualizar.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -186,8 +186,6 @@ public class menu_inicio extends AppCompatActivity {
                             JSONObject jsonObj = new JSONObject(respuesta);
                             resp = jsonObj.getString("dato");
                             //Toast.makeText(espera_soli.this, resp, Toast.LENGTH_SHORT).show();
-
-
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

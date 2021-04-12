@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.chulkify.login.Login;
 import com.example.chulkify.login.cargar3;
 import com.example.chulkify.login.cargar_admin_Activity;
 import com.example.chulkify.login.cargar_1;
@@ -78,33 +79,26 @@ public class inicio extends AppCompatActivity {
         if ((preferences.getString("nombre_usuario", null) != null)&&(preferences.getString("pass", null) != null)){
             if((preferences.getInt("anio_cadu", 0) != 0)&&(preferences.getInt("mes_cadu", 0) != 0)&&(preferences.getInt("dia_cadu", 0) != 0)){
                 cdd="CADUCADO";
-
                 Manejo_fechas mf = new Manejo_fechas();
-
                 int aaa=mf.anio_actual();
                 int mmm=mf.mes_actual();
                 int ddd=mf.dia_actual();
                 int hhh=mf.hora_actual();
                 int mnt=mf.minuto_actual();
                 int sss=mf.segundo_actual();
-
                 preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
                 int aux_anio = preferences.getInt("anio_cadu", 0);
                 int aux_mes = preferences.getInt("mes_cadu", 0);
                 int aux_dia = preferences.getInt("dia_cadu", 0);
                 int aux_hora = preferences.getInt("hora_cadu", 0);
                 int aux_mnt = preferences.getInt("minuto_cadu", 0);
-
-
                 if (aaa >= aux_anio){
                     if (mmm >= aux_mes){
                         if (ddd >= aux_dia){
                             if (hhh >= aux_hora){
                                 if (mnt >= aux_mnt){
                                     preferences.edit().clear().apply();
-
                                     cdd="CADUCADO";
-
                                 }
                                 else{
                                     cdd="NO_CADUCADO";
@@ -126,8 +120,6 @@ public class inicio extends AppCompatActivity {
                 else{
                     cdd="NO_CADUCADO";
                 }
-
-
                 if (cdd.equals("CADUCADO")){
                     preferences.edit().clear().apply();
                     Toast.makeText(inicio.this, "La session ah caducado", Toast.LENGTH_SHORT).show();
@@ -138,8 +130,6 @@ public class inicio extends AppCompatActivity {
                     usuario_clien = new AsyncHttpClient();
                     ini_seccion();
                 }
-
-
             }
             else{
                 us=preferences.getString("nombre_usuario", null);
@@ -152,14 +142,11 @@ public class inicio extends AppCompatActivity {
             startActivity(new Intent(inicio.this, menu_inicio.class));
            }
     }
-
     private void ini_seccion() {
         String usuario = us.replace(" ", "%20");
         String password =   pw.replace(" ", "%20");
         String l_lg= getString(R.string.link_login);
         String url = l_lg+"?usuario_us="+usuario+"&contrasena_us="+password;
-        //Toast.makeText(Login.this, url, Toast.LENGTH_SHORT).show();
-
         usuario_clien.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -170,17 +157,12 @@ public class inicio extends AppCompatActivity {
                         startActivity(new Intent(inicio.this, menu_inicio.class));
                     } else {
                         try {
-
                             JSONObject jsonObj = new JSONObject(respuesta);
-
-
                             String n_tp= jsonObj.getString("tipo_us");
                             Manejo_fechas cd = new Manejo_fechas();
                             String cadd=cd.caducidad();
                             String[] pt = cadd.split("/");
-
                             SharedPreferences.Editor editor=preferences.edit();
-
                             editor.putString("fecha_actual",cd.fecha_actual() );
                             editor.putInt("anio_cadu", Integer.parseInt(pt[2]));
                             editor.putInt("mes_cadu", Integer.parseInt(pt[1]));
@@ -188,7 +170,6 @@ public class inicio extends AppCompatActivity {
                             editor.putInt("hora_cadu", Integer.parseInt(pt[3]));
                             editor.putInt("minuto_cadu", Integer.parseInt(pt[4]));
                             editor.putInt("segundo_cadu", Integer.parseInt(pt[5]));
-
                             editor.putString("cedula_usuario", jsonObj.getString("cedula_us"));
                             editor.putString("nombre_usuario", jsonObj.getString("usuario_us"));
                             editor.putInt("id", jsonObj.getInt("id_us"));
@@ -209,6 +190,8 @@ public class inicio extends AppCompatActivity {
                                 intent= new Intent(inicio.this, cargar_1.class);
                             }else if(n_tp.equals("ADMIN_COMU")){
                                 intent= new Intent(inicio.this, cargar_1.class);
+                            }else if(n_tp.equals("US_ESPERA")){
+                                intent= new Intent(inicio.this, cargar3.class);
                             }else if(n_tp.equals("SUPER_US")){
                                 intent= new Intent(inicio.this, cargar_admin_Activity.class);
                             }

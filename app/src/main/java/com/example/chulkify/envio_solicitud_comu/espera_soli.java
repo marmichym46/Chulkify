@@ -187,9 +187,7 @@ public class espera_soli extends AppCompatActivity {
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Toast.makeText(espera_soli.this, "Error Desconocido. Intentelo De Nuevo!!"+responseBody, Toast.LENGTH_SHORT).show();
 
-
             }
-
 
         });
 
@@ -207,9 +205,6 @@ public class espera_soli extends AppCompatActivity {
         buscar_cadu.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
-
-
                 if (statusCode == 200) {
                     String respuesta = new String(responseBody);
                     if (respuesta.equalsIgnoreCase("null")) {
@@ -233,13 +228,6 @@ public class espera_soli extends AppCompatActivity {
                                 tv_fecha.setText(fecha_caducidad);
 
                             }
-
-
-
-
-
-
-
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

@@ -46,7 +46,6 @@ public class Manejo_fechas {
         fecha = diaS+"/"+mesS+"/"+anioS;
         return fecha;
     }
-
     public String hora_actual_formato(){
         Calendar fecha_a = Calendar.getInstance();
         Date date = new Date();
@@ -77,7 +76,6 @@ public class Manejo_fechas {
         fecha = horaS+"/"+minutosS+"/"+segundosS;
         return fecha;
     }
-
     public String fechaYhora_actual(){
         Calendar fecha_a = Calendar.getInstance();
         Date date = new Date();
@@ -108,9 +106,6 @@ public class Manejo_fechas {
         fecha = diaS+"/"+mesS+"/"+anioS+"/"+horaS+"/"+minutosS+"/"+segundosS;
         return fecha;
     }
-
-
-
     public int anio_actual(){
         Calendar fecha_a = Calendar.getInstance();
         Date date = new Date();
@@ -498,9 +493,7 @@ public class Manejo_fechas {
         return fecha_caducidad;
 
     }
-
     /*prestamos*/
-
     public String mes1_inicio(){
         String aux_fecha=caducidad();
         String [] f=aux_fecha.split("/");
@@ -579,7 +572,6 @@ public class Manejo_fechas {
         String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
         return fecha_mes;
     }
-
     public String mes2_inicio(){
         String aux_fecha=mes1_fin();
         String [] f=aux_fecha.split("/");
@@ -642,7 +634,6 @@ public class Manejo_fechas {
         String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
         return fecha_mes;
     }
-
     public String mes3_inicio(){
         String aux_fecha=mes2_fin();
         String [] f=aux_fecha.split("/");
@@ -706,7 +697,6 @@ public class Manejo_fechas {
         String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
         return fecha_mes;
     }
-
     public String mes4_inicio(){
         String aux_fecha=mes3_fin();
         String [] f=aux_fecha.split("/");
@@ -769,7 +759,6 @@ public class Manejo_fechas {
         String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
         return fecha_mes;
     }
-
     public String mes5_inicio(){
         String aux_fecha=mes4_fin();
         String [] f=aux_fecha.split("/");
@@ -833,7 +822,6 @@ public class Manejo_fechas {
         String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
         return fecha_mes;
     }
-
     public String mes6_inicio(){
         String aux_fecha=mes5_fin();
         String [] f=aux_fecha.split("/");
@@ -897,8 +885,6 @@ public class Manejo_fechas {
         String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
         return fecha_mes;
     }
-
-
     public String mes7_inicio(){
         String aux_fecha=mes6_fin();
         String [] f=aux_fecha.split("/");
@@ -962,7 +948,6 @@ public class Manejo_fechas {
         String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
         return fecha_mes;
     }
-
     public String mes8_inicio(){
         String aux_fecha=mes7_fin();
         String [] f=aux_fecha.split("/");
@@ -1026,7 +1011,6 @@ public class Manejo_fechas {
         String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
         return fecha_mes;
     }
-
     public String mes9_inicio(){
         String aux_fecha=mes8_fin();
         String [] f=aux_fecha.split("/");
@@ -1089,7 +1073,6 @@ public class Manejo_fechas {
         String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
         return fecha_mes;
     }
-
     public String mes10_inicio(){
         String aux_fecha=mes9_fin();
         String [] f=aux_fecha.split("/");
@@ -1153,7 +1136,6 @@ public class Manejo_fechas {
         String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
         return fecha_mes;
     }
-
     public String mes11_inicio(){
         String aux_fecha=mes10_fin();
         String [] f=aux_fecha.split("/");
@@ -1217,7 +1199,6 @@ public class Manejo_fechas {
         String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
         return fecha_mes;
     }
-
     public String mes12_inicio(){
         String aux_fecha=mes11_fin();
         String [] f=aux_fecha.split("/");
@@ -1281,7 +1262,6 @@ public class Manejo_fechas {
         String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
         return fecha_mes;
     }
-
     public String mes13_inicio(){
         String aux_fecha=mes12_fin();
         String [] f=aux_fecha.split("/");
@@ -1345,8 +1325,6 @@ public class Manejo_fechas {
         String fecha_mes=dddd+"/"+mmmm+"/"+aaaa+"/"+hhhh+"/"+mnt+"/"+ssss;
         return fecha_mes;
     }
-
-
     public String extremos_ini(){
         Calendar fecha_a = Calendar.getInstance();
         Date date = new Date();

@@ -41,6 +41,8 @@ public class cargar3 extends AppCompatActivity {
         },07000);
     }
     private void cargar_datos(){
+        Toast.makeText(cargar3.this, "entro", Toast.LENGTH_SHORT).show();
+
         String cog_comu = usuario.replace(" ", "%20");
         String l_c_comu = getString(R.string.link_consultar_comunidad);
         String url = l_c_comu+"?codigo_comu="+cog_comu;

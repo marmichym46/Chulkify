@@ -144,14 +144,9 @@ public class nuevo_usuario extends AppCompatActivity {
         String l_rg=getString(R.string.link_registro_us);
         String url = l_rg+"?cedula_us="+ci_us+"&nombre_us="+nom_us+"&apellidos_us="+ape_us+"&correo_us="+correo_us+"&usuario_us="+nw_us+"&contrasena_us="+pass_us+"&telefono_us="+tf_us+"&direccion_us="+dir_us+"&ciudad_us="+cd_us+"&fecha_inicio_us="+fecha_us;
 
-
-
         clien.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
-
-
 
                 if (statusCode == 200) {
 

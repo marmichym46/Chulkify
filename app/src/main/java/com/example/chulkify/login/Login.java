@@ -146,7 +146,7 @@ public class Login extends AppCompatActivity {
                                         }else if(n_tp.equals("US_ESPERA")){
                                             intent= new Intent(Login.this, cargar3.class);
                                         }else if(n_tp.equals("SUPER_US")){
-                                            Toast.makeText(Login.this, "Entro!!", Toast.LENGTH_SHORT).show();
+                                            //Toast.makeText(Login.this, "Entro!!", Toast.LENGTH_SHORT).show();
 
                                             intent= new Intent(Login.this, cargar_admin_Activity.class);
                                         }

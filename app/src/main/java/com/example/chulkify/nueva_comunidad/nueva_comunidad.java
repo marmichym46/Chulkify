@@ -34,11 +34,7 @@ public class nueva_comunidad extends AppCompatActivity {
     private EditText edt_nombre, edt_codigo, edt_ciudad;
     private String fecha;
 
-
     private String fechacrea, fechacadu;
-
-
-
     private Button btn_guardar;
     private AsyncHttpClient cliente;
     private Date fecha_dt;
@@ -74,7 +70,6 @@ public class nueva_comunidad extends AppCompatActivity {
         cliente=new AsyncHttpClient();
 
 
-
         btn_guardar=(Button) findViewById(R.id.btn_registrar);
         btn_guardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +78,6 @@ public class nueva_comunidad extends AppCompatActivity {
             }
         });
     }
-
 
     public void ejecutarregistro() {
 

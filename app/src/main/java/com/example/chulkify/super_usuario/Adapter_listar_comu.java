@@ -44,7 +44,6 @@ public void onBindViewHolder(@NonNull Adapter_listar_comu.comunidadholder holder
         holder.codigo_union.setText(listComunidades.get(position).getCodigo_comu());
         holder.administrador.setText(listComunidades.get(position).getAdmisntrador());
         holder.ciudad.setText(listComunidades.get(position).getCiudad());
-        holder.total_usuario.setText(listComunidades.get(position).getTotal_usuario());
 
         holder.identificador=listComunidades.get(position).getId_comu();
  /*
@@ -78,7 +77,6 @@ public  class comunidadholder extends RecyclerView.ViewHolder{
         codigo_union = (TextView) itemView.findViewById(R.id.txt_c_comu);
         administrador = (TextView) itemView.findViewById(R.id.txt_admin_comu);
         ciudad = (TextView) itemView.findViewById(R.id.txt_cd_comu);
-        total_usuario = (TextView) itemView.findViewById(R.id.txt_tt_comu);
 
         informacion =(Button) itemView.findViewById(R.id.btn_info);
 
